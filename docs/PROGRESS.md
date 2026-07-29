@@ -17,10 +17,11 @@
 - [x] Design tokens definidos.
 - [x] Design tokens implementados no código.
 - [x] AppText e ScreenContainer implementados.
+- [x] Button implementado.
 
 ## Próxima etapa
 
-- [ ] Implementar Button após a definição das especificações visuais aprovadas.
+- [ ] Configurar a fonte Inter após sua instalação ou carregamento aprovados.
 
 ## Pendências de aprovação
 
@@ -29,4 +30,4 @@
 - PENDENTE: preencher com informação aprovada sobre o contrato de banco de dados antes do CRUD.
 - PENDENTE: preencher com informação aprovada sobre campos, validações e dados exibidos nas telas.
 - PENDENTE: preencher com informação aprovada sobre indicadores financeiros do dashboard.
-- PENDENTE: preencher com informação aprovada sobre as especificações visuais do Button.
+- PENDENTE: configurar a fonte Inter após sua instalação ou carregamento aprovados.

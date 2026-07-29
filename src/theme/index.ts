@@ -9,3 +9,6 @@ export type { SpacingToken } from "./spacing";
 
 export { borderRadius } from "./border-radius";
 export type { BorderRadiusToken } from "./border-radius";
+
+export { button } from "./button";
+export type { ButtonVariant } from "./button";

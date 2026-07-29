@@ -59,7 +59,7 @@
 
 ## Componentes documentados
 
-- Botões: primário, secundário outline, danger outline e ghost/link.
+- Botões: primary, secondary, danger e ghost.
 - Inputs: vazio, focado, preenchido, erro e senha com mostrar/ocultar.
 - Card de assinatura: normal, vencendo em até 3 dias e vencida.
 - Chips/badges de categoria.
@@ -68,9 +68,106 @@
 - Estado vazio.
 - Componentes visuais de perfil.
 
+## Especificações aprovadas — Button
+
+### Estrutura geral
+
+Primary, secondary e danger:
+
+- Altura: 52px.
+- Largura mínima: 160px.
+- Largura automática, podendo crescer conforme o conteúdo.
+- Border radius: 12px.
+- Alinhamento central.
+- Tamanho do texto: 15px.
+- Peso do texto: 600.
+- Espaçamento entre ícone e texto: 8px.
+- PENDENTE: preencher com informação aprovada sobre padding horizontal.
+
+Ghost:
+
+- Altura determinada pelo conteúdo.
+- `paddingVertical`: 4px.
+- `paddingHorizontal`: 0px.
+- Tamanho do texto: 14px.
+- Peso do texto: 600.
+- Sem ícone.
+- Sem sublinhado visível no estado normal.
+
+### Primary
+
+Estado padrão:
+
+- `backgroundColor`: `#1B4D3E`.
+- Texto: `#FFFFFF`.
+- Sem borda.
+- Sombra equivalente a `0 2px 8px rgba(27, 77, 62, 0.25)`.
+
+Estado pressionado:
+
+- `backgroundColor`: `#143D30`.
+- Texto: `#FFFFFF`.
+- Sem sombra.
+- Transformação de escala: `0.98`.
+
+Estado desabilitado:
+
+- `backgroundColor`: `#9CA3AF`.
+- Texto: `#E5E7EB`.
+- Sem sombra.
+- Impedir acionamento.
+
+Estado loading:
+
+- Mesmo visual do estado padrão.
+- Impedir acionamento.
+- Substituir o label por “Carregando...”.
+- Exibir `ActivityIndicator` branco à esquerda do texto.
+- Espaçamento de 8px entre indicador e texto.
+
+- Ícone opcional por `ReactNode`, à esquerda do texto, com tamanho visual esperado de 20px e espaçamento de 8px.
+
+### Secondary
+
+Estados aprovados: padrão e pressionado.
+
+- `borderWidth`: 1.5px.
+- Sem sombra.
+
+Padrão:
+
+- `backgroundColor`: transparente.
+- `borderColor`: `#1B4D3E`.
+- Texto: `#1B4D3E`.
+
+Pressionado:
+
+- `backgroundColor`: `#EAF2EF`.
+- `borderColor`: `#143D30`.
+- Texto: `#1B4D3E`.
+
+### Danger
+
+Somente estado padrão aprovado.
+
+- `borderWidth`: 1.5px.
+- `borderColor`: `#EF4444`.
+- `backgroundColor`: transparente.
+- Texto: `#EF4444`.
+- Sem sombra.
+- Ícone opcional por `ReactNode`, com tamanho visual esperado de 18px e espaçamento de 8px.
+
+### Ghost
+
+Somente estado padrão aprovado.
+
+- `backgroundColor`: transparente.
+- Sem borda.
+- Texto: `#1B4D3E`.
+- Sem sombra.
+
 ## Pendências
 
 - Line heights: PENDENTE: preencher com informação aprovada.
 - Sombras: PENDENTE: preencher com informação aprovada.
 - Animações: PENDENTE: preencher com informação aprovada.
-

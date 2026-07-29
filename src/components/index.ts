@@ -33,3 +33,6 @@ export type { FloatingActionButtonProps } from "./FloatingActionButton";
 
 export { HomeHeader } from "./HomeHeader";
 export type { HomeHeaderProps } from "./HomeHeader";
+
+export { BottomNav } from "./BottomNav";
+export type { BottomNavProps, BottomNavTab } from "./BottomNav";

@@ -338,3 +338,22 @@ Não há helper text ou estado desabilitado aprovados.
 - 56px × 56px, circular, fundo `#1B4D3E` e ícone de adicionar de 22px em `#FFFFFF`.
 - Sombra: `0 4px 20px rgba(27,77,62,0.4)`; no Android, `elevation` 6 como equivalente visual.
 - Estado pressionado: fundo `#163D31` e escala 0,95.
+
+## Especificações aprovadas — BottomNav
+
+### Estrutura
+
+- Container externo: largura de 100%, sem encolhimento, fundo `#FFFFFF` e borda superior de 1px em `#E5E7EB`.
+- Container interno: direção horizontal e alinhamento vertical central.
+- Cada aba ocupa `flex: 1`, com conteúdo centralizado, `paddingTop: 12px`, `paddingBottom: 20px` e espaçamento de 4px entre ícone e label.
+- Não há altura fixa, sombra, fundo pressionado, escala, indicador adicional, linha ou ponto sob a aba ativa.
+
+### Abas, cores e tipografia
+
+- Início: `home` ativa e `home-outline` inativa.
+- Assinaturas: `card` ativa e `card-outline` inativa.
+- Perfil: `person` ativa e `person-outline` inativa.
+- Ícones Ionicons: 22px.
+- Estado ativo: ícone e label em `#1B4D3E`.
+- Estado inativo: ícone e label em `#9CA3AF`.
+- Labels: 10px, peso 600 e `lineHeight: 10px`.

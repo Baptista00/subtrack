@@ -27,6 +27,34 @@ const categoryBadgeColors: Record<string, CategoryBadgeColor> = {
 };
 
 export const home = {
+  bottomNav: {
+    container: {
+      width: "100%",
+      flexShrink: 0,
+      backgroundColor: colors.surface,
+      borderTopWidth: 1,
+      borderTopColor: colors.border,
+    },
+    tab: {
+      paddingTop: spacing[2],
+      paddingBottom: 20,
+      gap: spacing[0],
+    },
+    active: {
+      color: colors.primary,
+    },
+    inactive: {
+      color: "#9CA3AF",
+    },
+    icon: {
+      size: 22,
+    },
+    label: {
+      fontSize: 10,
+      fontWeight: "600",
+      lineHeight: 10,
+    },
+  },
   header: {
     container: {
       paddingHorizontal: 20,

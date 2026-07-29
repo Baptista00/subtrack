@@ -1,15 +1,16 @@
-import { Text, View } from "react-native";
+import {
+  BottomNav,
+  EmptyState,
+  HomeHeader,
+  ScreenContainer,
+} from "../src/components";
 
 export default function Index() {
   return (
-    <View
-      style={{
-        flex: 1,
-        justifyContent: "center",
-        alignItems: "center",
-      }}
-    >
-      <Text>SubTrack</Text>
-    </View>
+    <ScreenContainer>
+      <HomeHeader userName="Lucas" />
+      <EmptyState />
+      <BottomNav activeTab="home" />
+    </ScreenContainer>
   );
 }

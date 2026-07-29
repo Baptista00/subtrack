@@ -5,7 +5,7 @@ import { home } from "../theme";
 import { AppText } from "./AppText";
 import { Button } from "./Button";
 
-export type EmptyStateProps = { onAddSubscription: () => void; style?: StyleProp<ViewStyle> };
+export type EmptyStateProps = { onAddSubscription?: () => void; style?: StyleProp<ViewStyle> };
 
 export function EmptyState({ onAddSubscription, style }: EmptyStateProps) {
   return (

@@ -22,6 +22,7 @@
 - [x] CategoryBadge e SubscriptionCard implementados.
 - [x] FinancialSummaryCard implementado.
 - [x] `expo-linear-gradient` instalado para o FinancialSummaryCard.
+- [x] HomeHeader, EmptyState e FloatingActionButton implementados.
 
 ## Próxima etapa
 
@@ -38,3 +39,4 @@
 - PENDENTE: definir uma adaptação React Native aprovada para o focus ring do Input em Android e iOS.
 - PENDENTE: integrar o FinancialSummaryCard à Home quando a tela for montada.
 - PENDENTE: validar visualmente o FinancialSummaryCard quando a Home for montada.
+- PENDENTE: integrar HomeHeader, EmptyState e FloatingActionButton quando a Home for montada.

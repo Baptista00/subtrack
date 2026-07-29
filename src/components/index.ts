@@ -24,3 +24,12 @@ export type { SubscriptionCardProps } from "./SubscriptionCard";
 
 export { FinancialSummaryCard } from "./FinancialSummaryCard";
 export type { FinancialSummaryCardProps } from "./FinancialSummaryCard";
+
+export { EmptyState } from "./EmptyState";
+export type { EmptyStateProps } from "./EmptyState";
+
+export { FloatingActionButton } from "./FloatingActionButton";
+export type { FloatingActionButtonProps } from "./FloatingActionButton";
+
+export { HomeHeader } from "./HomeHeader";
+export type { HomeHeaderProps } from "./HomeHeader";

@@ -317,3 +317,24 @@ Não há helper text ou estado desabilitado aprovados.
 - Line heights: PENDENTE: preencher com informação aprovada.
 - Sombras fora das especificações já aprovadas para Button e SubscriptionCard: PENDENTE: preencher com informação aprovada.
 - Animações: PENDENTE: preencher com informação aprovada.
+
+## Especificações aprovadas — HomeHeader
+
+- Container: `paddingHorizontal` 20px, `paddingTop` 20px e `paddingBottom` 16px.
+- Título: 22px, peso 700, `#1A1A1A` e `letterSpacing` de -0,55px.
+- O menu existe apenas no estado com assinaturas: 36px × 36px, circular, fundo `#FFFFFF`, borda de 1px `#E5E7EB`, sombra pequena e ícone de três pontos de 18px em `#1A1A1A`.
+
+## Especificações aprovadas — EmptyState
+
+- Container centralizado: `flex: 1`, `paddingHorizontal` 32px, `gap` 24px e deslocamento vertical de -32px.
+- Ilustração: 200px × 168px, montada apenas com formas visuais usando `#1B4D3E` e as opacidades aprovadas.
+- Título: 17px, peso 700, `#1A1A1A`, margem inferior de 8px e alinhamento central.
+- Descrição: 14px, peso 400, `#6B7280`, `lineHeight` 22,75px e alinhamento central.
+- CTA: 100% da largura do container, 52px de altura, raio de 16px, fundo `#1B4D3E`, sombra pequena, ícone de adicionar de 16px e estado pressionado `#163D31` com escala 0,98.
+
+## Especificações aprovadas — FloatingActionButton
+
+- Posição absoluta: 88px acima da borda inferior e 20px à direita.
+- 56px × 56px, circular, fundo `#1B4D3E` e ícone de adicionar de 22px em `#FFFFFF`.
+- Sombra: `0 4px 20px rgba(27,77,62,0.4)`; no Android, `elevation` 6 como equivalente visual.
+- Estado pressionado: fundo `#163D31` e escala 0,95.

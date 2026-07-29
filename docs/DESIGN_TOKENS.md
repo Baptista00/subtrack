@@ -166,6 +166,73 @@ Somente estado padrão aprovado.
 - Texto: `#1B4D3E`.
 - Sem sombra.
 
+## Especificações aprovadas — Formulários
+
+### Input
+
+Estados aprovados: padrão, focado, preenchido e erro.
+
+- Largura: 100%.
+- Altura não fixa.
+- `paddingVertical`: 14px.
+- `paddingHorizontal`: 16px.
+- Border radius: 12px.
+- `borderWidth`: 1.5px.
+- `backgroundColor`: `#FFFFFF`.
+- Tamanho do texto: 14px.
+- Texto preenchido: `#1A1A1A`.
+- Placeholder: `#6B7280`.
+- Sem `fontFamily` e sem `lineHeight` nesta etapa.
+
+Padrão e preenchido sem foco:
+
+- `borderColor`: `#E5E7EB`.
+
+Focado:
+
+- `borderColor`: `#1B4D3E`.
+
+Erro:
+
+- `borderColor`: `#EF4444`.
+- Tem prioridade visual sobre o foco.
+
+### FormField
+
+Organiza label, campo e mensagem de erro.
+
+Label:
+
+- Tamanho: 13px.
+- Peso: 500.
+- `marginBottom`: 6px.
+- Padrão: `#6B7280`.
+- Focado: `#1B4D3E`.
+- Erro: `#EF4444`.
+- Erro tem prioridade sobre foco.
+
+Mensagem de erro:
+
+- Exibida somente quando houver texto de erro.
+- Tamanho: 12px.
+- Peso: 500.
+- Cor: `#EF4444`.
+- `marginTop`: 5px.
+- Sem `lineHeight`.
+
+Não há helper text ou estado desabilitado aprovados.
+
+### PasswordInput
+
+- A senha inicia oculta e alterna `secureTextEntry` instantaneamente.
+- Ícones equivalentes a `eye` e `eye-off` de `@expo/vector-icons`.
+- Tamanho do ícone: 20px.
+- Cor do ícone: `#6B7280`.
+- Área do ícone com `paddingHorizontal`: 14px, sem fundo e sem borda.
+- Rótulos de acessibilidade: “Mostrar senha” e “Ocultar senha”.
+- O `TextInput` mantém `paddingHorizontal`: 16px e `flex: 1`.
+- O botão de visibilidade é irmão do `TextInput` no mesmo contêiner horizontal, sem posicionamento absoluto e sem padding direito adicional no texto.
+
 ## Pendências
 
 - Line heights: PENDENTE: preencher com informação aprovada.

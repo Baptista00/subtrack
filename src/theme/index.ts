@@ -12,3 +12,5 @@ export type { BorderRadiusToken } from "./border-radius";
 
 export { button } from "./button";
 export type { ButtonVariant } from "./button";
+
+export { input } from "./input";

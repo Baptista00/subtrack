@@ -18,6 +18,7 @@
 - [x] Design tokens implementados no código.
 - [x] AppText e ScreenContainer implementados.
 - [x] Button implementado.
+- [x] FormField, Input e PasswordInput implementados.
 
 ## Próxima etapa
 
@@ -31,3 +32,4 @@
 - PENDENTE: preencher com informação aprovada sobre campos, validações e dados exibidos nas telas.
 - PENDENTE: preencher com informação aprovada sobre indicadores financeiros do dashboard.
 - PENDENTE: configurar a fonte Inter após sua instalação ou carregamento aprovados.
+- PENDENTE: definir uma adaptação React Native aprovada para o focus ring do Input em Android e iOS.

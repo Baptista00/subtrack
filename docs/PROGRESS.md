@@ -16,10 +16,11 @@
 - [x] Referências do Figma documentadas.
 - [x] Design tokens definidos.
 - [x] Design tokens implementados no código.
+- [x] AppText e ScreenContainer implementados.
 
 ## Próxima etapa
 
-- [ ] Criar componentes fundamentais de layout e texto.
+- [ ] Implementar Button após a definição das especificações visuais aprovadas.
 
 ## Pendências de aprovação
 
@@ -28,3 +29,4 @@
 - PENDENTE: preencher com informação aprovada sobre o contrato de banco de dados antes do CRUD.
 - PENDENTE: preencher com informação aprovada sobre campos, validações e dados exibidos nas telas.
 - PENDENTE: preencher com informação aprovada sobre indicadores financeiros do dashboard.
+- PENDENTE: preencher com informação aprovada sobre as especificações visuais do Button.

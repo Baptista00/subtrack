@@ -20,6 +20,8 @@
 - [x] Button implementado.
 - [x] FormField, Input e PasswordInput implementados.
 - [x] CategoryBadge e SubscriptionCard implementados.
+- [x] FinancialSummaryCard implementado.
+- [x] `expo-linear-gradient` instalado para o FinancialSummaryCard.
 
 ## Próxima etapa
 
@@ -34,3 +36,5 @@
 - PENDENTE: preencher com informação aprovada sobre indicadores financeiros do dashboard.
 - PENDENTE: configurar a fonte Inter após sua instalação ou carregamento aprovados.
 - PENDENTE: definir uma adaptação React Native aprovada para o focus ring do Input em Android e iOS.
+- PENDENTE: integrar o FinancialSummaryCard à Home quando a tela for montada.
+- PENDENTE: validar visualmente o FinancialSummaryCard quando a Home for montada.

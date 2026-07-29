@@ -27,6 +27,77 @@ const categoryBadgeColors: Record<string, CategoryBadgeColor> = {
 };
 
 export const home = {
+  financialSummaryCard: {
+    gradient: {
+      colors: [colors.primary, "#163D31"],
+      start: { x: 0, y: 0 },
+      end: { x: 1, y: 1 },
+    },
+    container: {
+      width: "100%",
+      borderRadius: 24,
+      padding: spacing[4],
+    },
+    decoration: {
+      backgroundColor: "rgba(255, 255, 255, 0.04)",
+      largeCircle: {
+        width: 160,
+        height: 160,
+        borderRadius: 80,
+        top: -32,
+        right: -32,
+      },
+      smallCircle: {
+        width: 112,
+        height: 112,
+        borderRadius: 56,
+        bottom: -40,
+        right: -16,
+      },
+    },
+    totalLabel: {
+      fontSize: 10,
+      fontWeight: "600",
+      color: "rgba(255, 255, 255, 0.50)",
+      letterSpacing: 1,
+      marginBottom: spacing[1],
+    },
+    totalValue: {
+      fontSize: 40,
+      fontWeight: "800",
+      color: colors.surface,
+      lineHeight: 40,
+      letterSpacing: -1,
+      marginBottom: spacing[4],
+    },
+    statistics: {
+      gap: spacing[3],
+      label: {
+        fontSize: 11,
+        fontWeight: "500",
+        color: "rgba(255, 255, 255, 0.50)",
+        marginBottom: 2,
+      },
+      value: {
+        fontSize: 18,
+        fontWeight: "700",
+        color: colors.surface,
+      },
+      divider: {
+        width: 1,
+        height: 32,
+        backgroundColor: "rgba(255, 255, 255, 0.15)",
+      },
+      upcomingValue: {
+        gap: 6,
+        suffix: {
+          fontSize: 11,
+          fontWeight: "600",
+          color: colors.success,
+        },
+      },
+    },
+  },
   categoryBadge: {
     borderRadius: 9999,
     paddingHorizontal: spacing[1],

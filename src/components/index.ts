@@ -21,3 +21,6 @@ export type { CategoryBadgeProps } from "./CategoryBadge";
 
 export { SubscriptionCard } from "./SubscriptionCard";
 export type { SubscriptionCardProps } from "./SubscriptionCard";
+
+export { FinancialSummaryCard } from "./FinancialSummaryCard";
+export type { FinancialSummaryCardProps } from "./FinancialSummaryCard";

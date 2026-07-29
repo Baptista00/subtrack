@@ -284,6 +284,34 @@ Não há helper text ou estado desabilitado aprovados.
 - Preço: 14px, peso 700, `#1A1A1A`.
 - Chevron: 14px, `#D1D5DB`.
 
+## Especificações aprovadas — FinancialSummaryCard
+
+### Container e gradiente
+
+- Largura: 100%.
+- Gradiente diagonal equivalente a 135deg, de `#1B4D3E` para `#163D31`.
+- `borderRadius`: 24px.
+- `padding`: 24px.
+- `overflow`: hidden.
+- Sem borda, sombra ou altura fixa.
+
+### Círculos decorativos
+
+- Cor: `rgba(255,255,255,0.04)`.
+- Círculo superior direito: 160px × 160px, raio 80px, `top: -32px` e `right: -32px`.
+- Círculo inferior direito: 112px × 112px, raio 56px, `bottom: -40px` e `right: -16px`.
+- São apenas visuais, sem animação e ocultos de tecnologias assistivas.
+
+### Tipografia e estatísticas
+
+- Label principal: 10px, peso 600, `rgba(255,255,255,0.50)`, caixa alta, `letterSpacing: 1px` e margem inferior de 8px.
+- Valor principal: 40px, peso 800, `#FFFFFF`, `lineHeight: 40px`, `letterSpacing: -1px`, algarismos tabulares e margem inferior de 20px.
+- Linha de estatísticas: espaçamento de 16px entre elementos.
+- Labels das estatísticas: 11px, peso 500, `rgba(255,255,255,0.50)` e margem inferior de 2px.
+- Valores das estatísticas: 18px, peso 700, `#FFFFFF` e algarismos tabulares.
+- Sufixo “este mês”: 11px, peso 600 e `#22C55E`.
+- Divisor: 1px × 32px, `rgba(255,255,255,0.15)`.
+
 ## Pendências
 
 - Line heights: PENDENTE: preencher com informação aprovada.

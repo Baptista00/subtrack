@@ -357,3 +357,10 @@ Não há helper text ou estado desabilitado aprovados.
 - Estado ativo: ícone e label em `#1B4D3E`.
 - Estado inativo: ícone e label em `#9CA3AF`.
 - Labels: 10px, peso 600 e `lineHeight: 10px`.
+
+## Especificações aprovadas — Cabeçalho da seção de assinaturas
+
+- Direção horizontal, alinhamento vertical central e distribuição entre as extremidades.
+- Margem inferior: 12px.
+- Título “Minhas assinaturas”: 15px, peso 700 e `#1A1A1A`.
+- Texto visual “Ver todas”: 13px, peso 600 e `#1B4D3E`, sem ação nesta etapa.

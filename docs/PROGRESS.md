@@ -26,6 +26,10 @@
 - [x] BottomNav implementada.
 - [x] Home vazia integrada em `app/index.tsx`.
 - [x] Primeira tela visual da Home disponível para teste.
+- [x] Home com dados integrada visualmente em `app/index.tsx`.
+- [x] FinancialSummaryCard, SubscriptionCard e FloatingActionButton integrados na Home com dados.
+- [x] BottomNav e estado vazio preservados na Home.
+- [x] Validação web disponível nesta etapa.
 
 ## Próxima etapa
 
@@ -40,11 +44,9 @@
 - PENDENTE: preencher com informação aprovada sobre indicadores financeiros do dashboard.
 - PENDENTE: configurar a fonte Inter após sua instalação ou carregamento aprovados.
 - PENDENTE: definir uma adaptação React Native aprovada para o focus ring do Input em Android e iOS.
-- PENDENTE: integrar o FinancialSummaryCard à Home quando a tela for montada.
-- PENDENTE: validar visualmente o FinancialSummaryCard quando a Home for montada.
-- PENDENTE: integrar o FinancialSummaryCard e validá-lo visualmente na Home com dados aprovados.
-- PENDENTE: integrar FloatingActionButton quando a Home com assinaturas for montada.
 - PENDENTE: substituir o nome estático temporário “Lucas” por dados de autenticação aprovados.
 - PENDENTE: implementar navegação aprovada para o CTA “Adicionar assinatura”.
-- PENDENTE: implementar a Home com dados aprovados de assinaturas.
 - PENDENTE: integrar Supabase.
+- PENDENTE: substituir os dados demonstrativos temporários do Figma em `app/index.tsx` por dados do Supabase.
+- PENDENTE: implementar navegação aprovada para menu, FAB, cards e barra inferior.
+- PENDENTE: validar a Home com dados em Android.

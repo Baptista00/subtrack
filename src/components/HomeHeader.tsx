@@ -4,13 +4,12 @@ import { Pressable, StyleSheet, View, type StyleProp, type ViewStyle } from "rea
 import { home } from "../theme";
 import { AppText } from "./AppText";
 
-type HeaderWithoutMenu = { showMenuButton?: false; onMenuPress?: never };
-type HeaderWithMenu = { showMenuButton: true; onMenuPress: () => void };
-
 export type HomeHeaderProps = {
   userName: string;
+  showMenuButton?: boolean;
+  onMenuPress?: () => void;
   style?: StyleProp<ViewStyle>;
-} & (HeaderWithoutMenu | HeaderWithMenu);
+};
 
 export function HomeHeader({ userName, style, ...menuProps }: HomeHeaderProps) {
   const showMenuButton = menuProps.showMenuButton === true;

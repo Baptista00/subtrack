@@ -4,7 +4,7 @@ import { Pressable, StyleSheet, type PressableProps, type StyleProp, type ViewSt
 import { home } from "../theme";
 
 export type FloatingActionButtonProps = Omit<PressableProps, "accessibilityLabel" | "accessibilityRole" | "children" | "style"> & {
-  onPress: () => void;
+  onPress?: () => void;
   accessibilityLabel?: string;
   style?: StyleProp<ViewStyle>;
 };

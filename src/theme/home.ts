@@ -83,6 +83,19 @@ export const home = {
       iconColor: colors.textPrimary,
     },
   },
+  subscriptionsSection: {
+    marginBottom: spacing[2],
+    title: {
+      fontSize: 15,
+      fontWeight: "700",
+      color: colors.textPrimary,
+    },
+    action: {
+      fontSize: 13,
+      fontWeight: "600",
+      color: colors.primary,
+    },
+  },
   emptyState: {
     container: {
       flex: 1,

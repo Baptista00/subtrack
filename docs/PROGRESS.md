@@ -15,10 +15,10 @@
 - [x] Regras permanentes consolidadas no `AGENTS.md`.
 - [x] Referências do Figma documentadas.
 - [x] Design tokens definidos.
+- [x] Design tokens implementados no código.
 
 ## Próxima etapa
 
-- [ ] Implementar os design tokens no código.
 - [ ] Criar componentes fundamentais de layout e texto.
 
 ## Pendências de aprovação

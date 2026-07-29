@@ -13,18 +13,18 @@
 - [x] Primeiro commit da base limpa realizado.
 - [x] Documentação inicial criada.
 - [x] Regras permanentes consolidadas no `AGENTS.md`.
+- [x] Referências do Figma documentadas.
+- [x] Design tokens definidos.
 
 ## Próxima etapa
 
-- [ ] Preencher os valores exatos dos design tokens.
-- [ ] Adicionar a referência do Figma.
-- [ ] Definir o contrato do banco antes do CRUD.
 - [ ] Implementar os design tokens no código.
+- [ ] Criar componentes fundamentais de layout e texto.
 
 ## Pendências de aprovação
 
-- PENDENTE: preencher com informação aprovada sobre os valores dos design tokens.
-- PENDENTE: preencher com informação aprovada sobre a referência e as especificações do Figma.
+- PENDENTE: preencher com informação aprovada sobre line heights, sombras e animações.
+- PENDENTE: preencher com informação aprovada sobre a tela visual final de Perfil.
 - PENDENTE: preencher com informação aprovada sobre o contrato de banco de dados antes do CRUD.
 - PENDENTE: preencher com informação aprovada sobre campos, validações e dados exibidos nas telas.
 - PENDENTE: preencher com informação aprovada sobre indicadores financeiros do dashboard.

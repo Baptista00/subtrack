@@ -15,3 +15,9 @@ export type { InputProps } from "./Input";
 
 export { PasswordInput } from "./PasswordInput";
 export type { PasswordInputProps } from "./PasswordInput";
+
+export { CategoryBadge } from "./CategoryBadge";
+export type { CategoryBadgeProps } from "./CategoryBadge";
+
+export { SubscriptionCard } from "./SubscriptionCard";
+export type { SubscriptionCardProps } from "./SubscriptionCard";

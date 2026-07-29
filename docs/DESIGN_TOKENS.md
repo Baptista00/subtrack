@@ -40,7 +40,7 @@
 | Small/Helper | 12px | 400 |
 | Section Label | 11px | 700 |
 
-- Line heights: PENDENTE: preencher com informação aprovada.
+- Line heights fora da especificação já aprovada para o nome no SubscriptionCard: PENDENTE: preencher com informação aprovada.
 
 ## Espaçamento
 
@@ -233,8 +233,59 @@ Não há helper text ou estado desabilitado aprovados.
 - O `TextInput` mantém `paddingHorizontal`: 16px e `flex: 1`.
 - O botão de visibilidade é irmão do `TextInput` no mesmo contêiner horizontal, sem posicionamento absoluto e sem padding direito adicional no texto.
 
+## Especificações aprovadas — CategoryBadge
+
+- `borderRadius`: pill. Na implementação React Native, o token equivalente usa `9999px`.
+- `paddingHorizontal`: 8px.
+- `paddingVertical`: 2px.
+- Texto: 10px, peso 600.
+- Sem borda e sem sombra.
+
+| Categoria | Fundo | Texto |
+| --- | --- | --- |
+| Streaming | `#E8F5F0` | `#1B4D3E` |
+| Música | `#F3E8FF` | `#7C3AED` |
+| Produtividade | `#EFF6FF` | `#1D4ED8` |
+| Saúde | `#FFF7ED` | `#C2410C` |
+| Fallback, incluindo Educação e Outros | `#F3F4F6` | `#374151` |
+
+## Especificações aprovadas — SubscriptionCard
+
+### Contêiner
+
+- Largura: 100%.
+- Fundo: `#FFFFFF`.
+- `borderRadius`: 16px.
+- `paddingHorizontal`: 16px.
+- `paddingVertical`: 14px.
+- Espaçamento entre as colunas principais: 12px.
+- Borda: 1px, `#F3F4F6`.
+- Alinhamento vertical central.
+- Sombra React Native: `shadowColor: #000000`, `shadowOffset: { width: 0, height: 1 }`, `shadowOpacity: 0.05`, `shadowRadius: 1` e `elevation: 1` no Android.
+- Estado pressionado: fundo `#F9FAFB`.
+
+### Ícone do serviço
+
+- Contêiner: 44px × 44px, `borderRadius`: 16px, sem encolhimento e com conteúdo centralizado.
+- Inicial: 15px, peso 700 e cor recebida por `serviceColor`.
+- Fundo: `serviceColor` com alpha 0.094, equivalente ao sufixo hexadecimal `18`.
+- Se `serviceColor` não estiver no formato `#RRGGBB`, usar fundo `#F3F4F6` e texto `#374151`.
+
+### Conteúdo central
+
+- Nome: 14px, peso 600, line-height 17.5px, `#1A1A1A` e margem inferior de 4px.
+- O nome pode quebrar linha; não usar truncamento, ellipsis ou `numberOfLines`.
+- Segunda linha: direção horizontal, alinhamento central e gap de 8px.
+- Renovação: 11px, peso 500, `#9CA3AF`; quando houver alerta, `#F59E0B` e ícone de alerta de 12px na mesma linha.
+
+### Coluna direita
+
+- Direção horizontal, alinhamento central, gap de 6px e sem encolhimento.
+- Preço: 14px, peso 700, `#1A1A1A`.
+- Chevron: 14px, `#D1D5DB`.
+
 ## Pendências
 
 - Line heights: PENDENTE: preencher com informação aprovada.
-- Sombras: PENDENTE: preencher com informação aprovada.
+- Sombras fora das especificações já aprovadas para Button e SubscriptionCard: PENDENTE: preencher com informação aprovada.
 - Animações: PENDENTE: preencher com informação aprovada.

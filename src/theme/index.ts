@@ -14,3 +14,5 @@ export { button } from "./button";
 export type { ButtonVariant } from "./button";
 
 export { input } from "./input";
+
+export { home } from "./home";

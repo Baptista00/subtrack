@@ -19,6 +19,7 @@
 - [x] AppText e ScreenContainer implementados.
 - [x] Button implementado.
 - [x] FormField, Input e PasswordInput implementados.
+- [x] CategoryBadge e SubscriptionCard implementados.
 
 ## Próxima etapa
 

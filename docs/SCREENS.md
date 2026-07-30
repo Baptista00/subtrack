@@ -35,7 +35,10 @@
 
 - Usa a mesma rota para o estado vazio e o estado com assinaturas.
 - Não criar uma tela separada para a Home vazia.
-- Estado vazio, lista, dados apresentados e layout: PENDENTE: preencher com informação aprovada.
+- Consulta somente as assinaturas do usuário autenticado em `public.subscriptions`.
+- Possui estados de carregamento, erro, vazio e lista com dados.
+- Exibe um resumo com total mensal, assinaturas ativas e renovações dos próximos 30 dias quando houver dados.
+- Atualiza a consulta ao receber foco, incluindo após salvar uma assinatura.
 
 ## Adicionar assinatura
 

@@ -46,6 +46,12 @@
 - [x] Rota de Adicionar assinatura protegida para usuários autenticados.
 - [x] FAB e CTA do estado vazio ligados à tela Adicionar assinatura.
 - [x] Lembrete de renovação exibido somente como elemento visual.
+- [x] Home integrada com as assinaturas reais de `public.subscriptions`.
+- [x] Dados demonstrativos removidos da Home e listagem real implementada.
+- [x] Estados de carregamento, erro e vazio implementados na Home.
+- [x] Refetch da Home implementado ao retornar da tela de cadastro.
+- [x] Total mensal calculado com planos anuais convertidos por divisão por 12.
+- [x] Renovações próximas definidas como os próximos 30 dias, incluindo hoje.
 
 ## Próxima etapa
 
@@ -59,7 +65,6 @@
 - PENDENTE: preencher com informação aprovada sobre indicadores financeiros do dashboard.
 - PENDENTE: configurar a fonte Inter após sua instalação ou carregamento aprovados.
 - PENDENTE: definir uma adaptação React Native aprovada para o focus ring do Input em Android e iOS.
-- PENDENTE: substituir os dados demonstrativos temporários do Figma em `app/index.tsx` por dados do Supabase.
 - PENDENTE: implementar navegação aprovada para menu, FAB, cards e barra inferior.
 - PENDENTE: validar a Home com dados em Android.
 - PENDENTE: definir a atualização automática de `updated_at` antes do CRUD final.
@@ -69,7 +74,7 @@
 - PENDENTE: implementar login social.
 - PENDENTE: implementar logout visual.
 - PENDENTE: implementar listagem real de assinaturas na Home.
-- PENDENTE: implementar edição e exclusão de assinaturas.
+- PENDENTE: implementar edição, exclusão e detalhes de assinaturas.
 
 ## Próximas etapas de dados
 
@@ -79,7 +84,7 @@
 4. [x] Implementar autenticação.
 5. [ ] Criar tipagens e funções de acesso aos dados.
 6. [x] Implementar cadastro de assinatura.
-7. [ ] Substituir dados demonstrativos da Home por dados reais.
+7. [x] Substituir dados demonstrativos da Home por dados reais.
 8. [ ] Implementar edição e exclusão.
 9. [ ] Implementar notificações locais.
 10. [ ] Implementar posteriormente o avanço automático da renovação.

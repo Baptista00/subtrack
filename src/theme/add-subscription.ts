@@ -1,6 +1,9 @@
 import { borderRadius } from "./border-radius";
 import { colors } from "./colors";
 import { spacing } from "./spacing";
+import type { BillingCycle, SubscriptionCategory } from "../types/subscription";
+
+export type { BillingCycle, SubscriptionCategory } from "../types/subscription";
 
 export const subscriptionCategories = [
   { label: "Streaming", value: "streaming", serviceColor: "#E50914" },
@@ -9,16 +12,19 @@ export const subscriptionCategories = [
   { label: "Saúde", value: "saude", serviceColor: "#2F80ED" },
   { label: "Educação", value: "educacao", serviceColor: "#F2994A" },
   { label: "Outros", value: "outros", serviceColor: "#6B7280" },
-] as const;
-
-export type SubscriptionCategory = (typeof subscriptionCategories)[number]["value"];
+] as const satisfies readonly {
+  label: string;
+  value: SubscriptionCategory;
+  serviceColor: string;
+}[];
 
 export const billingCycles = [
   { label: "Mensal", value: "monthly" },
   { label: "Anual", value: "yearly" },
-] as const;
-
-export type BillingCycle = (typeof billingCycles)[number]["value"];
+] as const satisfies readonly {
+  label: string;
+  value: BillingCycle;
+}[];
 
 export const addSubscription = {
   form: {

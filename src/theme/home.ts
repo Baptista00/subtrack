@@ -267,7 +267,7 @@ export const home = {
       gap: spacing[2],
       borderWidth: 1,
       borderColor: "#F3F4F6",
-      alignItems: "center",
+      alignItems: "flex-start",
     },
     shadow: {
       shadowColor: "#000000",
@@ -303,7 +303,7 @@ export const home = {
       },
       renewal: {
         fontSize: 11,
-        fontWeight: "500",
+        fontWeight: "400",
         color: "#9CA3AF",
         warningColor: colors.warning,
         warningIconSize: 12,

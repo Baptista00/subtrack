@@ -60,37 +60,42 @@ export function SubscriptionCard({
         typeof style === "function" ? style(state) : style,
       ]}
     >
-      <View style={[styles.serviceIcon, { backgroundColor: serviceIconColors.backgroundColor }]}>
-        <AppText variant="Body" style={[styles.serviceInitial, { color: serviceIconColors.textColor }]}>
-          {serviceInitial}
-        </AppText>
-      </View>
-
-      <View style={styles.content}>
-        <AppText variant="Body" style={styles.serviceName}>
-          {serviceName}
-        </AppText>
-        <View style={styles.details}>
-          <CategoryBadge category={category} />
-          <AppText
-            variant="Body"
-            style={[styles.renewalText, warning ? styles.warningRenewalText : undefined]}
-          >
-            {renewalText}
+      <View style={styles.leftArea}>
+        <View style={[styles.serviceIcon, { backgroundColor: serviceIconColors.backgroundColor }]}>
+          <AppText variant="Body" style={[styles.serviceInitial, { color: serviceIconColors.textColor }]}>
+            {serviceInitial}
           </AppText>
-          {warning ? (
-            <Feather
-              accessible={false}
-              color={home.subscriptionCard.content.renewal.warningColor}
-              name="alert-triangle"
-              size={home.subscriptionCard.content.renewal.warningIconSize}
-            />
-          ) : null}
+        </View>
+
+        <View style={styles.content}>
+          <AppText numberOfLines={1} variant="Body" style={styles.serviceName}>
+            {serviceName}
+          </AppText>
+          <View style={styles.details}>
+            <CategoryBadge category={category} />
+            <View style={styles.renewalRow}>
+              <AppText
+                numberOfLines={1}
+                variant="Body"
+                style={[styles.renewalText, warning ? styles.warningRenewalText : undefined]}
+              >
+                {renewalText}
+              </AppText>
+              {warning ? (
+                <Feather
+                  accessible={false}
+                  color={home.subscriptionCard.content.renewal.warningColor}
+                  name="alert-triangle"
+                  size={home.subscriptionCard.content.renewal.warningIconSize}
+                />
+              ) : null}
+            </View>
+          </View>
         </View>
       </View>
 
       <View style={styles.rightColumn}>
-        <AppText variant="Body" style={styles.priceText}>
+        <AppText numberOfLines={1} variant="Body" style={styles.priceText}>
           {priceText}
         </AppText>
         <Feather
@@ -157,12 +162,20 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     width: home.subscriptionCard.serviceIcon.width,
   },
+  leftArea: {
+    alignItems: "center",
+    flex: 1,
+    flexDirection: "row",
+    gap: home.subscriptionCard.container.gap,
+    minWidth: 0,
+  },
   serviceInitial: {
     fontSize: home.subscriptionCard.serviceIcon.fontSize,
     fontWeight: home.subscriptionCard.serviceIcon.fontWeight,
   },
   content: {
     flex: 1,
+    minWidth: 0,
   },
   serviceName: {
     color: home.subscriptionCard.content.name.color,
@@ -172,12 +185,19 @@ const styles = StyleSheet.create({
     marginBottom: home.subscriptionCard.content.name.marginBottom,
   },
   details: {
+    alignItems: "flex-start",
+    flexDirection: "column",
+    gap: home.subscriptionCard.content.details.gap,
+  },
+  renewalRow: {
     alignItems: "center",
     flexDirection: "row",
     gap: home.subscriptionCard.content.details.gap,
+    minWidth: 0,
   },
   renewalText: {
     color: home.subscriptionCard.content.renewal.color,
+    flexShrink: 1,
     fontSize: home.subscriptionCard.content.renewal.fontSize,
     fontWeight: home.subscriptionCard.content.renewal.fontWeight,
   },
@@ -192,6 +212,7 @@ const styles = StyleSheet.create({
   },
   priceText: {
     color: home.subscriptionCard.price.color,
+    flexShrink: 0,
     fontSize: home.subscriptionCard.price.fontSize,
     fontWeight: home.subscriptionCard.price.fontWeight,
   },

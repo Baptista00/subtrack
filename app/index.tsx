@@ -1,5 +1,6 @@
-import { FlatList, StyleSheet, View } from "react-native";
-import { router } from "expo-router";
+import { useCallback, useRef, useState } from "react";
+import { ActivityIndicator, FlatList, StyleSheet, View } from "react-native";
+import { router, useFocusEffect } from "expo-router";
 
 import {
   BottomNav,
@@ -10,72 +11,36 @@ import {
   ScreenContainer,
   SubscriptionCard,
   AppText,
+  Button,
 } from "../src/components";
 import { useAuth } from "../src/auth";
-import { home } from "../src/theme";
+import {
+  calculateMonthlyTotal,
+  countUpcomingRenewals,
+  formatCurrency,
+  formatDatabaseDate,
+  getCategoryLabel,
+  getServiceInitials,
+  normalizeSubscriptions,
+} from "../src/lib/subscriptions";
+import { supabase } from "../src/lib/supabase";
+import { colors, home, spacing } from "../src/theme";
+import type { Subscription } from "../src/types/subscription";
 
-interface PresentationSubscription {
-  id: string;
-  serviceName: string;
-  serviceInitial: string;
-  serviceColor: string;
-  category: string;
-  renewalText: string;
-  priceText: string;
-  warning?: boolean;
-}
+const subscriptionsSelect =
+  "id, user_id, name, price, category, service_color, next_renewal_date, billing_cycle, created_at, updated_at";
 
-// Dados temporários de apresentação aprovados no Figma para validação visual.
-const subscriptions: PresentationSubscription[] = [
-  {
-    id: "netflix",
-    serviceName: "Netflix",
-    serviceInitial: "N",
-    serviceColor: "#E50914",
-    category: "Streaming",
-    renewalText: "Renova 02/08/2025",
-    priceText: "R$ 55,90",
-    warning: true,
-  },
-  {
-    id: "spotify",
-    serviceName: "Spotify",
-    serviceInitial: "S",
-    serviceColor: "#1DB954",
-    category: "Música",
-    renewalText: "Renova 10/08/2025",
-    priceText: "R$ 21,90",
-    warning: false,
-  },
-  {
-    id: "chatgpt-plus",
-    serviceName: "ChatGPT Plus",
-    serviceInitial: "G",
-    serviceColor: "#10A37F",
-    category: "Produtividade",
-    renewalText: "Renova 15/08/2025",
-    priceText: "R$ 30,00",
-    warning: false,
-  },
-  {
-    id: "disney-plus",
-    serviceName: "Disney+",
-    serviceInitial: "D",
-    serviceColor: "#0B3D91",
-    category: "Streaming",
-    renewalText: "Renova 20/08/2025",
-    priceText: "R$ 27,90",
-    warning: false,
-  },
-];
+type ListHeaderProps = {
+  subscriptions: Subscription[];
+};
 
-function ListHeader() {
+function ListHeader({ subscriptions }: ListHeaderProps) {
   return (
     <View>
       <FinancialSummaryCard
-        activeSubscriptionsCount={5}
-        totalMonthlyText="R$ 149,90"
-        upcomingRenewalsCount={3}
+        activeSubscriptionsCount={subscriptions.length}
+        totalMonthlyText={formatCurrency(calculateMonthlyTotal(subscriptions))}
+        upcomingRenewalsCount={countUpcomingRenewals(subscriptions)}
       />
       <View style={styles.summarySpacer} />
       <View style={styles.sectionHeader}>
@@ -96,43 +61,161 @@ function ListItemSeparator() {
 
 export default function Index() {
   const { user } = useAuth();
-  const hasSubscriptions = subscriptions.length > 0;
+  const [subscriptions, setSubscriptions] = useState<Subscription[]>([]);
+  const [isInitialLoading, setIsInitialLoading] = useState(true);
+  const [hasLoadError, setHasLoadError] = useState(false);
+  const activeRequestId = useRef(0);
+  const userId = user?.id;
   const fullName = user?.user_metadata.full_name;
   const userName =
     typeof fullName === "string" && fullName.trim().length > 0
       ? fullName.trim().split(/\s+/)[0]
       : "Usuário";
 
+  const loadSubscriptions = useCallback(
+    async (isActive: () => boolean) => {
+      if (!userId) {
+        if (isActive()) {
+          setSubscriptions([]);
+          setHasLoadError(true);
+          setIsInitialLoading(false);
+        }
+
+        return;
+      }
+
+      try {
+        const { data, error } = await supabase
+          .from("subscriptions")
+          .select(subscriptionsSelect)
+          .eq("user_id", userId)
+          .order("next_renewal_date", { ascending: true })
+          .order("created_at", { ascending: false });
+
+        if (!isActive()) {
+          return;
+        }
+
+        if (error) {
+          setHasLoadError(true);
+          return;
+        }
+
+        setSubscriptions(normalizeSubscriptions(data as unknown));
+        setHasLoadError(false);
+      } catch {
+        if (isActive()) {
+          setHasLoadError(true);
+        }
+      } finally {
+        if (isActive()) {
+          setIsInitialLoading(false);
+        }
+      }
+    },
+    [userId],
+  );
+
+  useFocusEffect(
+    useCallback(() => {
+      let isActive = true;
+      const requestId = activeRequestId.current + 1;
+
+      activeRequestId.current = requestId;
+
+      async function fetchSubscriptions() {
+        await loadSubscriptions(
+          () => isActive && activeRequestId.current === requestId,
+        );
+      }
+
+      void fetchSubscriptions();
+
+      return () => {
+        isActive = false;
+        activeRequestId.current += 1;
+      };
+    }, [loadSubscriptions]),
+  );
+
+  const hasSubscriptions = subscriptions.length > 0;
+
+  function handleRetry() {
+    const requestId = activeRequestId.current;
+
+    void loadSubscriptions(() => activeRequestId.current === requestId);
+  }
+
+  function renderMainContent() {
+    if (isInitialLoading) {
+      return (
+        <View style={styles.statusContainer}>
+          <ActivityIndicator color={colors.primary} />
+          <AppText variant="Body" style={styles.statusText}>
+            Carregando assinaturas...
+          </AppText>
+        </View>
+      );
+    }
+
+    if (hasLoadError && !hasSubscriptions) {
+      return (
+        <>
+          <View style={styles.statusContainer}>
+            <AppText variant="Body" style={styles.errorText}>
+              Não foi possível carregar suas assinaturas.
+            </AppText>
+            <Button onPress={handleRetry} variant="secondary">
+              Tentar novamente
+            </Button>
+          </View>
+          <FloatingActionButton onPress={() => router.push("/adicionar")} />
+        </>
+      );
+    }
+
+    if (!hasSubscriptions) {
+      return <EmptyState onAddSubscription={() => router.push("/adicionar")} />;
+    }
+
+    return (
+      <>
+        <FlatList
+          contentContainerStyle={styles.listContent}
+          data={subscriptions}
+          ItemSeparatorComponent={ListItemSeparator}
+          keyExtractor={(item) => item.id}
+          ListHeaderComponent={<ListHeader subscriptions={subscriptions} />}
+          renderItem={({ item }) => {
+            const renewalDate = formatDatabaseDate(item.next_renewal_date);
+
+            return (
+              <SubscriptionCard
+                category={getCategoryLabel(item.category)}
+                priceText={formatCurrency(item.price)}
+                renewalText={
+                  renewalDate === "Data indisponível"
+                    ? renewalDate
+                    : `Renova ${renewalDate}`
+                }
+                serviceColor={item.service_color}
+                serviceInitial={getServiceInitials(item.name)}
+                serviceName={item.name}
+              />
+            );
+          }}
+          showsVerticalScrollIndicator={false}
+          style={styles.list}
+        />
+        <FloatingActionButton onPress={() => router.push("/adicionar")} />
+      </>
+    );
+  }
+
   return (
     <ScreenContainer style={styles.screen}>
       <HomeHeader showMenuButton={hasSubscriptions} userName={userName} />
-      {hasSubscriptions ? (
-        <>
-          <FlatList
-            contentContainerStyle={styles.listContent}
-            data={subscriptions}
-            ItemSeparatorComponent={ListItemSeparator}
-            keyExtractor={(item) => item.id}
-            ListHeaderComponent={ListHeader}
-            renderItem={({ item }) => (
-              <SubscriptionCard
-                category={item.category}
-                priceText={item.priceText}
-                renewalText={item.renewalText}
-                serviceColor={item.serviceColor}
-                serviceInitial={item.serviceInitial}
-                serviceName={item.serviceName}
-                warning={item.warning}
-              />
-            )}
-            showsVerticalScrollIndicator={false}
-            style={styles.list}
-          />
-          <FloatingActionButton onPress={() => router.push("/adicionar")} />
-        </>
-      ) : (
-        <EmptyState onAddSubscription={() => router.push("/adicionar")} />
-      )}
+      {renderMainContent()}
       <BottomNav activeTab="home" />
     </ScreenContainer>
   );
@@ -170,5 +253,19 @@ const styles = StyleSheet.create({
   },
   itemSeparator: {
     height: 10,
+  },
+  statusContainer: {
+    alignItems: "center",
+    flex: 1,
+    gap: spacing[3],
+    justifyContent: "center",
+    paddingHorizontal: home.header.container.paddingHorizontal,
+  },
+  statusText: {
+    color: colors.textSecondary,
+  },
+  errorText: {
+    color: colors.error,
+    textAlign: "center",
   },
 });

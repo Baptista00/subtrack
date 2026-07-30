@@ -15,9 +15,11 @@
 - Autenticação: Supabase Auth.
 - Ambiente atual: projeto de desenvolvimento.
 - Região do projeto: São Paulo.
-- O aplicativo acessará os dados pelo cliente oficial do Supabase.
+- O aplicativo acessa os dados pelo cliente oficial do Supabase.
 - Nenhuma chave secreta de servidor será usada no aplicativo mobile.
-- A chave pública/anon será armazenada em uma variável de ambiente pública apropriada do Expo quando a integração for configurada.
+- A chave pública publishable é lida de `EXPO_PUBLIC_SUPABASE_PUBLISHABLE_KEY`; a URL é lida de `EXPO_PUBLIC_SUPABASE_URL`.
+- As variáveis `EXPO_PUBLIC_` são configuradas localmente e não registram valores reais nesta documentação.
+- A persistência de sessão para a futura autenticação usa AsyncStorage.
 - Nenhuma credencial real deve ser registrada neste repositório ou nesta documentação.
 
 ## Tabela `subscriptions`

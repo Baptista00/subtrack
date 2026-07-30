@@ -31,6 +31,10 @@
 - [x] BottomNav e estado vazio preservados na Home.
 - [x] Validação web disponível nesta etapa.
 - [x] Contrato inicial da tabela `subscriptions` documentado.
+- [x] Tabela `subscriptions` criada no Supabase, com RLS e políticas aplicadas.
+- [x] Auditoria de segurança do Supabase concluída sem alertas.
+- [x] Cliente Supabase configurado no aplicativo.
+- [x] Variáveis locais do Supabase configuradas e ignoradas pelo Git.
 
 ## Próxima etapa
 
@@ -46,18 +50,19 @@
 - PENDENTE: definir uma adaptação React Native aprovada para o focus ring do Input em Android e iOS.
 - PENDENTE: substituir o nome estático temporário “Lucas” por dados de autenticação aprovados.
 - PENDENTE: implementar navegação aprovada para o CTA “Adicionar assinatura”.
-- PENDENTE: integrar Supabase.
 - PENDENTE: substituir os dados demonstrativos temporários do Figma em `app/index.tsx` por dados do Supabase.
 - PENDENTE: implementar navegação aprovada para menu, FAB, cards e barra inferior.
 - PENDENTE: validar a Home com dados em Android.
 - PENDENTE: definir a atualização automática de `updated_at` antes do CRUD final.
 - PENDENTE: definir os casos de renovação mensal para os dias 29, 30 e 31.
+- PENDENTE: implementar autenticação com Supabase Auth.
+- PENDENTE: implementar CRUD de assinaturas.
 
 ## Próximas etapas de dados
 
-1. [ ] Criar a tabela `subscriptions` e as políticas RLS no Supabase.
-2. [ ] Configurar variáveis de ambiente do Expo.
-3. [ ] Instalar e configurar o cliente Supabase.
+1. [x] Criar a tabela `subscriptions` e as políticas RLS no Supabase.
+2. [x] Configurar variáveis de ambiente do Expo.
+3. [x] Instalar e configurar o cliente Supabase.
 4. [ ] Implementar autenticação.
 5. [ ] Criar tipagens e funções de acesso aos dados.
 6. [ ] Implementar cadastro de assinatura.

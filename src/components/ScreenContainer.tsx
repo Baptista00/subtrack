@@ -22,7 +22,13 @@ export function ScreenContainer({
 }: ScreenContainerProps) {
   return (
     <SafeAreaView {...props} style={[styles.container, style]}>
-      {scrollable ? <ScrollView style={styles.scroll}>{children}</ScrollView> : children}
+      {scrollable ? (
+        <ScrollView keyboardShouldPersistTaps="handled" style={styles.scroll}>
+          {children}
+        </ScrollView>
+      ) : (
+        children
+      )}
     </SafeAreaView>
   );
 }

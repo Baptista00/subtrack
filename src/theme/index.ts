@@ -16,3 +16,6 @@ export type { ButtonVariant } from "./button";
 export { input } from "./input";
 
 export { home } from "./home";
+
+export { addSubscription, billingCycles, subscriptionCategories } from "./add-subscription";
+export type { BillingCycle, SubscriptionCategory } from "./add-subscription";

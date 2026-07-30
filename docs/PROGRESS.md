@@ -41,6 +41,11 @@
 - [x] Home protegida para usuários autenticados.
 - [x] Nome da Home obtido de `user_metadata.full_name`.
 - [x] Confirmação de e-mail desabilitada somente durante os testes.
+- [x] Tela Adicionar assinatura implementada.
+- [x] Insert real de assinaturas no Supabase implementado.
+- [x] Rota de Adicionar assinatura protegida para usuários autenticados.
+- [x] FAB e CTA do estado vazio ligados à tela Adicionar assinatura.
+- [x] Lembrete de renovação exibido somente como elemento visual.
 
 ## Próxima etapa
 
@@ -54,7 +59,6 @@
 - PENDENTE: preencher com informação aprovada sobre indicadores financeiros do dashboard.
 - PENDENTE: configurar a fonte Inter após sua instalação ou carregamento aprovados.
 - PENDENTE: definir uma adaptação React Native aprovada para o focus ring do Input em Android e iOS.
-- PENDENTE: implementar navegação aprovada para o CTA “Adicionar assinatura”.
 - PENDENTE: substituir os dados demonstrativos temporários do Figma em `app/index.tsx` por dados do Supabase.
 - PENDENTE: implementar navegação aprovada para menu, FAB, cards e barra inferior.
 - PENDENTE: validar a Home com dados em Android.
@@ -64,7 +68,8 @@
 - PENDENTE: implementar deep link para fluxos de autenticação.
 - PENDENTE: implementar login social.
 - PENDENTE: implementar logout visual.
-- PENDENTE: implementar CRUD de assinaturas.
+- PENDENTE: implementar listagem real de assinaturas na Home.
+- PENDENTE: implementar edição e exclusão de assinaturas.
 
 ## Próximas etapas de dados
 
@@ -73,7 +78,7 @@
 3. [x] Instalar e configurar o cliente Supabase.
 4. [x] Implementar autenticação.
 5. [ ] Criar tipagens e funções de acesso aos dados.
-6. [ ] Implementar cadastro de assinatura.
+6. [x] Implementar cadastro de assinatura.
 7. [ ] Substituir dados demonstrativos da Home por dados reais.
 8. [ ] Implementar edição e exclusão.
 9. [ ] Implementar notificações locais.

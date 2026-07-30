@@ -4,6 +4,7 @@
 
 - As telas abaixo estão aprovadas para o MVP.
 - `/` é a Home e exige sessão autenticada.
+- `/adicionar` exige sessão autenticada.
 - `/login` e `/cadastro` estão disponíveis somente para usuários não autenticados.
 - Enquanto a sessão inicial é restaurada, o aplicativo mostra uma tela de carregamento antes de decidir a rota.
 
@@ -39,7 +40,12 @@
 ## Adicionar assinatura
 
 - Permite adicionar uma assinatura.
-- Campos, validações e layout: PENDENTE: preencher com informação aprovada.
+- Campos: nome do serviço, categoria, valor, ciclo de cobrança e próxima renovação.
+- Categorias: Streaming, Música, Produtividade, Saúde, Educação e Outros.
+- Ciclos: Mensal e Anual.
+- A próxima renovação é informada como `DD/MM/AAAA` e salva como `YYYY-MM-DD`.
+- Exibe um lembrete apenas visual; notificações e persistência desse estado não fazem parte desta etapa.
+- Após salvar com sucesso, retorna para a Home.
 
 ## Detalhes ou edição de assinatura
 

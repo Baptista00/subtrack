@@ -1,4 +1,5 @@
 import { FlatList, StyleSheet, View } from "react-native";
+import { router } from "expo-router";
 
 import {
   BottomNav,
@@ -127,10 +128,10 @@ export default function Index() {
             showsVerticalScrollIndicator={false}
             style={styles.list}
           />
-          <FloatingActionButton />
+          <FloatingActionButton onPress={() => router.push("/adicionar")} />
         </>
       ) : (
-        <EmptyState />
+        <EmptyState onAddSubscription={() => router.push("/adicionar")} />
       )}
       <BottomNav activeTab="home" />
     </ScreenContainer>

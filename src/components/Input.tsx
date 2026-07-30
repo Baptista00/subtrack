@@ -23,6 +23,7 @@ export type InputProps = Omit<
   inputStyle?: StyleProp<TextStyle>;
   label?: string;
   labelStyle?: StyleProp<TextStyle>;
+  leftElement?: ReactNode;
   rightElement?: ReactNode;
 };
 
@@ -34,6 +35,7 @@ export function Input({
   inputStyle,
   label,
   labelStyle,
+  leftElement,
   onBlur,
   onFocus,
   rightElement,
@@ -52,6 +54,7 @@ export function Input({
       style={containerStyle}
     >
       <View style={[styles.field, getFieldStateStyle(hasError, isFocused), fieldStyle]}>
+        {leftElement}
         <TextInput
           {...props}
           onBlur={(event) => {

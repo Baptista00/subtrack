@@ -36,3 +36,6 @@ export type { HomeHeaderProps } from "./HomeHeader";
 
 export { BottomNav } from "./BottomNav";
 export type { BottomNavProps, BottomNavTab } from "./BottomNav";
+
+export { BackButton } from "./BackButton";
+export type { BackButtonProps } from "./BackButton";

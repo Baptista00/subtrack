@@ -3,20 +3,27 @@
 ## Convenções de rota
 
 - As telas abaixo estão aprovadas para o MVP.
-- Os caminhos técnicos das rotas no Expo Router ainda não foram aprovados.
+- `/` é a Home e exige sessão autenticada.
+- `/login` e `/cadastro` estão disponíveis somente para usuários não autenticados.
+- Enquanto a sessão inicial é restaurada, o aplicativo mostra uma tela de carregamento antes de decidir a rota.
 
-PENDENTE: preencher com informação aprovada sobre os caminhos técnicos das rotas.
 
 ## Login
 
 - Permite login por e-mail e senha.
-- Oferece acesso ao fluxo de recuperação de senha.
-- Campos, validações, mensagens e layout: PENDENTE: preencher com informação aprovada.
+- Campos: e-mail e senha.
+- Validações: e-mail obrigatório com formato simples; senha obrigatória com mínimo de 6 caracteres.
+- Exibe erros de validação e autenticação inline.
+- Oferece a ação visual para criar uma conta.
+- A recuperação de senha não faz parte desta etapa.
 
 ## Cadastro
 
 - Permite cadastro por e-mail e senha.
-- Campos, validações, mensagens e layout: PENDENTE: preencher com informação aprovada.
+- Campos: nome, e-mail, senha e confirmar senha.
+- Validações: nome obrigatório com mínimo de 2 caracteres após trim; e-mail obrigatório com formato simples; senha obrigatória com mínimo de 6 caracteres; confirmação igual à senha.
+- Exibe erros inline e a mensagem de confirmação de e-mail quando o Supabase não retornar sessão.
+- Oferece a ação visual para entrar em uma conta existente.
 
 ## Esqueci minha senha
 

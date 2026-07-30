@@ -10,6 +10,7 @@ import {
   SubscriptionCard,
   AppText,
 } from "../src/components";
+import { useAuth } from "../src/auth";
 import { home } from "../src/theme";
 
 interface PresentationSubscription {
@@ -93,11 +94,17 @@ function ListItemSeparator() {
 }
 
 export default function Index() {
+  const { user } = useAuth();
   const hasSubscriptions = subscriptions.length > 0;
+  const fullName = user?.user_metadata.full_name;
+  const userName =
+    typeof fullName === "string" && fullName.trim().length > 0
+      ? fullName.trim().split(/\s+/)[0]
+      : "Usuário";
 
   return (
     <ScreenContainer style={styles.screen}>
-      <HomeHeader showMenuButton={hasSubscriptions} userName="Lucas" />
+      <HomeHeader showMenuButton={hasSubscriptions} userName={userName} />
       {hasSubscriptions ? (
         <>
           <FlatList

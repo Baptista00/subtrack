@@ -35,6 +35,12 @@
 - [x] Auditoria de segurança do Supabase concluída sem alertas.
 - [x] Cliente Supabase configurado no aplicativo.
 - [x] Variáveis locais do Supabase configuradas e ignoradas pelo Git.
+- [x] Autenticação por e-mail e senha com Supabase Auth implementada.
+- [x] Sessão persistida, restaurada e observada por mudanças de autenticação.
+- [x] Telas de Login e Cadastro implementadas.
+- [x] Home protegida para usuários autenticados.
+- [x] Nome da Home obtido de `user_metadata.full_name`.
+- [x] Confirmação de e-mail desabilitada somente durante os testes.
 
 ## Próxima etapa
 
@@ -48,14 +54,16 @@
 - PENDENTE: preencher com informação aprovada sobre indicadores financeiros do dashboard.
 - PENDENTE: configurar a fonte Inter após sua instalação ou carregamento aprovados.
 - PENDENTE: definir uma adaptação React Native aprovada para o focus ring do Input em Android e iOS.
-- PENDENTE: substituir o nome estático temporário “Lucas” por dados de autenticação aprovados.
 - PENDENTE: implementar navegação aprovada para o CTA “Adicionar assinatura”.
 - PENDENTE: substituir os dados demonstrativos temporários do Figma em `app/index.tsx` por dados do Supabase.
 - PENDENTE: implementar navegação aprovada para menu, FAB, cards e barra inferior.
 - PENDENTE: validar a Home com dados em Android.
 - PENDENTE: definir a atualização automática de `updated_at` antes do CRUD final.
 - PENDENTE: definir os casos de renovação mensal para os dias 29, 30 e 31.
-- PENDENTE: implementar autenticação com Supabase Auth.
+- PENDENTE: implementar recuperação de senha.
+- PENDENTE: implementar deep link para fluxos de autenticação.
+- PENDENTE: implementar login social.
+- PENDENTE: implementar logout visual.
 - PENDENTE: implementar CRUD de assinaturas.
 
 ## Próximas etapas de dados
@@ -63,7 +71,7 @@
 1. [x] Criar a tabela `subscriptions` e as políticas RLS no Supabase.
 2. [x] Configurar variáveis de ambiente do Expo.
 3. [x] Instalar e configurar o cliente Supabase.
-4. [ ] Implementar autenticação.
+4. [x] Implementar autenticação.
 5. [ ] Criar tipagens e funções de acesso aos dados.
 6. [ ] Implementar cadastro de assinatura.
 7. [ ] Substituir dados demonstrativos da Home por dados reais.

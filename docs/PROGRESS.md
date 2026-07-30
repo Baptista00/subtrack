@@ -30,6 +30,7 @@
 - [x] FinancialSummaryCard, SubscriptionCard e FloatingActionButton integrados na Home com dados.
 - [x] BottomNav e estado vazio preservados na Home.
 - [x] Validação web disponível nesta etapa.
+- [x] Contrato inicial da tabela `subscriptions` documentado.
 
 ## Próxima etapa
 
@@ -39,7 +40,6 @@
 
 - PENDENTE: preencher com informação aprovada sobre line heights, sombras e animações.
 - PENDENTE: preencher com informação aprovada sobre a tela visual final de Perfil.
-- PENDENTE: preencher com informação aprovada sobre o contrato de banco de dados antes do CRUD.
 - PENDENTE: preencher com informação aprovada sobre campos, validações e dados exibidos nas telas.
 - PENDENTE: preencher com informação aprovada sobre indicadores financeiros do dashboard.
 - PENDENTE: configurar a fonte Inter após sua instalação ou carregamento aprovados.
@@ -50,3 +50,18 @@
 - PENDENTE: substituir os dados demonstrativos temporários do Figma em `app/index.tsx` por dados do Supabase.
 - PENDENTE: implementar navegação aprovada para menu, FAB, cards e barra inferior.
 - PENDENTE: validar a Home com dados em Android.
+- PENDENTE: definir a atualização automática de `updated_at` antes do CRUD final.
+- PENDENTE: definir os casos de renovação mensal para os dias 29, 30 e 31.
+
+## Próximas etapas de dados
+
+1. [ ] Criar a tabela `subscriptions` e as políticas RLS no Supabase.
+2. [ ] Configurar variáveis de ambiente do Expo.
+3. [ ] Instalar e configurar o cliente Supabase.
+4. [ ] Implementar autenticação.
+5. [ ] Criar tipagens e funções de acesso aos dados.
+6. [ ] Implementar cadastro de assinatura.
+7. [ ] Substituir dados demonstrativos da Home por dados reais.
+8. [ ] Implementar edição e exclusão.
+9. [ ] Implementar notificações locais.
+10. [ ] Implementar posteriormente o avanço automático da renovação.

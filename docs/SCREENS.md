@@ -48,7 +48,10 @@
 - Categorias: Streaming, Música, Produtividade, Saúde, Educação e Outros.
 - Ciclos: Mensal e Anual.
 - A próxima renovação é informada como `DD/MM/AAAA` e salva como `YYYY-MM-DD`.
-- Exibe um lembrete apenas visual; notificações e persistência desse estado não fazem parte desta etapa.
+- O toggle de lembrete agenda uma notificação local para 1 dia antes da renovação, às 09:00 no fuso local do dispositivo.
+- A permissão é solicitada somente quando o usuário salva com o lembrete ativado.
+- Quando a permissão, a data ou o agendamento impedirem o lembrete, a assinatura continua salva e a tela mostra um aviso inline com a ação “Continuar”.
+- Na web, o lembrete não é agendado e a tela informa que ele está disponível apenas no aplicativo móvel.
 - Após salvar com sucesso, retorna para a Home.
 
 ## Assinaturas
@@ -69,11 +72,13 @@
 - É aberta ao tocar em um card de assinatura na Home.
 - Carrega somente a assinatura cujo `id` e `user_id` correspondem ao usuário autenticado.
 - Enquanto o registro é carregado, exibe o estado “Carregando assinatura...”; caso não seja encontrado ou ocorra erro, exibe uma mensagem segura e a ação “Voltar”.
-- Reutiliza o layout e os campos de Adicionar assinatura: nome do serviço, categoria, valor, ciclo de cobrança, próxima renovação e lembrete apenas visual.
+- Reutiliza o layout e os campos de Adicionar assinatura: nome do serviço, categoria, valor, ciclo de cobrança, próxima renovação e toggle de lembrete funcional.
 - Preenche o formulário com os dados atuais, preservando valores em BRL e a data no formato `DD/MM/AAAA`.
-- Salva a edição no Supabase e retorna para a Home, que atualiza a listagem ao receber foco.
+- Carrega o estado inicial do lembrete a partir do identificador local associado à assinatura.
+- Salva a edição no Supabase, cancela o lembrete anterior e agenda um novo quando o toggle está ativo; se o toggle estiver desligado, mantém o lembrete cancelado.
+- Quando o reagendamento não for possível, a atualização no banco permanece válida e a tela mostra um aviso inline com a ação “Continuar”.
 - Exibe abaixo de “Salvar alterações” a ação destrutiva “Excluir assinatura”.
-- A exclusão exige confirmação explícita antes de remover, é filtrada por `id` e `user_id` e retorna para a Home após o sucesso.
+- A exclusão exige confirmação explícita antes de remover, é filtrada por `id` e `user_id`, cancela o lembrete local em melhor esforço e retorna para a Home após o sucesso.
 - Não há restauração, lixeira ou soft delete nesta etapa.
 
 ## Dashboard
@@ -97,7 +102,8 @@
 - A splash deve seguir somente a configuração e o design aprovados.
 - Não criar onboarding sem aprovação.
 - Lembretes locais de renovação não exigem tela própria de configurações no MVP.
-- Configuração visual e comportamento dos lembretes: PENDENTE: preencher com informação aprovada.
+- Com o aplicativo aberto, a notificação local exibe banner e lista, sem reproduzir som ou alterar o badge.
+- O Android usa o canal “Lembretes de assinaturas”; não há notificações recorrentes, push remoto ou navegação ao tocar na notificação.
 
 ## Fluxos de navegação
 

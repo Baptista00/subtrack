@@ -77,6 +77,14 @@
 - [x] Pesquisa local de assinaturas por nome.
 - [x] Estados de carregamento, erro, vazio e sem resultados na tela Assinaturas.
 - [x] Cadastro e edição acessíveis pela tela Assinaturas.
+- [x] Lembretes locais de renovação implementados com `expo-notifications`.
+- [x] Notificação local agendada para 1 dia antes da renovação, às 09:00 no fuso local.
+- [x] Permissão de notificações solicitada somente ao salvar com lembrete ativado.
+- [x] Identificadores de lembrete armazenados localmente por assinatura.
+- [x] Edição cancela e reagenda o lembrete local.
+- [x] Exclusão cancela o lembrete local em melhor esforço.
+- [x] Web não agenda lembretes locais.
+- [x] Lembretes implementados sem push remoto, tokens ou serviço em nuvem.
 
 ## Próxima etapa
 
@@ -98,7 +106,6 @@
 - PENDENTE: implementar listagem real de assinaturas na Home.
 - PENDENTE: implementar filtros avançados, ordenação manual e paginação na tela Assinaturas.
 - PENDENTE: implementar Editar perfil, Notificações, Configurações, alteração de senha e exclusão de conta.
-- PENDENTE: implementar notificações locais.
 - PENDENTE: implementar renovação automática de assinaturas.
 
 ## Próximas etapas de dados
@@ -111,5 +118,5 @@
 6. [x] Implementar cadastro de assinatura.
 7. [x] Substituir dados demonstrativos da Home por dados reais.
 8. [x] Implementar exclusão.
-9. [ ] Implementar notificações locais.
+9. [x] Implementar notificações locais.
 10. [ ] Implementar posteriormente o avanço automático da renovação.

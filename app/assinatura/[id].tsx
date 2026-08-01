@@ -24,6 +24,13 @@ import {
   validateSubscriptionForm,
   type SubscriptionFormFieldErrors,
 } from "../../src/lib/subscription-form";
+import {
+  cancelSubscriptionReminder,
+  getNotificationId,
+  getReminderWarningMessage,
+  removeNotificationId,
+  scheduleSubscriptionReminder,
+} from "../../src/lib/notifications";
 import { formatDatabaseDate, normalizeSubscriptions } from "../../src/lib/subscriptions";
 import { supabase } from "../../src/lib/supabase";
 import {
@@ -54,6 +61,9 @@ export default function EditarAssinatura() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isDeleting, setIsDeleting] = useState(false);
   const [deleteError, setDeleteError] = useState<string | null>(null);
+  const [reminderEnabled, setReminderEnabled] = useState(false);
+  const [reminderMessage, setReminderMessage] = useState<string | null>(null);
+  const [isAwaitingReminderNotice, setIsAwaitingReminderNotice] = useState(false);
 
   useEffect(() => {
     let isActive = true;
@@ -101,11 +111,19 @@ export default function EditarAssinatura() {
           return;
         }
 
+        const notificationId = await getNotificationId(subscription.id);
+
+        if (!isActive) {
+          return;
+        }
+
         setName(subscription.name);
         setCategory(subscription.category);
         setPrice(formatPriceInput(subscription.price));
         setBillingCycle(subscription.billing_cycle);
         setNextRenewalDate(formattedNextRenewalDate);
+        setReminderEnabled(Boolean(notificationId));
+        setReminderMessage(null);
         setErrors({});
         setHasLoadError(false);
       } catch {
@@ -131,7 +149,7 @@ export default function EditarAssinatura() {
   }
 
   async function handleSubmit() {
-    if (isSubmitting || isDeleting) {
+    if (isSubmitting || isDeleting || isAwaitingReminderNotice) {
       return;
     }
 
@@ -145,6 +163,7 @@ export default function EditarAssinatura() {
 
     setErrors(validation.errors);
     setSubmitError(null);
+    setReminderMessage(null);
 
     if (!validation.values) {
       return;
@@ -179,7 +198,43 @@ export default function EditarAssinatura() {
         return;
       }
 
-      router.replace("/");
+      try {
+        await cancelSubscriptionReminder(subscriptionId);
+      } catch {
+        try {
+          await removeNotificationId(subscriptionId);
+        } catch {
+          // A atualização no banco permanece válida mesmo se a limpeza local falhar.
+        }
+
+        setReminderEnabled(false);
+        setReminderMessage(
+          "A assinatura foi atualizada, mas não foi possível agendar o lembrete.",
+        );
+        setIsAwaitingReminderNotice(true);
+        return;
+      }
+
+      if (!reminderEnabled) {
+        router.replace("/");
+        return;
+      }
+
+      const reminderResult = await scheduleSubscriptionReminder({
+        subscriptionId,
+        name: validation.values.name,
+        price: validation.values.price,
+        nextRenewalDate: validation.values.nextRenewalDate,
+      });
+
+      if (reminderResult.status === "scheduled") {
+        router.replace("/");
+        return;
+      }
+
+      setReminderEnabled(false);
+      setReminderMessage(getReminderWarningMessage(reminderResult, "atualizada"));
+      setIsAwaitingReminderNotice(true);
     } catch {
       setSubmitError("Não foi possível atualizar a assinatura. Tente novamente.");
     } finally {
@@ -188,7 +243,7 @@ export default function EditarAssinatura() {
   }
 
   function handleDeletePress() {
-    if (isSubmitting || isDeleting) {
+    if (isSubmitting || isDeleting || isAwaitingReminderNotice) {
       return;
     }
 
@@ -221,7 +276,7 @@ export default function EditarAssinatura() {
   }
 
   async function handleDelete() {
-    if (isSubmitting || isDeleting) {
+    if (isSubmitting || isDeleting || isAwaitingReminderNotice) {
       return;
     }
 
@@ -247,12 +302,35 @@ export default function EditarAssinatura() {
         return;
       }
 
+      try {
+        await cancelSubscriptionReminder(subscriptionId);
+      } catch {
+        try {
+          await removeNotificationId(subscriptionId);
+        } catch {
+          // A exclusão no banco não deve ser bloqueada por uma falha local.
+        }
+      }
+
       router.replace("/");
     } catch {
       setDeleteError("Não foi possível excluir a assinatura. Tente novamente.");
     } finally {
       setIsDeleting(false);
     }
+  }
+
+  function handleReminderChange(value: boolean) {
+    setReminderEnabled(value);
+    setReminderMessage(
+      value && Platform.OS === "web"
+        ? "Lembretes estão disponíveis apenas no aplicativo móvel."
+        : null,
+    );
+  }
+
+  function handleContinueAfterReminderNotice() {
+    router.replace("/");
   }
 
   if (isInitialLoading) {
@@ -303,6 +381,11 @@ export default function EditarAssinatura() {
             errors={errors}
             footer={
               <>
+                {isAwaitingReminderNotice ? (
+                  <Button onPress={handleContinueAfterReminderNotice} variant="secondary">
+                    Continuar
+                  </Button>
+                ) : null}
                 {deleteError ? (
                   <AppText
                     accessibilityRole="alert"
@@ -313,7 +396,7 @@ export default function EditarAssinatura() {
                   </AppText>
                 ) : null}
                 <Button
-                  disabled={isSubmitting}
+                  disabled={isSubmitting || isAwaitingReminderNotice}
                   loading={isDeleting}
                   onPress={handleDeletePress}
                   style={styles.deleteButton}
@@ -323,7 +406,7 @@ export default function EditarAssinatura() {
                 </Button>
               </>
             }
-            isDisabled={isDeleting}
+            isDisabled={isDeleting || isAwaitingReminderNotice}
             isSubmitting={isSubmitting}
             name={name}
             nextRenewalDate={nextRenewalDate}
@@ -332,8 +415,11 @@ export default function EditarAssinatura() {
             onNameChange={setName}
             onNextRenewalDateChange={setNextRenewalDate}
             onPriceChange={setPrice}
+            onReminderChange={handleReminderChange}
             onSubmit={handleSubmit}
             price={price}
+            reminderEnabled={reminderEnabled}
+            reminderMessage={reminderMessage}
             submitError={submitError}
             submitLabel="Salvar alterações"
           />

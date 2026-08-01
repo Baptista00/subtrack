@@ -1,4 +1,4 @@
-import { useState, type ReactNode } from "react";
+import { type ReactNode } from "react";
 import { Pressable, StyleSheet, Switch, View } from "react-native";
 
 import { formatDateInput, type SubscriptionFormFieldErrors } from "../lib/subscription-form";
@@ -22,6 +22,8 @@ export type SubscriptionFormProps = {
   price: string;
   billingCycle: BillingCycle;
   nextRenewalDate: string;
+  reminderEnabled: boolean;
+  reminderMessage?: string | null;
   errors: SubscriptionFormFieldErrors;
   submitError: string | null;
   isSubmitting: boolean;
@@ -33,6 +35,7 @@ export type SubscriptionFormProps = {
   onPriceChange: (value: string) => void;
   onBillingCycleChange: (value: BillingCycle) => void;
   onNextRenewalDateChange: (value: string) => void;
+  onReminderChange: (value: boolean) => void;
   onSubmit: () => void;
 };
 
@@ -50,12 +53,14 @@ export function SubscriptionForm({
   onNameChange,
   onNextRenewalDateChange,
   onPriceChange,
+  onReminderChange,
   onSubmit,
   price,
+  reminderEnabled,
+  reminderMessage,
   submitError,
   submitLabel,
 }: SubscriptionFormProps) {
-  const [reminderEnabled, setReminderEnabled] = useState(false);
   const isFormDisabled = isSubmitting || isDisabled;
 
   return (
@@ -159,13 +164,27 @@ export function SubscriptionForm({
       />
 
       <View style={styles.reminder}>
-        <AppText variant="Body" style={styles.reminderTitle}>
-          Lembrete de renovação
-        </AppText>
-        {/* O lembrete é somente visual nesta etapa e não é salvo no Supabase. */}
+        <View style={styles.reminderContent}>
+          <AppText variant="Body" style={styles.reminderTitle}>
+            Lembrete de renovação
+          </AppText>
+          <AppText variant="Small/Helper" style={styles.reminderHelper}>
+            Receba um lembrete 1 dia antes, às 09:00.
+          </AppText>
+          {reminderMessage ? (
+            <AppText
+              accessibilityRole="alert"
+              variant="Small/Helper"
+              style={styles.reminderMessage}
+            >
+              {reminderMessage}
+            </AppText>
+          ) : null}
+        </View>
         <Switch
           accessibilityLabel="Ativar lembrete de renovação"
-          onValueChange={setReminderEnabled}
+          disabled={isFormDisabled}
+          onValueChange={onReminderChange}
           thumbColor={colors.surface}
           trackColor={{ false: colors.toggleOff, true: colors.primary }}
           value={reminderEnabled}
@@ -264,8 +283,19 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     padding: addSubscription.reminder.padding,
   },
+  reminderContent: {
+    flex: 1,
+    gap: spacing[0],
+    paddingRight: spacing[2],
+  },
   reminderTitle: {
     color: addSubscription.reminder.title.color,
+  },
+  reminderHelper: {
+    color: colors.textSecondary,
+  },
+  reminderMessage: {
+    color: colors.warning,
   },
   actions: {
     alignItems: "center",

@@ -3,7 +3,17 @@ import { KeyboardAvoidingView, Platform, ScrollView, StyleSheet, View } from "re
 import { router } from "expo-router";
 
 import { useAuth } from "../src/auth";
-import { AppText, BackButton, ScreenContainer, SubscriptionForm } from "../src/components";
+import {
+  AppText,
+  BackButton,
+  Button,
+  ScreenContainer,
+  SubscriptionForm,
+} from "../src/components";
+import {
+  getReminderWarningMessage,
+  scheduleSubscriptionReminder,
+} from "../src/lib/notifications";
 import {
   getServiceColor,
   validateSubscriptionForm,
@@ -22,9 +32,12 @@ export default function Adicionar() {
   const [errors, setErrors] = useState<SubscriptionFormFieldErrors>({});
   const [submitError, setSubmitError] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [reminderEnabled, setReminderEnabled] = useState(false);
+  const [reminderMessage, setReminderMessage] = useState<string | null>(null);
+  const [isAwaitingReminderNotice, setIsAwaitingReminderNotice] = useState(false);
 
   async function handleSubmit() {
-    if (isSubmitting) {
+    if (isSubmitting || isAwaitingReminderNotice) {
       return;
     }
 
@@ -38,6 +51,7 @@ export default function Adicionar() {
 
     setErrors(validation.errors);
     setSubmitError(null);
+    setReminderMessage(null);
 
     if (!validation.values || !user) {
       if (!user) {
@@ -50,27 +64,69 @@ export default function Adicionar() {
     setIsSubmitting(true);
 
     try {
-      const { error } = await supabase.from("subscriptions").insert({
-        user_id: user.id,
-        name: validation.values.name,
-        price: validation.values.price,
-        category: validation.values.category,
-        service_color: getServiceColor(validation.values.category),
-        next_renewal_date: validation.values.nextRenewalDate,
-        billing_cycle: validation.values.billingCycle,
-      });
+      const { data, error } = await supabase
+        .from("subscriptions")
+        .insert({
+          user_id: user.id,
+          name: validation.values.name,
+          price: validation.values.price,
+          category: validation.values.category,
+          service_color: getServiceColor(validation.values.category),
+          next_renewal_date: validation.values.nextRenewalDate,
+          billing_cycle: validation.values.billingCycle,
+        })
+        .select("id, name, price, next_renewal_date")
+        .single();
 
       if (error) {
         setSubmitError("Não foi possível salvar a assinatura. Tente novamente.");
         return;
       }
 
-      router.replace("/");
+      if (!reminderEnabled) {
+        router.replace("/");
+        return;
+      }
+
+      const createdSubscription = getCreatedSubscription(data);
+
+      if (!createdSubscription) {
+        setReminderEnabled(false);
+        setReminderMessage(
+          "A assinatura foi salva, mas não foi possível agendar o lembrete.",
+        );
+        setIsAwaitingReminderNotice(true);
+        return;
+      }
+
+      const reminderResult = await scheduleSubscriptionReminder(createdSubscription);
+
+      if (reminderResult.status === "scheduled") {
+        router.replace("/");
+        return;
+      }
+
+      setReminderEnabled(false);
+      setReminderMessage(getReminderWarningMessage(reminderResult, "salva"));
+      setIsAwaitingReminderNotice(true);
     } catch {
       setSubmitError("Não foi possível salvar a assinatura. Tente novamente.");
     } finally {
       setIsSubmitting(false);
     }
+  }
+
+  function handleReminderChange(value: boolean) {
+    setReminderEnabled(value);
+    setReminderMessage(
+      value && Platform.OS === "web"
+        ? "Lembretes estão disponíveis apenas no aplicativo móvel."
+        : null,
+    );
+  }
+
+  function handleContinueAfterReminderNotice() {
+    router.replace("/");
   }
 
   return (
@@ -95,6 +151,14 @@ export default function Adicionar() {
             billingCycle={billingCycle}
             category={category}
             errors={errors}
+            footer={
+              isAwaitingReminderNotice ? (
+                <Button onPress={handleContinueAfterReminderNotice} variant="secondary">
+                  Continuar
+                </Button>
+              ) : undefined
+            }
+            isDisabled={isAwaitingReminderNotice}
             isSubmitting={isSubmitting}
             name={name}
             nextRenewalDate={nextRenewalDate}
@@ -103,8 +167,11 @@ export default function Adicionar() {
             onNameChange={setName}
             onNextRenewalDateChange={setNextRenewalDate}
             onPriceChange={setPrice}
+            onReminderChange={handleReminderChange}
             onSubmit={handleSubmit}
             price={price}
+            reminderEnabled={reminderEnabled}
+            reminderMessage={reminderMessage}
             submitError={submitError}
             submitLabel="Salvar"
           />
@@ -112,6 +179,38 @@ export default function Adicionar() {
       </KeyboardAvoidingView>
     </ScreenContainer>
   );
+}
+
+function getCreatedSubscription(value: unknown): {
+  subscriptionId: string;
+  name: string;
+  price: number;
+  nextRenewalDate: string;
+} | null {
+  if (typeof value !== "object" || value === null) {
+    return null;
+  }
+
+  const record = value as Record<string, unknown>;
+  const price = typeof record.price === "number" || typeof record.price === "string"
+    ? Number(record.price)
+    : Number.NaN;
+
+  if (
+    typeof record.id !== "string" ||
+    typeof record.name !== "string" ||
+    typeof record.next_renewal_date !== "string" ||
+    !Number.isFinite(price)
+  ) {
+    return null;
+  }
+
+  return {
+    subscriptionId: record.id,
+    name: record.name,
+    price,
+    nextRenewalDate: record.next_renewal_date,
+  };
 }
 
 const styles = StyleSheet.create({

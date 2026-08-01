@@ -57,6 +57,13 @@ Não criar os campos abaixo nem outros campos além dos aprovados:
 - `notes`
 - `logo_url`
 
+## Lembretes locais de renovação
+
+- Lembretes não são armazenados na tabela `subscriptions` e não criam colunas, tabelas, políticas ou RLS adicionais.
+- O identificador de cada notificação fica somente no AsyncStorage do dispositivo, associado ao `id` da assinatura.
+- Esse mapeamento local não é sincronizado pelo Supabase. Ao trocar de aparelho ou limpar os dados do aplicativo, o usuário precisa ativar os lembretes novamente.
+- Push remoto, tokens de dispositivo e serviços de envio em nuvem não fazem parte desta etapa.
+
 ## Relacionamentos, integridade e índices planejados
 
 - `subscriptions.user_id` referencia `auth.users(id)` com exclusão em cascata.

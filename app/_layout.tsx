@@ -1,3 +1,5 @@
+import "../src/lib/notifications";
+
 import { ActivityIndicator, StyleSheet } from "react-native";
 import { Stack } from "expo-router";
 

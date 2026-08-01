@@ -69,9 +69,9 @@ Não criar os campos abaixo nem outros campos além dos aprovados:
 - `subscriptions.user_id` referencia `auth.users(id)` com exclusão em cascata.
 - Índice por proprietário: `user_id`.
 - Índice composto para próximas renovações: `user_id, next_renewal_date`.
-- Não planejar índices adicionais nesta etapa.
-- No MVP, nomes duplicados são bloqueados no cliente após normalização por trim, espaços internos, minúsculas e acentos.
-- Antes da produção, deve ser adicionada uma constraint ou índice único por `user_id` e nome normalizado para impedir condições de corrida.
+- Há uma restrição única por `user_id` e nome normalizado. A normalização considera trim, espaços internos consecutivos, maiúsculas/minúsculas e acentos.
+- O cliente mantém uma validação preventiva de nomes duplicados para uma melhor experiência.
+- O banco protege definitivamente contra condições de corrida; a violação de unicidade PostgreSQL `23505` é traduzida no aplicativo para uma mensagem amigável.
 
 ## Row Level Security
 

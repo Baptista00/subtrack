@@ -1,3 +1,5 @@
+import type { PostgrestError } from "@supabase/supabase-js";
+
 import { supabase } from "./supabase";
 import type {
   BillingCycle,
@@ -9,6 +11,10 @@ import type {
 export const subscriptionSummarySelect =
   "id, name, price, category, service_color, next_renewal_date, billing_cycle";
 const subscriptionNameSelect = "id, name";
+
+export function isUniqueViolation(error: PostgrestError | null): boolean {
+  return error?.code === "23505";
+}
 
 const subscriptionCategories: readonly SubscriptionCategory[] = [
   "streaming",

@@ -86,6 +86,8 @@
 - [x] Web não agenda lembretes locais.
 - [x] Lembretes implementados sem push remoto, tokens ou serviço em nuvem.
 - [x] Auditoria técnica pré-build realizada.
+- [x] Proteção definitiva contra assinaturas duplicadas implementada no banco por usuário e nome normalizado.
+- [x] Tratamento da violação de unicidade PostgreSQL `23505` implementado com mensagem amigável no cadastro e na edição.
 - [x] Recarga concorrente da Home, acessibilidade de campos, safe area, teclado e bloqueio de envios concorrentes corrigidos.
 - [x] Consultas de assinaturas restringidas aos campos consumidos pela interface, mantendo o filtro explícito por `user_id` e a proteção por RLS.
 - [x] Validações automáticas da auditoria executadas: lint, TypeScript, Expo Doctor, compatibilidade de dependências e verificação de diff.

@@ -35,6 +35,7 @@ import {
 import {
   fetchUserSubscriptionNames,
   formatDatabaseDate,
+  isUniqueViolation,
   normalizeSubscriptions,
   subscriptionSummarySelect,
 } from "../../src/lib/subscriptions";
@@ -211,7 +212,16 @@ export default function EditarAssinatura() {
         .select("id")
         .single();
 
-      if (error || !data) {
+      if (error) {
+        setSubmitError(
+          isUniqueViolation(error)
+            ? "Você já possui uma assinatura com este nome."
+            : "Não foi possível atualizar a assinatura. Tente novamente.",
+        );
+        return;
+      }
+
+      if (!data) {
         setSubmitError("Não foi possível atualizar a assinatura. Tente novamente.");
         return;
       }

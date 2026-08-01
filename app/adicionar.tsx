@@ -20,7 +20,10 @@ import {
   validateSubscriptionForm,
   type SubscriptionFormFieldErrors,
 } from "../src/lib/subscription-form";
-import { fetchUserSubscriptionNames } from "../src/lib/subscriptions";
+import {
+  fetchUserSubscriptionNames,
+  isUniqueViolation,
+} from "../src/lib/subscriptions";
 import { supabase } from "../src/lib/supabase";
 import { colors, home, spacing, type BillingCycle, type SubscriptionCategory } from "../src/theme";
 
@@ -95,7 +98,11 @@ export default function Adicionar() {
         .single();
 
       if (error) {
-        setSubmitError("Não foi possível salvar a assinatura. Tente novamente.");
+        setSubmitError(
+          isUniqueViolation(error)
+            ? "Você já possui uma assinatura com este nome."
+            : "Não foi possível salvar a assinatura. Tente novamente.",
+        );
         return;
       }
 

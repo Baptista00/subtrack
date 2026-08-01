@@ -47,6 +47,11 @@
 ## Assinaturas e dados
 
 - [ ] Cadastrar nomes com espaços extras, 80 caracteres e mais de 80 caracteres.
+- [ ] Cadastrar uma assinatura com o nome `Netflix`.
+- [ ] Tentar cadastrar uma segunda assinatura com o nome `netflix` e confirmar a mensagem de duplicidade.
+- [ ] Tentar cadastrar uma segunda assinatura com o nome `Nétflix` e confirmar a mensagem de duplicidade.
+- [ ] Tentar cadastrar uma segunda assinatura com espaços extras no nome e confirmar a mensagem de duplicidade.
+- [ ] Tentar renomear outra assinatura para `Netflix` e confirmar a mensagem de duplicidade.
 - [ ] Validar valores `55,90`, `1.234,56`, `0`, texto inválido e um toque repetido em Salvar.
 - [ ] Validar datas reais, incluindo `31/02` inválida e ano bissexto; confirmar persistência sem deslocamento de fuso.
 - [ ] Confirmar que data passada não entra em próximas renovações e que hoje até 30 dias entra no contador.

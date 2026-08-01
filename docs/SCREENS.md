@@ -4,6 +4,7 @@
 
 - As telas abaixo estão aprovadas para o MVP.
 - `/` é a Home e exige sessão autenticada.
+- `/assinaturas` exige sessão autenticada.
 - `/adicionar` exige sessão autenticada.
 - `/login` e `/cadastro` estão disponíveis somente para usuários não autenticados.
 - Enquanto a sessão inicial é restaurada, o aplicativo mostra uma tela de carregamento antes de decidir a rota.
@@ -50,6 +51,18 @@
 - Exibe um lembrete apenas visual; notificações e persistência desse estado não fazem parte desta etapa.
 - Após salvar com sucesso, retorna para a Home.
 
+## Assinaturas
+
+- Rota: `/assinaturas`, disponível somente para usuários autenticados.
+- Exibe o cabeçalho “Assinaturas” e o subtítulo “Gerencie seus serviços recorrentes.”.
+- Consulta somente as assinaturas do usuário autenticado em `public.subscriptions`, ordenadas pela próxima renovação e, em seguida, pela criação.
+- Atualiza a lista ao receber foco, refletindo inclusões, edições e exclusões recentes sem reiniciar o aplicativo.
+- Possui busca local por nome, sem diferenciação entre maiúsculas, minúsculas ou acentos, e apresenta o contador de assinaturas ou resultados filtrados.
+- Reutiliza os cards de assinatura; ao tocar em um card, abre `/assinatura/[id]` para edição.
+- Exibe estados de carregamento, erro com “Tentar novamente”, vazio com CTA de adicionar e busca sem correspondências.
+- Mantém o FloatingActionButton para abrir `/adicionar` e a BottomNav com Assinaturas ativa.
+- Não possui filtros avançados, ordenação manual, paginação, edição inline ou exclusão pela lista nesta etapa.
+
 ## Editar assinatura
 
 - Rota: `/assinatura/[id]`, disponível somente para usuários autenticados.
@@ -76,7 +89,7 @@
 - A seção “CONTA” possui as ações visuais Editar perfil e Notificações; ambas mostram “Em breve” e não abrem novas telas.
 - A seção “PREFERÊNCIAS” mostra a moeda fixa `BRL (R$)` e a ação visual Configurações, que também mostra “Em breve”.
 - O logout funcional fica abaixo dos cards e exige confirmação explícita; durante o envio, o botão mostra loading e, em caso de falha, a mensagem é exibida inline.
-- A BottomNav mantém Perfil ativo, permite retornar à Home pelo item Início e mantém Assinaturas sem navegação nesta etapa.
+- A BottomNav mantém Perfil ativo e permite navegar para Início e Assinaturas.
 - Não há edição de perfil, alteração de senha ou exclusão de conta nesta etapa.
 
 ## Splash e notificações locais

@@ -5,9 +5,21 @@ import { home } from "../theme";
 import { AppText } from "./AppText";
 import { Button } from "./Button";
 
-export type EmptyStateProps = { onAddSubscription?: () => void; style?: StyleProp<ViewStyle> };
+export type EmptyStateProps = {
+  onAddSubscription?: () => void;
+  title?: string;
+  description?: string;
+  actionLabel?: string;
+  style?: StyleProp<ViewStyle>;
+};
 
-export function EmptyState({ onAddSubscription, style }: EmptyStateProps) {
+export function EmptyState({
+  actionLabel = "Adicionar assinatura",
+  description = "Adicione sua primeira assinatura\npara começar.",
+  onAddSubscription,
+  style,
+  title = "Nenhuma assinatura cadastrada",
+}: EmptyStateProps) {
   return (
     <View style={[styles.container, style]}>
       <View accessibilityElementsHidden importantForAccessibility="no-hide-descendants" pointerEvents="none" style={styles.illustration}>
@@ -24,11 +36,11 @@ export function EmptyState({ onAddSubscription, style }: EmptyStateProps) {
         </View>
       </View>
       <View style={styles.copy}>
-        <AppText variant="Heading 2" style={styles.title}>Nenhuma assinatura cadastrada</AppText>
-        <AppText variant="Body" style={styles.description}>{"Adicione sua primeira assinatura\npara começar."}</AppText>
+        <AppText variant="Heading 2" style={styles.title}>{title}</AppText>
+        <AppText variant="Body" style={styles.description}>{description}</AppText>
       </View>
       <Button accessibilityLabel="Adicionar assinatura" icon={<Feather accessible={false} color={home.emptyState.callToAction.iconColor} name="plus" size={home.emptyState.callToAction.iconSize} />} onPress={onAddSubscription} style={({ pressed }) => [styles.callToAction, pressed && styles.callToActionPressed]} variant="primary">
-        Adicionar assinatura
+        {actionLabel}
       </Button>
     </View>
   );

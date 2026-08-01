@@ -173,7 +173,12 @@ export default function Perfil() {
         </View>
       </ScrollView>
 
-      <BottomNav activeTab="profile" onHomePress={() => router.replace("/")} />
+      <BottomNav
+        activeTab="profile"
+        onHomePress={() => router.replace("/")}
+        onProfilePress={() => router.replace("/perfil")}
+        onSubscriptionsPress={() => router.replace("/assinaturas")}
+      />
     </ScreenContainer>
   );
 }

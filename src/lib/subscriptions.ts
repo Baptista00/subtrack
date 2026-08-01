@@ -1,4 +1,8 @@
+import { supabase } from "./supabase";
 import type { BillingCycle, Subscription, SubscriptionCategory } from "../types/subscription";
+
+const subscriptionsSelect =
+  "id, user_id, name, price, category, service_color, next_renewal_date, billing_cycle, created_at, updated_at";
 
 const subscriptionCategories: readonly SubscriptionCategory[] = [
   "streaming",
@@ -44,6 +48,27 @@ export function normalizeSubscriptions(value: unknown): Subscription[] {
     if (subscription) {
       subscriptions.push(subscription);
     }
+  }
+
+  return subscriptions;
+}
+
+export async function fetchUserSubscriptions(userId: string): Promise<Subscription[]> {
+  const { data, error } = await supabase
+    .from("subscriptions")
+    .select(subscriptionsSelect)
+    .eq("user_id", userId)
+    .order("next_renewal_date", { ascending: true })
+    .order("created_at", { ascending: false });
+
+  if (error || !Array.isArray(data)) {
+    throw new Error("Não foi possível carregar as assinaturas.");
+  }
+
+  const subscriptions = normalizeSubscriptions(data);
+
+  if (subscriptions.length !== data.length) {
+    throw new Error("Não foi possível carregar as assinaturas.");
   }
 
   return subscriptions;

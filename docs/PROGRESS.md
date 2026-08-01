@@ -71,6 +71,12 @@
 - [x] Tela Perfil ajustada conforme a referência visual.
 - [x] Moeda do Perfil permanece fixa em BRL.
 - [x] Logout funcional preservado após o ajuste visual.
+- [x] Tela Assinaturas implementada.
+- [x] BottomNav totalmente navegável entre Início, Assinaturas e Perfil.
+- [x] Listagem real das assinaturas do usuário na tela Assinaturas.
+- [x] Pesquisa local de assinaturas por nome.
+- [x] Estados de carregamento, erro, vazio e sem resultados na tela Assinaturas.
+- [x] Cadastro e edição acessíveis pela tela Assinaturas.
 
 ## Próxima etapa
 
@@ -83,7 +89,6 @@
 - PENDENTE: preencher com informação aprovada sobre indicadores financeiros do dashboard.
 - PENDENTE: configurar a fonte Inter após sua instalação ou carregamento aprovados.
 - PENDENTE: definir uma adaptação React Native aprovada para o focus ring do Input em Android e iOS.
-- PENDENTE: implementar navegação da BottomNav para Assinaturas.
 - PENDENTE: validar a Home com dados em Android.
 - PENDENTE: definir a atualização automática de `updated_at` antes do CRUD final.
 - PENDENTE: definir os casos de renovação mensal para os dias 29, 30 e 31.
@@ -91,6 +96,7 @@
 - PENDENTE: implementar deep link para fluxos de autenticação.
 - PENDENTE: implementar login social.
 - PENDENTE: implementar listagem real de assinaturas na Home.
+- PENDENTE: implementar filtros avançados, ordenação manual e paginação na tela Assinaturas.
 - PENDENTE: implementar Editar perfil, Notificações, Configurações, alteração de senha e exclusão de conta.
 - PENDENTE: implementar notificações locais.
 - PENDENTE: implementar renovação automática de assinaturas.

@@ -33,6 +33,7 @@ function RootNavigator() {
     <Stack screenOptions={{ headerShown: false }}>
       <Stack.Protected guard={isAuthenticated}>
         <Stack.Screen name="index" />
+        <Stack.Screen name="assinaturas" />
         <Stack.Screen name="adicionar" />
         <Stack.Screen name="assinatura/[id]" />
         <Stack.Screen name="perfil" />

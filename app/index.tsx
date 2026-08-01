@@ -17,18 +17,14 @@ import { useAuth } from "../src/auth";
 import {
   calculateMonthlyTotal,
   countUpcomingRenewals,
+  fetchUserSubscriptions,
   formatCurrency,
   formatDatabaseDate,
   getCategoryLabel,
   getServiceInitials,
-  normalizeSubscriptions,
 } from "../src/lib/subscriptions";
-import { supabase } from "../src/lib/supabase";
 import { colors, home, spacing } from "../src/theme";
 import type { Subscription } from "../src/types/subscription";
-
-const subscriptionsSelect =
-  "id, user_id, name, price, category, service_color, next_renewal_date, billing_cycle, created_at, updated_at";
 
 type ListHeaderProps = {
   subscriptions: Subscription[];
@@ -85,23 +81,13 @@ export default function Index() {
       }
 
       try {
-        const { data, error } = await supabase
-          .from("subscriptions")
-          .select(subscriptionsSelect)
-          .eq("user_id", userId)
-          .order("next_renewal_date", { ascending: true })
-          .order("created_at", { ascending: false });
+        const nextSubscriptions = await fetchUserSubscriptions(userId);
 
         if (!isActive()) {
           return;
         }
 
-        if (error) {
-          setHasLoadError(true);
-          return;
-        }
-
-        setSubscriptions(normalizeSubscriptions(data as unknown));
+        setSubscriptions(nextSubscriptions);
         setHasLoadError(false);
       } catch {
         if (isActive()) {
@@ -225,7 +211,9 @@ export default function Index() {
       {renderMainContent()}
       <BottomNav
         activeTab="home"
-        onProfilePress={() => router.push("/perfil")}
+        onHomePress={() => router.replace("/")}
+        onProfilePress={() => router.replace("/perfil")}
+        onSubscriptionsPress={() => router.replace("/assinaturas")}
       />
     </ScreenContainer>
   );

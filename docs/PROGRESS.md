@@ -52,6 +52,11 @@
 - [x] Refetch da Home implementado ao retornar da tela de cadastro.
 - [x] Total mensal calculado com planos anuais convertidos por divisão por 12.
 - [x] Renovações próximas definidas como os próximos 30 dias, incluindo hoje.
+- [x] Edição de assinatura implementada.
+- [x] Card da Home abre a tela de edição da assinatura selecionada.
+- [x] Tela de edição carrega somente registro pertencente ao usuário autenticado.
+- [x] Update real de assinaturas no Supabase implementado.
+- [x] Home atualiza a listagem ao retornar da edição.
 
 ## Próxima etapa
 
@@ -74,7 +79,9 @@
 - PENDENTE: implementar login social.
 - PENDENTE: implementar logout visual.
 - PENDENTE: implementar listagem real de assinaturas na Home.
-- PENDENTE: implementar edição, exclusão e detalhes de assinaturas.
+- PENDENTE: implementar exclusão de assinaturas.
+- PENDENTE: implementar notificações locais.
+- PENDENTE: implementar renovação automática de assinaturas.
 
 ## Próximas etapas de dados
 
@@ -85,6 +92,6 @@
 5. [ ] Criar tipagens e funções de acesso aos dados.
 6. [x] Implementar cadastro de assinatura.
 7. [x] Substituir dados demonstrativos da Home por dados reais.
-8. [ ] Implementar edição e exclusão.
+8. [ ] Implementar exclusão.
 9. [ ] Implementar notificações locais.
 10. [ ] Implementar posteriormente o avanço automático da renovação.

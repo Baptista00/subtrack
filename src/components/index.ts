@@ -39,3 +39,6 @@ export type { BottomNavProps, BottomNavTab } from "./BottomNav";
 
 export { BackButton } from "./BackButton";
 export type { BackButtonProps } from "./BackButton";
+
+export { SubscriptionForm } from "./SubscriptionForm";
+export type { SubscriptionFormProps } from "./SubscriptionForm";

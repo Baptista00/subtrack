@@ -201,6 +201,13 @@ export default function Index() {
                 serviceColor={item.service_color}
                 serviceInitial={getServiceInitials(item.name)}
                 serviceName={item.name}
+                accessibilityLabel={`Editar ${item.name}`}
+                onPress={() =>
+                  router.push({
+                    pathname: "/assinatura/[id]",
+                    params: { id: item.id },
+                  })
+                }
               />
             );
           }}

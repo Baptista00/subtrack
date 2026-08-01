@@ -50,11 +50,16 @@
 - Exibe um lembrete apenas visual; notificações e persistência desse estado não fazem parte desta etapa.
 - Após salvar com sucesso, retorna para a Home.
 
-## Detalhes ou edição de assinatura
+## Editar assinatura
 
-- Permite visualizar os dados de uma assinatura e editá-la conforme o fluxo aprovado.
-- A definição entre uma tela de detalhes, uma tela de edição ou um fluxo combinado: PENDENTE: preencher com informação aprovada.
-- Dados exibidos, campos, validações e layout: PENDENTE: preencher com informação aprovada.
+- Rota: `/assinatura/[id]`, disponível somente para usuários autenticados.
+- É aberta ao tocar em um card de assinatura na Home.
+- Carrega somente a assinatura cujo `id` e `user_id` correspondem ao usuário autenticado.
+- Enquanto o registro é carregado, exibe o estado “Carregando assinatura...”; caso não seja encontrado ou ocorra erro, exibe uma mensagem segura e a ação “Voltar”.
+- Reutiliza o layout e os campos de Adicionar assinatura: nome do serviço, categoria, valor, ciclo de cobrança, próxima renovação e lembrete apenas visual.
+- Preenche o formulário com os dados atuais, preservando valores em BRL e a data no formato `DD/MM/AAAA`.
+- Salva a edição no Supabase e retorna para a Home, que atualiza a listagem ao receber foco.
+- Exclusão não faz parte desta tela nesta etapa.
 
 ## Dashboard
 

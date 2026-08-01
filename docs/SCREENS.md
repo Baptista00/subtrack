@@ -59,7 +59,9 @@
 - Reutiliza o layout e os campos de Adicionar assinatura: nome do serviço, categoria, valor, ciclo de cobrança, próxima renovação e lembrete apenas visual.
 - Preenche o formulário com os dados atuais, preservando valores em BRL e a data no formato `DD/MM/AAAA`.
 - Salva a edição no Supabase e retorna para a Home, que atualiza a listagem ao receber foco.
-- Exclusão não faz parte desta tela nesta etapa.
+- Exibe abaixo de “Salvar alterações” a ação destrutiva “Excluir assinatura”.
+- A exclusão exige confirmação explícita antes de remover, é filtrada por `id` e `user_id` e retorna para a Home após o sucesso.
+- Não há restauração, lixeira ou soft delete nesta etapa.
 
 ## Dashboard
 

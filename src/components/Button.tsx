@@ -40,7 +40,7 @@ type SecondaryButtonProps = SharedButtonProps & {
 
 type DangerButtonProps = SharedButtonProps & {
   variant: "danger";
-  loading?: never;
+  loading?: boolean;
   /** O chamador define o tamanho visual indicado por `button.danger.iconSize`. */
   icon?: ReactNode;
 };
@@ -67,8 +67,12 @@ export function Button({
   variant,
   ...props
 }: ButtonProps) {
-  const isLoading = variant === "primary" && loading === true;
+  const isLoading =
+    (variant === "primary" || variant === "danger") && loading === true;
   const isDisabled = disabled || isLoading;
+  const loadingConfig =
+    variant === "danger" ? button.danger.loading : button.primary.loading;
+  const loadingText = variant === "danger" ? "Excluindo..." : "Carregando...";
 
   return (
     <Pressable
@@ -89,15 +93,15 @@ export function Button({
     >
       {isLoading ? (
         <ActivityIndicator
-          color={button.primary.loading.indicatorColor}
-          size={button.primary.loading.indicatorSize}
+          color={loadingConfig.indicatorColor}
+          size={loadingConfig.indicatorSize}
           style={styles.leadingElement}
         />
       ) : (
         icon && <View style={styles.leadingElement}>{icon}</View>
       )}
       <AppText variant="Body" style={getTextStyle(variant, isDisabled)}>
-        {isLoading ? "Carregando..." : children}
+        {isLoading ? loadingText : children}
       </AppText>
     </Pressable>
   );

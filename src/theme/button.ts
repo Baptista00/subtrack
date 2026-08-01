@@ -67,6 +67,10 @@ export const button = {
     backgroundColor: "transparent",
     borderColor: colors.error,
     textColor: colors.error,
+    loading: {
+      indicatorColor: colors.error,
+      indicatorSize: 20,
+    },
     iconSize: 18,
   },
   ghost: {

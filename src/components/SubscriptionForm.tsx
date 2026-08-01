@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, type ReactNode } from "react";
 import { Pressable, StyleSheet, Switch, View } from "react-native";
 
 import { formatDateInput, type SubscriptionFormFieldErrors } from "../lib/subscription-form";
@@ -25,7 +25,9 @@ export type SubscriptionFormProps = {
   errors: SubscriptionFormFieldErrors;
   submitError: string | null;
   isSubmitting: boolean;
+  isDisabled?: boolean;
   submitLabel: string;
+  footer?: ReactNode;
   onNameChange: (value: string) => void;
   onCategoryChange: (value: SubscriptionCategory) => void;
   onPriceChange: (value: string) => void;
@@ -38,6 +40,8 @@ export function SubscriptionForm({
   billingCycle,
   category,
   errors,
+  footer,
+  isDisabled = false,
   isSubmitting,
   name,
   nextRenewalDate,
@@ -52,6 +56,7 @@ export function SubscriptionForm({
   submitLabel,
 }: SubscriptionFormProps) {
   const [reminderEnabled, setReminderEnabled] = useState(false);
+  const isFormDisabled = isSubmitting || isDisabled;
 
   return (
     <View style={styles.form}>
@@ -75,7 +80,7 @@ export function SubscriptionForm({
                 key={option.value}
                 accessibilityRole="button"
                 accessibilityState={{ selected: isSelected }}
-                disabled={isSubmitting}
+                disabled={isFormDisabled}
                 onPress={() => onCategoryChange(option.value)}
                 style={[
                   styles.categoryChip,
@@ -121,7 +126,7 @@ export function SubscriptionForm({
                 key={option.value}
                 accessibilityRole="button"
                 accessibilityState={{ selected: isSelected }}
-                disabled={isSubmitting}
+                disabled={isFormDisabled}
                 onPress={() => onBillingCycleChange(option.value)}
                 style={[
                   styles.billingCycleOption,
@@ -178,6 +183,7 @@ export function SubscriptionForm({
           </AppText>
         ) : null}
         <Button
+          disabled={isDisabled}
           loading={isSubmitting}
           onPress={onSubmit}
           style={styles.saveButton}
@@ -185,6 +191,7 @@ export function SubscriptionForm({
         >
           {submitLabel}
         </Button>
+        {footer}
       </View>
     </View>
   );

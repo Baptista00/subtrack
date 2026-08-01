@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import {
   ActivityIndicator,
+  Alert,
   KeyboardAvoidingView,
   Platform,
   ScrollView,
@@ -51,6 +52,8 @@ export default function EditarAssinatura() {
   const [isInitialLoading, setIsInitialLoading] = useState(true);
   const [hasLoadError, setHasLoadError] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isDeleting, setIsDeleting] = useState(false);
+  const [deleteError, setDeleteError] = useState<string | null>(null);
 
   useEffect(() => {
     let isActive = true;
@@ -128,7 +131,7 @@ export default function EditarAssinatura() {
   }
 
   async function handleSubmit() {
-    if (isSubmitting) {
+    if (isSubmitting || isDeleting) {
       return;
     }
 
@@ -184,6 +187,74 @@ export default function EditarAssinatura() {
     }
   }
 
+  function handleDeletePress() {
+    if (isSubmitting || isDeleting) {
+      return;
+    }
+
+    if (Platform.OS === "web") {
+      const isConfirmed = globalThis.confirm(
+        "Excluir assinatura?\n\nEsta ação não pode ser desfeita.",
+      );
+
+      if (isConfirmed) {
+        void handleDelete();
+      }
+
+      return;
+    }
+
+    Alert.alert(
+      "Excluir assinatura?",
+      "Esta ação não pode ser desfeita.",
+      [
+        { text: "Cancelar", style: "cancel" },
+        {
+          text: "Excluir",
+          style: "destructive",
+          onPress: () => {
+            void handleDelete();
+          },
+        },
+      ],
+    );
+  }
+
+  async function handleDelete() {
+    if (isSubmitting || isDeleting) {
+      return;
+    }
+
+    if (!user || !subscriptionId) {
+      setDeleteError("Não foi possível excluir a assinatura. Tente novamente.");
+      return;
+    }
+
+    setIsDeleting(true);
+    setDeleteError(null);
+
+    try {
+      const { data, error } = await supabase
+        .from("subscriptions")
+        .delete()
+        .eq("id", subscriptionId)
+        .eq("user_id", user.id)
+        .select("id")
+        .single();
+
+      if (error || !data) {
+        setDeleteError("Não foi possível excluir a assinatura. Tente novamente.");
+        return;
+      }
+
+      router.replace("/");
+    } catch {
+      setDeleteError("Não foi possível excluir a assinatura. Tente novamente.");
+    } finally {
+      setIsDeleting(false);
+    }
+  }
+
   if (isInitialLoading) {
     return (
       <ScreenContainer style={styles.statusContainer}>
@@ -230,6 +301,29 @@ export default function EditarAssinatura() {
             billingCycle={billingCycle}
             category={category}
             errors={errors}
+            footer={
+              <>
+                {deleteError ? (
+                  <AppText
+                    accessibilityRole="alert"
+                    variant="Small/Helper"
+                    style={styles.deleteError}
+                  >
+                    {deleteError}
+                  </AppText>
+                ) : null}
+                <Button
+                  disabled={isSubmitting}
+                  loading={isDeleting}
+                  onPress={handleDeletePress}
+                  style={styles.deleteButton}
+                  variant="danger"
+                >
+                  Excluir assinatura
+                </Button>
+              </>
+            }
+            isDisabled={isDeleting}
             isSubmitting={isSubmitting}
             name={name}
             nextRenewalDate={nextRenewalDate}
@@ -283,5 +377,12 @@ const styles = StyleSheet.create({
   errorText: {
     color: colors.error,
     textAlign: "center",
+  },
+  deleteError: {
+    color: colors.error,
+    textAlign: "center",
+  },
+  deleteButton: {
+    width: "100%",
   },
 });

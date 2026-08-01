@@ -57,6 +57,11 @@
 - [x] Tela de edição carrega somente registro pertencente ao usuário autenticado.
 - [x] Update real de assinaturas no Supabase implementado.
 - [x] Home atualiza a listagem ao retornar da edição.
+- [x] Exclusão de assinatura implementada.
+- [x] Confirmação destrutiva obrigatória antes da exclusão.
+- [x] Delete filtrado por `id` e `user_id` implementado.
+- [x] Home atualiza a listagem ao retornar da exclusão.
+- [x] Exclusão definitiva implementada sem restauração ou lixeira.
 
 ## Próxima etapa
 
@@ -79,7 +84,6 @@
 - PENDENTE: implementar login social.
 - PENDENTE: implementar logout visual.
 - PENDENTE: implementar listagem real de assinaturas na Home.
-- PENDENTE: implementar exclusão de assinaturas.
 - PENDENTE: implementar notificações locais.
 - PENDENTE: implementar renovação automática de assinaturas.
 
@@ -92,6 +96,6 @@
 5. [ ] Criar tipagens e funções de acesso aos dados.
 6. [x] Implementar cadastro de assinatura.
 7. [x] Substituir dados demonstrativos da Home por dados reais.
-8. [ ] Implementar exclusão.
+8. [x] Implementar exclusão.
 9. [ ] Implementar notificações locais.
 10. [ ] Implementar posteriormente o avanço automático da renovação.

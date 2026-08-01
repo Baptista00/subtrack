@@ -14,7 +14,7 @@ import { FormField } from "./FormField";
 
 export type InputProps = Omit<
   TextInputProps,
-  "editable" | "placeholderTextColor" | "readOnly" | "style"
+  "placeholderTextColor" | "readOnly" | "style"
 > & {
   containerStyle?: StyleProp<ViewStyle>;
   error?: string;
@@ -36,6 +36,7 @@ export function Input({
   label,
   labelStyle,
   leftElement,
+  accessibilityLabel,
   onBlur,
   onFocus,
   rightElement,
@@ -57,6 +58,7 @@ export function Input({
         {leftElement}
         <TextInput
           {...props}
+          accessibilityLabel={accessibilityLabel ?? label}
           onBlur={(event) => {
             setIsFocused(false);
             onBlur?.(event);

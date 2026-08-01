@@ -22,7 +22,7 @@ import {
   getServiceInitials,
 } from "../src/lib/subscriptions";
 import { colors, home, input, spacing } from "../src/theme";
-import type { Subscription } from "../src/types/subscription";
+import type { SubscriptionSummary } from "../src/types/subscription";
 
 type SubscriptionsListHeaderProps = {
   hasLoadError: boolean;
@@ -34,7 +34,7 @@ type SubscriptionsListHeaderProps = {
 
 export default function Assinaturas() {
   const { user } = useAuth();
-  const [subscriptions, setSubscriptions] = useState<Subscription[]>([]);
+  const [subscriptions, setSubscriptions] = useState<SubscriptionSummary[]>([]);
   const [searchQuery, setSearchQuery] = useState("");
   const [isInitialLoading, setIsInitialLoading] = useState(true);
   const [hasLoadError, setHasLoadError] = useState(false);
@@ -215,7 +215,7 @@ export default function Assinaturas() {
   }
 
   return (
-    <ScreenContainer style={styles.screen}>
+    <ScreenContainer bottomSafeArea={false} style={styles.screen}>
       <View style={styles.header}>
         <AppText accessibilityRole="header" variant="Heading 1" style={styles.title}>
           Assinaturas

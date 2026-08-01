@@ -24,10 +24,10 @@ import {
   getServiceInitials,
 } from "../src/lib/subscriptions";
 import { colors, home, spacing } from "../src/theme";
-import type { Subscription } from "../src/types/subscription";
+import type { SubscriptionSummary } from "../src/types/subscription";
 
 type ListHeaderProps = {
-  subscriptions: Subscription[];
+  subscriptions: SubscriptionSummary[];
 };
 
 function ListHeader({ subscriptions }: ListHeaderProps) {
@@ -57,7 +57,7 @@ function ListItemSeparator() {
 
 export default function Index() {
   const { user } = useAuth();
-  const [subscriptions, setSubscriptions] = useState<Subscription[]>([]);
+  const [subscriptions, setSubscriptions] = useState<SubscriptionSummary[]>([]);
   const [isInitialLoading, setIsInitialLoading] = useState(true);
   const [hasLoadError, setHasLoadError] = useState(false);
   const activeRequestId = useRef(0);
@@ -127,8 +127,9 @@ export default function Index() {
   const hasSubscriptions = subscriptions.length > 0;
 
   function handleRetry() {
-    const requestId = activeRequestId.current;
+    const requestId = activeRequestId.current + 1;
 
+    activeRequestId.current = requestId;
     void loadSubscriptions(() => activeRequestId.current === requestId);
   }
 
@@ -206,7 +207,7 @@ export default function Index() {
   }
 
   return (
-    <ScreenContainer style={styles.screen}>
+    <ScreenContainer bottomSafeArea={false} style={styles.screen}>
       <HomeHeader showMenuButton={hasSubscriptions} userName={userName} />
       {renderMainContent()}
       <BottomNav

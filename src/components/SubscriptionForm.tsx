@@ -67,6 +67,7 @@ export function SubscriptionForm({
     <View style={styles.form}>
       <Input
         autoCapitalize="words"
+        editable={!isFormDisabled}
         error={errors.name}
         label="Nome do serviço"
         maxLength={80}
@@ -108,6 +109,7 @@ export function SubscriptionForm({
       </FormField>
 
       <Input
+        editable={!isFormDisabled}
         error={errors.price}
         keyboardType="decimal-pad"
         label="Valor"
@@ -154,6 +156,7 @@ export function SubscriptionForm({
       </FormField>
 
       <Input
+        editable={!isFormDisabled}
         error={errors.nextRenewalDate}
         keyboardType="numeric"
         label="Próxima renovação"

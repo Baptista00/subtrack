@@ -55,6 +55,14 @@ export function formatDateInput(value: string): string {
   return `${digits.slice(0, 2)}/${digits.slice(2, 4)}/${digits.slice(4)}`;
 }
 
+export function normalizeSubscriptionName(name: string): string {
+  const normalizedName = name.trim().replace(/\s+/g, " ").toLowerCase();
+
+  return typeof normalizedName.normalize === "function"
+    ? normalizedName.normalize("NFD").replace(/[\u0300-\u036f]/g, "")
+    : normalizedName;
+}
+
 export function getServiceColor(category: SubscriptionCategory): string {
   return (
     subscriptionCategories.find((option) => option.value === category)

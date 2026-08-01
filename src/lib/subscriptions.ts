@@ -1,8 +1,14 @@
 import { supabase } from "./supabase";
-import type { BillingCycle, Subscription, SubscriptionCategory } from "../types/subscription";
+import type {
+  BillingCycle,
+  SubscriptionCategory,
+  SubscriptionNameSummary,
+  SubscriptionSummary,
+} from "../types/subscription";
 
-const subscriptionsSelect =
-  "id, user_id, name, price, category, service_color, next_renewal_date, billing_cycle, created_at, updated_at";
+export const subscriptionSummarySelect =
+  "id, name, price, category, service_color, next_renewal_date, billing_cycle";
+const subscriptionNameSelect = "id, name";
 
 const subscriptionCategories: readonly SubscriptionCategory[] = [
   "streaming",
@@ -35,12 +41,12 @@ type CalendarDate = {
   day: number;
 };
 
-export function normalizeSubscriptions(value: unknown): Subscription[] {
+export function normalizeSubscriptions(value: unknown): SubscriptionSummary[] {
   if (!Array.isArray(value)) {
     return [];
   }
 
-  const subscriptions: Subscription[] = [];
+  const subscriptions: SubscriptionSummary[] = [];
 
   for (const item of value) {
     const subscription = normalizeSubscription(item);
@@ -53,10 +59,12 @@ export function normalizeSubscriptions(value: unknown): Subscription[] {
   return subscriptions;
 }
 
-export async function fetchUserSubscriptions(userId: string): Promise<Subscription[]> {
+export async function fetchUserSubscriptions(
+  userId: string,
+): Promise<SubscriptionSummary[]> {
   const { data, error } = await supabase
     .from("subscriptions")
-    .select(subscriptionsSelect)
+    .select(subscriptionSummarySelect)
     .eq("user_id", userId)
     .order("next_renewal_date", { ascending: true })
     .order("created_at", { ascending: false });
@@ -69,6 +77,31 @@ export async function fetchUserSubscriptions(userId: string): Promise<Subscripti
 
   if (subscriptions.length !== data.length) {
     throw new Error("Não foi possível carregar as assinaturas.");
+  }
+
+  return subscriptions;
+}
+
+export async function fetchUserSubscriptionNames(
+  userId: string,
+): Promise<SubscriptionNameSummary[]> {
+  const { data, error } = await supabase
+    .from("subscriptions")
+    .select(subscriptionNameSelect)
+    .eq("user_id", userId);
+
+  if (error || !Array.isArray(data)) {
+    throw new Error("Não foi possível carregar as assinaturas.");
+  }
+
+  const subscriptions: SubscriptionNameSummary[] = [];
+
+  for (const item of data) {
+    if (!isRecord(item) || !isString(item.id) || !isString(item.name)) {
+      throw new Error("Não foi possível carregar as assinaturas.");
+    }
+
+    subscriptions.push({ id: item.id, name: item.name });
   }
 
   return subscriptions;
@@ -105,7 +138,7 @@ export function getServiceInitials(name: string): string {
     .join("");
 }
 
-export function calculateMonthlyTotal(subscriptions: Subscription[]): number {
+export function calculateMonthlyTotal(subscriptions: SubscriptionSummary[]): number {
   return subscriptions.reduce(
     (total, subscription) =>
       total +
@@ -115,7 +148,7 @@ export function calculateMonthlyTotal(subscriptions: Subscription[]): number {
 }
 
 export function countUpcomingRenewals(
-  subscriptions: Subscription[],
+  subscriptions: SubscriptionSummary[],
   now: Date = new Date(),
 ): number {
   const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
@@ -141,7 +174,7 @@ export function countUpcomingRenewals(
   }, 0);
 }
 
-function normalizeSubscription(value: unknown): Subscription | null {
+function normalizeSubscription(value: unknown): SubscriptionSummary | null {
   if (!isRecord(value)) {
     return null;
   }
@@ -150,30 +183,24 @@ function normalizeSubscription(value: unknown): Subscription | null {
 
   if (
     !isString(value.id) ||
-    !isString(value.user_id) ||
     !isString(value.name) ||
     price === null ||
     !isSubscriptionCategory(value.category) ||
     !isString(value.service_color) ||
     !isString(value.next_renewal_date) ||
-    !isBillingCycle(value.billing_cycle) ||
-    !isString(value.created_at) ||
-    !isString(value.updated_at)
+    !isBillingCycle(value.billing_cycle)
   ) {
     return null;
   }
 
   return {
     id: value.id,
-    user_id: value.user_id,
     name: value.name,
     price,
     category: value.category,
     service_color: value.service_color,
     next_renewal_date: value.next_renewal_date,
     billing_cycle: value.billing_cycle,
-    created_at: value.created_at,
-    updated_at: value.updated_at,
   };
 }
 

@@ -20,9 +20,31 @@ export function HomeHeader({ userName, style, ...menuProps }: HomeHeaderProps) {
         {`Olá, ${userName} 👋`}
       </AppText>
       {showMenuButton ? (
-        <Pressable accessibilityLabel="Mais opções" accessibilityRole="button" hitSlop={8} onPress={menuProps.onMenuPress} style={styles.menuButton}>
-          <Feather accessible={false} color={home.header.menuButton.iconColor} name="more-vertical" size={home.header.menuButton.iconSize} />
-        </Pressable>
+        menuProps.onMenuPress ? (
+          <Pressable
+            accessibilityLabel="Mais opções"
+            accessibilityRole="button"
+            hitSlop={8}
+            onPress={menuProps.onMenuPress}
+            style={styles.menuButton}
+          >
+            <Feather
+              accessible={false}
+              color={home.header.menuButton.iconColor}
+              name="more-vertical"
+              size={home.header.menuButton.iconSize}
+            />
+          </Pressable>
+        ) : (
+          <View accessible={false} pointerEvents="none" style={styles.menuButton}>
+            <Feather
+              accessible={false}
+              color={home.header.menuButton.iconColor}
+              name="more-vertical"
+              size={home.header.menuButton.iconSize}
+            />
+          </View>
+        )
       ) : null}
     </View>
   );

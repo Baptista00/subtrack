@@ -20,3 +20,16 @@ export type Subscription = {
   created_at: string;
   updated_at: string;
 };
+
+export type SubscriptionSummary = Pick<
+  Subscription,
+  | "id"
+  | "name"
+  | "price"
+  | "category"
+  | "service_color"
+  | "next_renewal_date"
+  | "billing_cycle"
+>;
+
+export type SubscriptionNameSummary = Pick<Subscription, "id" | "name">;

@@ -1,11 +1,5 @@
 import { Platform } from "react-native";
-import { AndroidImportance } from "expo-notifications/build/NotificationChannelManager.types";
-import { getPermissionsAsync, requestPermissionsAsync } from "expo-notifications/build/NotificationPermissions";
-import { setNotificationHandler } from "expo-notifications/build/NotificationsHandler";
-import { SchedulableTriggerInputTypes } from "expo-notifications/build/Notifications.types";
-import cancelScheduledNotificationAsync from "expo-notifications/build/cancelScheduledNotificationAsync";
-import scheduleNotificationAsync from "expo-notifications/build/scheduleNotificationAsync";
-import setNotificationChannelAsync from "expo-notifications/build/setNotificationChannelAsync";
+import * as Notifications from "expo-notifications";
 
 import { colors } from "../theme";
 import { formatCurrency } from "./subscriptions";
@@ -26,7 +20,7 @@ export {
 } from "./notifications.shared";
 export type { ReminderScheduleResult, SubscriptionReminderInput } from "./notifications.shared";
 
-setNotificationHandler({
+Notifications.setNotificationHandler({
   handleNotification: async () => ({
     shouldPlaySound: false,
     shouldSetBadge: false,
@@ -36,13 +30,13 @@ setNotificationHandler({
 });
 
 export async function ensureNotificationPermissionAsync(): Promise<boolean> {
-  const permissions = await getPermissionsAsync();
+  const permissions = await Notifications.getPermissionsAsync();
 
   if (permissions.granted) {
     return true;
   }
 
-  const requestedPermissions = await requestPermissionsAsync();
+  const requestedPermissions = await Notifications.requestPermissionsAsync();
 
   return requestedPermissions.granted;
 }
@@ -57,7 +51,7 @@ export async function cancelSubscriptionReminder(subscriptionId: string): Promis
   let cancellationError: unknown = null;
 
   try {
-    await cancelScheduledNotificationAsync(notificationId);
+    await Notifications.cancelScheduledNotificationAsync(notificationId);
   } catch (error) {
     cancellationError = error;
   }
@@ -97,7 +91,7 @@ export async function scheduleSubscriptionReminder(
       return { status: "past" };
     }
 
-    const notificationId = await scheduleNotificationAsync({
+    const notificationId = await Notifications.scheduleNotificationAsync({
       content: {
         title: "Renovação próxima",
         body: `${input.name} renova amanhã por ${formatCurrency(input.price)}.`,
@@ -108,7 +102,7 @@ export async function scheduleSubscriptionReminder(
         },
       },
       trigger: {
-        type: SchedulableTriggerInputTypes.DATE,
+        type: Notifications.SchedulableTriggerInputTypes.DATE,
         date: reminderDate,
         ...(Platform.OS === "android"
           ? { channelId: subscriptionRemindersChannelId }
@@ -135,9 +129,9 @@ async function ensureAndroidNotificationChannelAsync(): Promise<void> {
     return;
   }
 
-  await setNotificationChannelAsync(subscriptionRemindersChannelId, {
+  await Notifications.setNotificationChannelAsync(subscriptionRemindersChannelId, {
     name: "Lembretes de assinaturas",
-    importance: AndroidImportance.DEFAULT,
+    importance: Notifications.AndroidImportance.DEFAULT,
     lightColor: colors.primary,
   });
 }
@@ -169,7 +163,7 @@ function getReminderDate(nextRenewalDate: string): Date | null {
 
 async function cancelScheduledNotificationSilently(notificationId: string): Promise<void> {
   try {
-    await cancelScheduledNotificationAsync(notificationId);
+    await Notifications.cancelScheduledNotificationAsync(notificationId);
   } catch {
     // A notificação recém-criada não deve interromper o fluxo caso não possa ser removida.
   }

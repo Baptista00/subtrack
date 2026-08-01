@@ -1,6 +1,7 @@
 import { Ionicons } from "@expo/vector-icons";
 import { type ComponentProps } from "react";
 import { Pressable, StyleSheet, View, type StyleProp, type ViewStyle } from "react-native";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 import { home } from "../theme";
 import { AppText } from "./AppText";
@@ -30,6 +31,7 @@ export function BottomNav({
   onSubscriptionsPress,
   style,
 }: BottomNavProps) {
+  const insets = useSafeAreaInsets();
   const items: BottomNavItem[] = [
     {
       tab: "home",
@@ -72,6 +74,7 @@ export function BottomNav({
               onPress={item.onPress}
               style={({ pressed }) => [
                 styles.tab,
+                { paddingBottom: Math.max(home.bottomNav.tab.paddingBottom, insets.bottom) },
                 isInteractive && pressed ? styles.tabPressed : undefined,
               ]}
             >
@@ -109,7 +112,6 @@ const styles = StyleSheet.create({
     flex: 1,
     gap: home.bottomNav.tab.gap,
     justifyContent: "center",
-    paddingBottom: home.bottomNav.tab.paddingBottom,
     paddingTop: home.bottomNav.tab.paddingTop,
   },
   tabPressed: {

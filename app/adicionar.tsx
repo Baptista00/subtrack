@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { KeyboardAvoidingView, Platform, ScrollView, StyleSheet, View } from "react-native";
 import { router } from "expo-router";
 
@@ -16,9 +16,11 @@ import {
 } from "../src/lib/notifications";
 import {
   getServiceColor,
+  normalizeSubscriptionName,
   validateSubscriptionForm,
   type SubscriptionFormFieldErrors,
 } from "../src/lib/subscription-form";
+import { fetchUserSubscriptionNames } from "../src/lib/subscriptions";
 import { supabase } from "../src/lib/supabase";
 import { colors, home, spacing, type BillingCycle, type SubscriptionCategory } from "../src/theme";
 
@@ -35,9 +37,10 @@ export default function Adicionar() {
   const [reminderEnabled, setReminderEnabled] = useState(false);
   const [reminderMessage, setReminderMessage] = useState<string | null>(null);
   const [isAwaitingReminderNotice, setIsAwaitingReminderNotice] = useState(false);
+  const submissionInProgress = useRef(false);
 
   async function handleSubmit() {
-    if (isSubmitting || isAwaitingReminderNotice) {
+    if (submissionInProgress.current || isAwaitingReminderNotice) {
       return;
     }
 
@@ -61,9 +64,22 @@ export default function Adicionar() {
       return;
     }
 
+    submissionInProgress.current = true;
     setIsSubmitting(true);
 
     try {
+      const normalizedName = normalizeSubscriptionName(validation.values.name);
+      const existingSubscriptions = await fetchUserSubscriptionNames(user.id);
+      const hasDuplicateName = existingSubscriptions.some(
+        (subscription) =>
+          normalizeSubscriptionName(subscription.name) === normalizedName,
+      );
+
+      if (hasDuplicateName) {
+        setSubmitError("Você já possui uma assinatura com este nome.");
+        return;
+      }
+
       const { data, error } = await supabase
         .from("subscriptions")
         .insert({
@@ -112,6 +128,7 @@ export default function Adicionar() {
     } catch {
       setSubmitError("Não foi possível salvar a assinatura. Tente novamente.");
     } finally {
+      submissionInProgress.current = false;
       setIsSubmitting(false);
     }
   }
@@ -132,7 +149,7 @@ export default function Adicionar() {
   return (
     <ScreenContainer>
       <KeyboardAvoidingView
-        behavior={Platform.OS === "ios" ? "padding" : "height"}
+        behavior={Platform.OS === "ios" ? "padding" : undefined}
         style={styles.keyboardAvoidingView}
       >
         <ScrollView

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
   ActivityIndicator,
   Alert,
@@ -19,6 +19,7 @@ import {
   SubscriptionForm,
 } from "../../src/components";
 import {
+  normalizeSubscriptionName,
   formatPriceInput,
   getServiceColor,
   validateSubscriptionForm,
@@ -31,7 +32,12 @@ import {
   removeNotificationId,
   scheduleSubscriptionReminder,
 } from "../../src/lib/notifications";
-import { formatDatabaseDate, normalizeSubscriptions } from "../../src/lib/subscriptions";
+import {
+  fetchUserSubscriptionNames,
+  formatDatabaseDate,
+  normalizeSubscriptions,
+  subscriptionSummarySelect,
+} from "../../src/lib/subscriptions";
 import { supabase } from "../../src/lib/supabase";
 import {
   colors,
@@ -40,9 +46,6 @@ import {
   type BillingCycle,
   type SubscriptionCategory,
 } from "../../src/theme";
-
-const subscriptionsSelect =
-  "id, user_id, name, price, category, service_color, next_renewal_date, billing_cycle, created_at, updated_at";
 
 export default function EditarAssinatura() {
   const { id: routeId } = useLocalSearchParams<{ id?: string | string[] }>();
@@ -64,6 +67,7 @@ export default function EditarAssinatura() {
   const [reminderEnabled, setReminderEnabled] = useState(false);
   const [reminderMessage, setReminderMessage] = useState<string | null>(null);
   const [isAwaitingReminderNotice, setIsAwaitingReminderNotice] = useState(false);
+  const activeOperation = useRef<"submit" | "delete" | null>(null);
 
   useEffect(() => {
     let isActive = true;
@@ -85,7 +89,7 @@ export default function EditarAssinatura() {
       try {
         const { data, error } = await supabase
           .from("subscriptions")
-          .select(subscriptionsSelect)
+          .select(subscriptionSummarySelect)
           .eq("id", subscriptionId)
           .eq("user_id", user.id)
           .maybeSingle();
@@ -149,7 +153,7 @@ export default function EditarAssinatura() {
   }
 
   async function handleSubmit() {
-    if (isSubmitting || isDeleting || isAwaitingReminderNotice) {
+    if (activeOperation.current || isAwaitingReminderNotice) {
       return;
     }
 
@@ -174,9 +178,23 @@ export default function EditarAssinatura() {
       return;
     }
 
+    activeOperation.current = "submit";
     setIsSubmitting(true);
 
     try {
+      const normalizedName = normalizeSubscriptionName(validation.values.name);
+      const existingSubscriptions = await fetchUserSubscriptionNames(user.id);
+      const hasDuplicateName = existingSubscriptions.some(
+        (subscription) =>
+          subscription.id !== subscriptionId &&
+          normalizeSubscriptionName(subscription.name) === normalizedName,
+      );
+
+      if (hasDuplicateName) {
+        setSubmitError("Você já possui uma assinatura com este nome.");
+        return;
+      }
+
       const { data, error } = await supabase
         .from("subscriptions")
         .update({
@@ -238,12 +256,13 @@ export default function EditarAssinatura() {
     } catch {
       setSubmitError("Não foi possível atualizar a assinatura. Tente novamente.");
     } finally {
+      activeOperation.current = null;
       setIsSubmitting(false);
     }
   }
 
   function handleDeletePress() {
-    if (isSubmitting || isDeleting || isAwaitingReminderNotice) {
+    if (activeOperation.current || isAwaitingReminderNotice) {
       return;
     }
 
@@ -276,7 +295,7 @@ export default function EditarAssinatura() {
   }
 
   async function handleDelete() {
-    if (isSubmitting || isDeleting || isAwaitingReminderNotice) {
+    if (activeOperation.current || isAwaitingReminderNotice) {
       return;
     }
 
@@ -285,6 +304,7 @@ export default function EditarAssinatura() {
       return;
     }
 
+    activeOperation.current = "delete";
     setIsDeleting(true);
     setDeleteError(null);
 
@@ -316,6 +336,7 @@ export default function EditarAssinatura() {
     } catch {
       setDeleteError("Não foi possível excluir a assinatura. Tente novamente.");
     } finally {
+      activeOperation.current = null;
       setIsDeleting(false);
     }
   }
@@ -360,7 +381,7 @@ export default function EditarAssinatura() {
   return (
     <ScreenContainer>
       <KeyboardAvoidingView
-        behavior={Platform.OS === "ios" ? "padding" : "height"}
+        behavior={Platform.OS === "ios" ? "padding" : undefined}
         style={styles.keyboardAvoidingView}
       >
         <ScrollView

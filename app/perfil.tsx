@@ -83,7 +83,7 @@ export default function Perfil() {
   }
 
   return (
-    <ScreenContainer style={styles.screen}>
+    <ScreenContainer bottomSafeArea={false} style={styles.screen}>
       <ScrollView
         contentContainerStyle={styles.scrollContent}
         showsVerticalScrollIndicator={false}

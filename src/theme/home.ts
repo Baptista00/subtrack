@@ -267,7 +267,7 @@ export const home = {
       gap: spacing[2],
       borderWidth: 1,
       borderColor: "#F3F4F6",
-      alignItems: "flex-start",
+      alignItems: "center",
     },
     shadow: {
       shadowColor: "#000000",

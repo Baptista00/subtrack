@@ -37,7 +37,11 @@ export function FormField({
       ) : null}
       {children}
       {hasError ? (
-        <AppText variant="Small/Helper" style={[styles.error, errorStyle]}>
+        <AppText
+          accessibilityRole="alert"
+          variant="Small/Helper"
+          style={[styles.error, errorStyle]}
+        >
           {error}
         </AppText>
       ) : null}

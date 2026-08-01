@@ -85,6 +85,10 @@
 - [x] Exclusão cancela o lembrete local em melhor esforço.
 - [x] Web não agenda lembretes locais.
 - [x] Lembretes implementados sem push remoto, tokens ou serviço em nuvem.
+- [x] Auditoria técnica pré-build realizada.
+- [x] Recarga concorrente da Home, acessibilidade de campos, safe area, teclado e bloqueio de envios concorrentes corrigidos.
+- [x] Consultas de assinaturas restringidas aos campos consumidos pela interface, mantendo o filtro explícito por `user_id` e a proteção por RLS.
+- [x] Validações automáticas da auditoria executadas: lint, TypeScript, Expo Doctor, compatibilidade de dependências e verificação de diff.
 
 ## Próxima etapa
 
@@ -103,10 +107,11 @@
 - PENDENTE: implementar recuperação de senha.
 - PENDENTE: implementar deep link para fluxos de autenticação.
 - PENDENTE: implementar login social.
-- PENDENTE: implementar listagem real de assinaturas na Home.
 - PENDENTE: implementar filtros avançados, ordenação manual e paginação na tela Assinaturas.
 - PENDENTE: implementar Editar perfil, Notificações, Configurações, alteração de senha e exclusão de conta.
 - PENDENTE: implementar renovação automática de assinaturas.
+- PENDENTE: executar o checklist manual pré-build em Android, iOS e web.
+- PENDENTE: preparar e gerar os builds finais para Android e iOS após definição dos identificadores e credenciais.
 
 ## Próximas etapas de dados
 
@@ -114,7 +119,7 @@
 2. [x] Configurar variáveis de ambiente do Expo.
 3. [x] Instalar e configurar o cliente Supabase.
 4. [x] Implementar autenticação.
-5. [ ] Criar tipagens e funções de acesso aos dados.
+5. [x] Criar tipagens e funções de acesso aos dados.
 6. [x] Implementar cadastro de assinatura.
 7. [x] Substituir dados demonstrativos da Home por dados reais.
 8. [x] Implementar exclusão.

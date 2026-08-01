@@ -68,7 +68,7 @@ export function SubscriptionCard({
         </View>
 
         <View style={styles.content}>
-          <AppText numberOfLines={1} variant="Body" style={styles.serviceName}>
+          <AppText variant="Body" style={styles.serviceName}>
             {serviceName}
           </AppText>
           <View style={styles.details}>

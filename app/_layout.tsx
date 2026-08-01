@@ -2,6 +2,7 @@ import "../src/lib/notifications";
 
 import { ActivityIndicator, StyleSheet } from "react-native";
 import { Stack } from "expo-router";
+import { SafeAreaProvider } from "react-native-safe-area-context";
 
 import { AuthProvider, useAuth } from "../src/auth";
 import { AppText, ScreenContainer } from "../src/components";
@@ -9,9 +10,11 @@ import { colors, spacing } from "../src/theme";
 
 export default function RootLayout() {
   return (
-    <AuthProvider>
-      <RootNavigator />
-    </AuthProvider>
+    <SafeAreaProvider>
+      <AuthProvider>
+        <RootNavigator />
+      </AuthProvider>
+    </SafeAreaProvider>
   );
 }
 

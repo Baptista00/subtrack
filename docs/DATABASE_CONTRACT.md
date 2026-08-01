@@ -70,6 +70,8 @@ Não criar os campos abaixo nem outros campos além dos aprovados:
 - Índice por proprietário: `user_id`.
 - Índice composto para próximas renovações: `user_id, next_renewal_date`.
 - Não planejar índices adicionais nesta etapa.
+- No MVP, nomes duplicados são bloqueados no cliente após normalização por trim, espaços internos, minúsculas e acentos.
+- Antes da produção, deve ser adicionada uma constraint ou índice único por `user_id` e nome normalizado para impedir condições de corrida.
 
 ## Row Level Security
 
@@ -131,7 +133,7 @@ Não incluir campos formatados nessa interface de domínio.
 - A data é armazenada como `date`.
 - A categoria tem fallback visual no aplicativo.
 - Somente assinaturas do usuário autenticado entram nos totais.
-- A Home demonstrativa atual ainda não usa estes dados.
+- A Home consulta e exibe somente as assinaturas do usuário autenticado.
 - A renovação automática futura usará `next_renewal_date` e `billing_cycle`.
 - A definição dos casos de dia 29, 30 e 31 permanece pendente.
 - Nenhuma data será avançada automaticamente nesta etapa.

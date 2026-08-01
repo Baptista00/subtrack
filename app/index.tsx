@@ -223,7 +223,10 @@ export default function Index() {
     <ScreenContainer style={styles.screen}>
       <HomeHeader showMenuButton={hasSubscriptions} userName={userName} />
       {renderMainContent()}
-      <BottomNav activeTab="home" />
+      <BottomNav
+        activeTab="home"
+        onProfilePress={() => router.push("/perfil")}
+      />
     </ScreenContainer>
   );
 }

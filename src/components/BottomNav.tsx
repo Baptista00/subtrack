@@ -59,6 +59,7 @@ export function BottomNav({
       <View style={styles.content}>
         {items.map((item) => {
           const isActive = item.tab === activeTab;
+          const isInteractive = Boolean(item.onPress);
           const color = isActive ? home.bottomNav.active.color : home.bottomNav.inactive.color;
 
           return (
@@ -66,9 +67,13 @@ export function BottomNav({
               key={item.tab}
               accessibilityLabel={item.label}
               accessibilityRole="tab"
-              accessibilityState={{ selected: isActive }}
+              accessibilityState={{ disabled: !isInteractive, selected: isActive }}
+              disabled={!isInteractive}
               onPress={item.onPress}
-              style={styles.tab}
+              style={({ pressed }) => [
+                styles.tab,
+                isInteractive && pressed ? styles.tabPressed : undefined,
+              ]}
             >
               <Ionicons
                 accessible={false}
@@ -106,6 +111,9 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     paddingBottom: home.bottomNav.tab.paddingBottom,
     paddingTop: home.bottomNav.tab.paddingTop,
+  },
+  tabPressed: {
+    opacity: 0.7,
   },
   label: {
     fontSize: home.bottomNav.label.fontSize,

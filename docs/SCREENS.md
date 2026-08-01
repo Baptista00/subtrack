@@ -70,8 +70,14 @@
 
 ## Perfil
 
-- Exibe os dados aprovados e permite logout.
-- Dados exibidos e layout: PENDENTE: preencher com informação aprovada.
+- Rota: `/perfil`, disponível somente para usuários autenticados.
+- Exibe um cabeçalho verde com avatar textual central, nome e e-mail do usuário autenticado.
+- Nome e e-mail são obtidos diretamente do Supabase Auth, sem consulta a uma tabela `profiles`.
+- A seção “CONTA” possui as ações visuais Editar perfil e Notificações; ambas mostram “Em breve” e não abrem novas telas.
+- A seção “PREFERÊNCIAS” mostra a moeda fixa `BRL (R$)` e a ação visual Configurações, que também mostra “Em breve”.
+- O logout funcional fica abaixo dos cards e exige confirmação explícita; durante o envio, o botão mostra loading e, em caso de falha, a mensagem é exibida inline.
+- A BottomNav mantém Perfil ativo, permite retornar à Home pelo item Início e mantém Assinaturas sem navegação nesta etapa.
+- Não há edição de perfil, alteração de senha ou exclusão de conta nesta etapa.
 
 ## Splash e notificações locais
 

@@ -62,6 +62,15 @@
 - [x] Delete filtrado por `id` e `user_id` implementado.
 - [x] Home atualiza a listagem ao retornar da exclusão.
 - [x] Exclusão definitiva implementada sem restauração ou lixeira.
+- [x] Tela Perfil implementada.
+- [x] BottomNav navega entre Home e Perfil.
+- [x] Nome e e-mail do Perfil obtidos do Supabase Auth.
+- [x] Avatar textual por iniciais implementado.
+- [x] Logout com confirmação implementado.
+- [x] Após logout, a proteção de rotas retorna ao Login.
+- [x] Tela Perfil ajustada conforme a referência visual.
+- [x] Moeda do Perfil permanece fixa em BRL.
+- [x] Logout funcional preservado após o ajuste visual.
 
 ## Próxima etapa
 
@@ -70,20 +79,19 @@
 ## Pendências de aprovação
 
 - PENDENTE: preencher com informação aprovada sobre line heights, sombras e animações.
-- PENDENTE: preencher com informação aprovada sobre a tela visual final de Perfil.
 - PENDENTE: preencher com informação aprovada sobre campos, validações e dados exibidos nas telas.
 - PENDENTE: preencher com informação aprovada sobre indicadores financeiros do dashboard.
 - PENDENTE: configurar a fonte Inter após sua instalação ou carregamento aprovados.
 - PENDENTE: definir uma adaptação React Native aprovada para o focus ring do Input em Android e iOS.
-- PENDENTE: implementar navegação aprovada para menu, FAB, cards e barra inferior.
+- PENDENTE: implementar navegação da BottomNav para Assinaturas.
 - PENDENTE: validar a Home com dados em Android.
 - PENDENTE: definir a atualização automática de `updated_at` antes do CRUD final.
 - PENDENTE: definir os casos de renovação mensal para os dias 29, 30 e 31.
 - PENDENTE: implementar recuperação de senha.
 - PENDENTE: implementar deep link para fluxos de autenticação.
 - PENDENTE: implementar login social.
-- PENDENTE: implementar logout visual.
 - PENDENTE: implementar listagem real de assinaturas na Home.
+- PENDENTE: implementar Editar perfil, Notificações, Configurações, alteração de senha e exclusão de conta.
 - PENDENTE: implementar notificações locais.
 - PENDENTE: implementar renovação automática de assinaturas.
 

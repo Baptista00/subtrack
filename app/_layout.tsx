@@ -1,12 +1,12 @@
 import "../src/lib/notifications";
 
-import { ActivityIndicator, StyleSheet, View } from "react-native";
+import { useEffect, useState } from "react";
+import { StyleSheet, View } from "react-native";
 import { Stack } from "expo-router";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 
 import { AuthProvider, useAuth } from "../src/auth";
-import { AppText, ScreenContainer } from "../src/components";
-import { colors, spacing } from "../src/theme";
+import { LaunchScreen } from "../src/components";
 
 export default function RootLayout() {
   return (
@@ -19,9 +19,22 @@ export default function RootLayout() {
 }
 
 function RootNavigator() {
-  const { isLoading, isPasswordRecovery, session } = useAuth();
+  const { isLoading, isPasswordRecovery, isPasswordRecoveryLinkReady, session } = useAuth();
+  const [hasMinimumLaunchTimeElapsed, setHasMinimumLaunchTimeElapsed] = useState(false);
   const hasSession = session !== null;
   const canAccessPrivateRoutes = hasSession && !isPasswordRecovery;
+  const isAuthBootstrapLoading = isLoading || !isPasswordRecoveryLinkReady;
+  const showLaunchScreen = !hasMinimumLaunchTimeElapsed || isAuthBootstrapLoading;
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setHasMinimumLaunchTimeElapsed(true);
+    }, 2000);
+
+    return () => {
+      clearTimeout(timer);
+    };
+  }, []);
 
   return (
     <View style={styles.root}>
@@ -41,14 +54,7 @@ function RootNavigator() {
         <Stack.Screen name="redefinir-senha" />
       </Stack>
 
-      {isLoading ? (
-        <ScreenContainer style={styles.loadingScreen}>
-          <ActivityIndicator color={colors.primary} />
-          <AppText variant="Body" style={styles.loadingText}>
-            Carregando...
-          </AppText>
-        </ScreenContainer>
-      ) : null}
+      {showLaunchScreen ? <LaunchScreen /> : null}
     </View>
   );
 }
@@ -56,14 +62,5 @@ function RootNavigator() {
 const styles = StyleSheet.create({
   root: {
     flex: 1,
-  },
-  loadingScreen: {
-    ...StyleSheet.absoluteFillObject,
-    alignItems: "center",
-    gap: spacing[2],
-    justifyContent: "center",
-  },
-  loadingText: {
-    color: colors.textSecondary,
   },
 });

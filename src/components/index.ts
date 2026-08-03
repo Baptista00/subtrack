@@ -1,6 +1,8 @@
 export { AppText } from "./AppText";
 export type { AppTextProps } from "./AppText";
 
+export { LaunchScreen } from "./LaunchScreen";
+
 export { ScreenContainer } from "./ScreenContainer";
 export type { ScreenContainerProps } from "./ScreenContainer";
 

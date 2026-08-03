@@ -1,11 +1,9 @@
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { ActivityIndicator, StyleSheet, View } from "react-native";
-import * as Linking from "expo-linking";
 import { router } from "expo-router";
 
 import { useAuth } from "../src/auth";
 import { AppText, Button, PasswordInput, ScreenContainer } from "../src/components";
-import { establishPasswordRecoverySession } from "../src/lib/auth-recovery";
 import { supabase } from "../src/lib/supabase";
 import { colors, spacing } from "../src/theme";
 
@@ -15,6 +13,8 @@ type PasswordFieldErrors = {
   password?: string;
   confirmPassword?: string;
 };
+
+type RecoveryExitRoute = "/esqueci-senha" | "/login";
 
 function validatePasswords(password: string, confirmPassword: string): PasswordFieldErrors {
   const errors: PasswordFieldErrors = {};
@@ -33,86 +33,62 @@ function validatePasswords(password: string, confirmPassword: string): PasswordF
 }
 
 export default function ResetPassword() {
-  const { beginPasswordRecovery, clearPasswordRecovery, isPasswordRecovery } = useAuth();
+  const {
+    abandonPasswordRecovery,
+    clearPasswordRecovery,
+    isPasswordRecovery,
+    isPasswordRecoveryLinkReady,
+    passwordRecoveryLinkState,
+  } = useAuth();
   const [screenState, setScreenState] = useState<RecoveryScreenState>("processing");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [errors, setErrors] = useState<PasswordFieldErrors>({});
   const [submitError, setSubmitError] = useState<string | null>(null);
-  const isMountedRef = useRef(true);
-  const isProcessingRef = useRef(false);
-  const hasValidRecoveryLinkRef = useRef(false);
+  const [exitError, setExitError] = useState<string | null>(null);
+  const [isLeavingRecovery, setIsLeavingRecovery] = useState(false);
   const isUpdatingRef = useRef(false);
 
-  const handleRecoveryUrl = useCallback(
-    async (url: string) => {
-      if (isProcessingRef.current || hasValidRecoveryLinkRef.current) {
-        return;
-      }
-
-      isProcessingRef.current = true;
-      beginPasswordRecovery();
-      setScreenState("processing");
-      setSubmitError(null);
-
-      try {
-        const result = await establishPasswordRecoverySession(url);
-
-        if (!isMountedRef.current) {
-          return;
-        }
-
-        if (result.status === "success") {
-          hasValidRecoveryLinkRef.current = true;
-          setScreenState("valid");
-          return;
-        }
-
-        clearPasswordRecovery();
-        setScreenState("invalid");
-      } finally {
-        isProcessingRef.current = false;
-      }
-    },
-    [beginPasswordRecovery, clearPasswordRecovery],
-  );
-
   useEffect(() => {
-    isMountedRef.current = true;
-
-    async function processInitialUrl() {
-      try {
-        const url = await Linking.getInitialURL();
-
-        if (!isMountedRef.current) {
-          return;
-        }
-
-        if (!url) {
-          setScreenState("invalid");
-          return;
-        }
-
-        await handleRecoveryUrl(url);
-      } catch {
-        if (isMountedRef.current) {
-          clearPasswordRecovery();
-          setScreenState("invalid");
-        }
-      }
+    if (screenState === "updating" || screenState === "success") {
+      return;
     }
 
-    void processInitialUrl();
+    if (!isPasswordRecoveryLinkReady || passwordRecoveryLinkState === "processing") {
+      setScreenState("processing");
+      return;
+    }
 
-    const subscription = Linking.addEventListener("url", ({ url }) => {
-      void handleRecoveryUrl(url);
-    });
+    if (passwordRecoveryLinkState === "valid" && isPasswordRecovery) {
+      setScreenState("valid");
+      return;
+    }
 
-    return () => {
-      isMountedRef.current = false;
-      subscription.remove();
-    };
-  }, [clearPasswordRecovery, handleRecoveryUrl]);
+    setScreenState("invalid");
+  }, [
+    isPasswordRecovery,
+    isPasswordRecoveryLinkReady,
+    passwordRecoveryLinkState,
+    screenState,
+  ]);
+
+  async function handleExitRecovery(route: RecoveryExitRoute) {
+    if (isLeavingRecovery) {
+      return;
+    }
+
+    setExitError(null);
+    setIsLeavingRecovery(true);
+
+    try {
+      await abandonPasswordRecovery();
+      router.replace(route);
+    } catch {
+      setExitError("Não foi possível encerrar a recuperação. Tente novamente.");
+    } finally {
+      setIsLeavingRecovery(false);
+    }
+  }
 
   async function handleSubmit() {
     if (screenState !== "valid" || isUpdatingRef.current) {
@@ -195,10 +171,25 @@ export default function ResetPassword() {
             Solicite um novo link para redefinir sua senha.
           </AppText>
           <View style={styles.actions}>
-            <Button onPress={() => router.replace("/esqueci-senha")} variant="primary">
+            {exitError ? (
+              <AppText accessibilityRole="alert" variant="Small/Helper" style={styles.errorMessage}>
+                {exitError}
+              </AppText>
+            ) : null}
+            <Button
+              disabled={isLeavingRecovery}
+              loading={isLeavingRecovery}
+              loadingText="Encerrando..."
+              onPress={() => void handleExitRecovery("/esqueci-senha")}
+              variant="primary"
+            >
               Solicitar novo link
             </Button>
-            <Button onPress={() => router.replace("/login")} variant="ghost">
+            <Button
+              disabled={isLeavingRecovery}
+              onPress={() => void handleExitRecovery("/login")}
+              variant="ghost"
+            >
               Voltar para o login
             </Button>
           </View>

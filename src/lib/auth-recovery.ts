@@ -13,6 +13,7 @@ export type PasswordRecoveryResult =
   | { status: "invalid" };
 
 const passwordRecoveryPath = "/redefinir-senha";
+const passwordRecoveryRouteName = "redefinir-senha";
 
 export function getPasswordRecoveryRedirectUrl(): string {
   if (Platform.OS === "web") {
@@ -20,6 +21,17 @@ export function getPasswordRecoveryRedirectUrl(): string {
   }
 
   return "subtrack://redefinir-senha";
+}
+
+export function isPasswordRecoveryUrl(url: string): boolean {
+  try {
+    const parsedUrl = new URL(url);
+    const path = parsedUrl.pathname.replace(/^\/+/, "").replace(/^--\//, "");
+
+    return parsedUrl.hostname === passwordRecoveryRouteName || path === passwordRecoveryRouteName;
+  } catch {
+    return false;
+  }
 }
 
 export async function establishPasswordRecoverySession(

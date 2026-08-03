@@ -1,6 +1,5 @@
-import { Ionicons } from "@expo/vector-icons";
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet, useWindowDimensions, View } from "react-native";
+import { Image, StyleSheet, useWindowDimensions, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 import { borderRadius, colors, spacing } from "../theme";
@@ -9,7 +8,6 @@ import { AppText } from "./AppText";
 export function LaunchScreen() {
   const { width } = useWindowDimensions();
   const iconContainerSize = Math.min(92, Math.max(80, Math.round(width * 0.22)));
-  const iconSize = Math.round(iconContainerSize * 0.48);
 
   return (
     <View pointerEvents="auto" style={styles.overlay}>
@@ -23,7 +21,13 @@ export function LaunchScreen() {
               importantForAccessibility="no-hide-descendants"
               style={[styles.iconContainer, { height: iconContainerSize, width: iconContainerSize }]}
             >
-              <Ionicons color={colors.surface} name="sync-outline" size={iconSize} />
+              <Image
+                accessibilityIgnoresInvertColors
+                accessible={false}
+                resizeMode="contain"
+                source={require("../../assets/images/brand/subtrack-launch-symbol.png")}
+                style={styles.launchSymbol}
+              />
             </View>
 
             <View style={styles.copy}>
@@ -69,6 +73,10 @@ const styles = StyleSheet.create({
     borderRadius: borderRadius.xl,
     borderWidth: 1,
     justifyContent: "center",
+  },
+  launchSymbol: {
+    height: "100%",
+    width: "100%",
   },
   copy: {
     alignItems: "center",

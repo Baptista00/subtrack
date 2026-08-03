@@ -96,6 +96,14 @@
 - [x] Deep link de recuperação processado com suporte a callbacks por código e por tokens.
 - [x] Redefinição de senha com validações inline implementada.
 - [x] Sessão temporária de recuperação encerrada após a troca de senha.
+- [x] Projeto preparado para a primeira development build com EAS Build.
+- [x] `expo-dev-client` instalado para a development build.
+- [x] `eas.json` criado com perfis development, preview e production.
+- [x] Identificador Android definido como `com.baptista00.subtrack`.
+- [x] Identificador iOS reservado como `com.baptista00.subtrack`.
+- [x] `expo-notifications` configurado como config plugin mínimo para notificações locais.
+- [x] Nenhuma build foi executada nesta etapa.
+- [x] Nenhuma credencial foi criada nesta etapa.
 
 ## Próxima etapa
 
@@ -116,9 +124,10 @@
 - PENDENTE: implementar Editar perfil, Notificações, Configurações, alteração de senha e exclusão de conta.
 - PENDENTE: implementar renovação automática de assinaturas.
 - PENDENTE: executar o checklist manual pré-build em Android, iOS e web.
-- PENDENTE: preparar e gerar os builds finais para Android e iOS após definição dos identificadores e credenciais.
+- PENDENTE: criar as credenciais e gerar os builds Android e iOS necessários; a primeira development build Android ainda não foi executada.
 - PENDENTE: configurar SMTP próprio antes da produção; durante o desenvolvimento, o projeto usa o serviço padrão de e-mail do Supabase, sujeito a limitações de envio.
 - PENDENTE: validar o deep link de recuperação em development build ou build instalada; o custom scheme `subtrack` não tem teste final estável no Expo Go.
+- PENDENTE: executar o teste completo de recuperação de senha em development build instalada.
 
 ## Próximas etapas de dados
 

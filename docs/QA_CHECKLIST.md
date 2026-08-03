@@ -8,6 +8,20 @@
 - [x] `npx expo install --check` confirmou dependências compatíveis com o Expo SDK 54.
 - [x] `git diff --check` executado sem erros de espaçamento.
 
+## Development build Android
+
+- [ ] APK gerado com sucesso.
+- [ ] APK instalado.
+- [ ] Aplicativo abre sem Expo Go.
+- [ ] Servidor de desenvolvimento conecta.
+- [ ] Autenticação funciona.
+- [ ] Sessão persiste.
+- [ ] CRUD funciona.
+- [ ] Notificações locais funcionam.
+- [ ] Link de recuperação abre o aplicativo.
+- [ ] Senha pode ser redefinida.
+- [ ] Login com a nova senha funciona.
+
 ## Android
 
 - [ ] Abrir o app no Expo Go em aparelho Android e confirmar a splash, a safe area e a orientação vertical.

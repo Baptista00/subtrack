@@ -91,6 +91,11 @@
 - [x] Recarga concorrente da Home, acessibilidade de campos, safe area, teclado e bloqueio de envios concorrentes corrigidos.
 - [x] Consultas de assinaturas restringidas aos campos consumidos pela interface, mantendo o filtro explícito por `user_id` e a proteção por RLS.
 - [x] Validações automáticas da auditoria executadas: lint, TypeScript, Expo Doctor, compatibilidade de dependências e verificação de diff.
+- [x] Recuperação de senha com Supabase Auth implementada.
+- [x] Solicitação de recuperação com mensagem neutra para e-mails cadastrados ou não cadastrados implementada.
+- [x] Deep link de recuperação processado com suporte a callbacks por código e por tokens.
+- [x] Redefinição de senha com validações inline implementada.
+- [x] Sessão temporária de recuperação encerrada após a troca de senha.
 
 ## Próxima etapa
 
@@ -106,14 +111,14 @@
 - PENDENTE: validar a Home com dados em Android.
 - PENDENTE: definir a atualização automática de `updated_at` antes do CRUD final.
 - PENDENTE: definir os casos de renovação mensal para os dias 29, 30 e 31.
-- PENDENTE: implementar recuperação de senha.
-- PENDENTE: implementar deep link para fluxos de autenticação.
 - PENDENTE: implementar login social.
 - PENDENTE: implementar filtros avançados, ordenação manual e paginação na tela Assinaturas.
 - PENDENTE: implementar Editar perfil, Notificações, Configurações, alteração de senha e exclusão de conta.
 - PENDENTE: implementar renovação automática de assinaturas.
 - PENDENTE: executar o checklist manual pré-build em Android, iOS e web.
 - PENDENTE: preparar e gerar os builds finais para Android e iOS após definição dos identificadores e credenciais.
+- PENDENTE: configurar SMTP próprio antes da produção; durante o desenvolvimento, o projeto usa o serviço padrão de e-mail do Supabase, sujeito a limitações de envio.
+- PENDENTE: validar o deep link de recuperação em development build ou build instalada; o custom scheme `subtrack` não tem teste final estável no Expo Go.
 
 ## Próximas etapas de dados
 

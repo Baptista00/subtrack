@@ -6,7 +6,9 @@
 - `/` é a Home e exige sessão autenticada.
 - `/assinaturas` exige sessão autenticada.
 - `/adicionar` exige sessão autenticada.
-- `/login` e `/cadastro` estão disponíveis somente para usuários não autenticados.
+- `/login`, `/cadastro` e `/esqueci-senha` estão disponíveis somente para usuários sem uma sessão autenticada normal.
+- `/redefinir-senha` é uma rota especial de recuperação e permanece registrada enquanto o deep link é processado.
+- `/redefinir-senha` não libera as rotas autenticadas até que a senha seja alterada e a sessão temporária seja encerrada.
 - Enquanto a sessão inicial é restaurada, o aplicativo mostra uma tela de carregamento antes de decidir a rota.
 
 
@@ -17,7 +19,7 @@
 - Validações: e-mail obrigatório com formato simples; senha obrigatória com mínimo de 6 caracteres.
 - Exibe erros de validação e autenticação inline.
 - Oferece a ação visual para criar uma conta.
-- A recuperação de senha não faz parte desta etapa.
+- Oferece a ação visual “Esqueci minha senha?” abaixo do campo Senha e antes da ação Entrar.
 
 ## Cadastro
 
@@ -29,8 +31,24 @@
 
 ## Esqueci minha senha
 
-- Permite a recuperação de senha.
-- Fluxo, mensagens e layout: PENDENTE: preencher com informação aprovada.
+- Rota: `/esqueci-senha`, disponível sem sessão autenticada normal.
+- Possui botão voltar, título “Esqueci minha senha”, descrição orientativa, campo E-mail e ação “Enviar link”.
+- Valida e-mail obrigatório, após trim, com formato simples e mensagens inline.
+- Durante o envio, bloqueia novos envios e mostra loading no botão.
+- Após uma solicitação sem erro técnico, exibe a mensagem neutra “Se existir uma conta com este e-mail, enviaremos um link de recuperação.”, sem informar se o e-mail está cadastrado.
+- Em erro técnico ou limite de envio, permanece na tela e mostra uma mensagem amigável inline.
+- Oferece a ação “Voltar para o login” sem navegação automática após o envio.
+
+## Redefinir senha
+
+- Rota: `/redefinir-senha`, destinada exclusivamente ao callback de recuperação de senha.
+- Processa a URL inicial e URLs recebidas com o aplicativo aberto, aceitando callback por código ou por tokens quando o Supabase confirma o fluxo de recuperação.
+- Enquanto o link é validado, exibe “Validando link de recuperação...” com indicador de carregamento.
+- Com link válido, exibe o título “Crie uma nova senha”, os campos Nova senha e Confirmar nova senha e a ação “Alterar senha”.
+- Valida senha obrigatória com mínimo de 6 caracteres e confirmação igual à nova senha, sempre com mensagens inline.
+- Durante a atualização, bloqueia campos e novo envio; em erro, mantém o formulário e exibe a mensagem amigável inline.
+- Após o sucesso, encerra a sessão temporária, mostra “Senha alterada com sucesso.” e oferece “Ir para o login”.
+- Com link inválido, expirado ou já utilizado, não exibe o formulário; mostra “Link inválido ou expirado” com as ações “Solicitar novo link” e “Voltar para o login”.
 
 ## Home
 

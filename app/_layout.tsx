@@ -19,7 +19,7 @@ export default function RootLayout() {
 }
 
 function RootNavigator() {
-  const { isLoading, session } = useAuth();
+  const { isLoading, isPasswordRecovery, session } = useAuth();
 
   if (isLoading) {
     return (
@@ -32,7 +32,7 @@ function RootNavigator() {
     );
   }
 
-  const isAuthenticated = session !== null;
+  const isAuthenticated = session !== null && !isPasswordRecovery;
 
   return (
     <Stack screenOptions={{ headerShown: false }}>
@@ -46,7 +46,9 @@ function RootNavigator() {
       <Stack.Protected guard={!isAuthenticated}>
         <Stack.Screen name="login" />
         <Stack.Screen name="cadastro" />
+        <Stack.Screen name="esqueci-senha" />
       </Stack.Protected>
+      <Stack.Screen name="redefinir-senha" />
     </Stack>
   );
 }

@@ -43,6 +43,19 @@
 - [ ] Confirmar a mensagem de verificação de e-mail quando o Supabase não retornar sessão no cadastro.
 - [ ] Tentar abrir uma rota protegida sem sessão e confirmar redirecionamento seguro para Login.
 - [ ] Fazer logout, cancelar e confirmar em tentativas separadas; confirmar que somente a confirmação remove a sessão.
+- [ ] Solicitar recuperação com e-mail válido e confirmar a mensagem neutra de envio.
+- [ ] Solicitar recuperação com e-mail não cadastrado e confirmar a mesma mensagem neutra.
+- [ ] Informar e-mail inválido na recuperação e confirmar a validação inline.
+- [ ] Repetir a solicitação de recuperação e validar o bloqueio durante o envio e a mensagem amigável para rate limit.
+- [ ] Abrir um link de recuperação válido com o aplicativo fechado e com o aplicativo já aberto.
+- [ ] Abrir um link de recuperação expirado e confirmar as ações para solicitar novo link ou voltar ao login.
+- [ ] Reutilizar um link de recuperação já consumido e confirmar que o formulário não é exibido.
+- [ ] Informar senhas diferentes na redefinição e confirmar a mensagem inline.
+- [ ] Informar nova senha com menos de 6 caracteres e confirmar a mensagem inline.
+- [ ] Concluir a troca de senha e confirmar a mensagem de sucesso, o encerramento da sessão temporária e o retorno ao Login.
+- [ ] Confirmar que o login com a senha antiga falha após a troca.
+- [ ] Confirmar que o login com a nova senha funciona após a troca.
+- [ ] Confirmar que a sessão temporária de recuperação não abre a Home antes da troca de senha.
 
 ## Assinaturas e dados
 

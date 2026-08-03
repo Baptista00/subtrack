@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { StyleSheet, View } from "react-native";
+import { Pressable, StyleSheet, View } from "react-native";
 import { router } from "expo-router";
 
 import { getAuthErrorMessage } from "../src/auth";
@@ -100,6 +100,19 @@ export default function Login() {
             textContentType="password"
             value={password}
           />
+          <View style={styles.forgotPasswordAction}>
+            <Pressable
+              accessibilityLabel="Recuperar senha"
+              accessibilityRole="button"
+              disabled={isSubmitting}
+              hitSlop={8}
+              onPress={() => router.push("/esqueci-senha")}
+            >
+              <AppText variant="Label" style={styles.forgotPasswordText}>
+                Esqueci minha senha?
+              </AppText>
+            </Pressable>
+          </View>
         </View>
 
         <View style={styles.actions}>
@@ -137,6 +150,12 @@ const styles = StyleSheet.create({
   },
   form: {
     gap: spacing[3],
+  },
+  forgotPasswordAction: {
+    alignItems: "flex-end",
+  },
+  forgotPasswordText: {
+    color: colors.primary,
   },
   actions: {
     alignItems: "center",

@@ -1,7 +1,9 @@
 import {
+  useCallback,
   createContext,
   useEffect,
   useMemo,
+  useRef,
   useState,
   type PropsWithChildren,
 } from "react";
@@ -13,6 +15,9 @@ export type AuthContextValue = {
   session: Session | null;
   user: User | null;
   isLoading: boolean;
+  isPasswordRecovery: boolean;
+  beginPasswordRecovery: () => void;
+  clearPasswordRecovery: () => void;
   signOut: () => Promise<void>;
 };
 
@@ -22,6 +27,33 @@ export function AuthProvider({ children }: PropsWithChildren) {
   const [session, setSession] = useState<Session | null>(null);
   const [user, setUser] = useState<User | null>(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [isPasswordRecovery, setIsPasswordRecovery] = useState(false);
+  const passwordRecoveryRef = useRef(false);
+
+  const setPasswordRecovery = useCallback((nextValue: boolean) => {
+    if (passwordRecoveryRef.current === nextValue) {
+      return;
+    }
+
+    passwordRecoveryRef.current = nextValue;
+    setIsPasswordRecovery(nextValue);
+  }, []);
+
+  const beginPasswordRecovery = useCallback(() => {
+    setPasswordRecovery(true);
+  }, [setPasswordRecovery]);
+
+  const clearPasswordRecovery = useCallback(() => {
+    setPasswordRecovery(false);
+  }, [setPasswordRecovery]);
+
+  const signOut = useCallback(async () => {
+    const { error } = await supabase.auth.signOut();
+
+    if (error) {
+      throw error;
+    }
+  }, []);
 
   useEffect(() => {
     let isMounted = true;
@@ -63,28 +95,39 @@ export function AuthProvider({ children }: PropsWithChildren) {
 
       setSession(nextSession);
       setUser(nextSession?.user ?? null);
+
+      if (_event === "PASSWORD_RECOVERY") {
+        setPasswordRecovery(true);
+      } else if (_event === "SIGNED_OUT") {
+        setPasswordRecovery(false);
+      }
     });
 
     return () => {
       isMounted = false;
       subscription.unsubscribe();
     };
-  }, []);
+  }, [setPasswordRecovery]);
 
   const value = useMemo<AuthContextValue>(
     () => ({
       session,
       user,
       isLoading,
-      async signOut() {
-        const { error } = await supabase.auth.signOut();
-
-        if (error) {
-          throw error;
-        }
-      },
+      isPasswordRecovery,
+      beginPasswordRecovery,
+      clearPasswordRecovery,
+      signOut,
     }),
-    [isLoading, session, user],
+    [
+      beginPasswordRecovery,
+      clearPasswordRecovery,
+      isLoading,
+      isPasswordRecovery,
+      session,
+      signOut,
+      user,
+    ],
   );
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

@@ -142,6 +142,58 @@
 - Resultado: aprovado.
 - Data: 05/08/2026.
 
+### Teste de layout, acessibilidade e dados extremos concluído
+
+#### Layout responsivo
+
+- [x] Nomes longos não invadem preço ou outros elementos.
+- [x] Valores altos permanecem legíveis.
+- [x] Cards não apresentam sobreposição.
+- [x] Categoria e renovação continuam visíveis.
+- [x] Resumo financeiro suporta valores grandes.
+- [x] Lista extensa permite rolagem completa.
+- [x] BottomNav não cobre o conteúdo.
+- [x] Último item da lista permanece acessível.
+- [x] Campo de pesquisa continua funcional.
+- [x] Conteúdo respeita a Safe Area.
+- [x] Nada fica atrás da barra superior ou navegação do Android.
+- [x] Tela de abertura ocupa corretamente a tela.
+
+#### Acessibilidade e fonte
+
+- [x] Fonte aumentada não corta textos.
+- [x] Botões continuam acessíveis com fonte maior.
+- [x] Telas permitem rolagem quando necessário.
+- [x] Campos não ficam sobrepostos.
+- [x] Contraste entre verde, branco e cinza é legível.
+- [x] Áreas de toque são adequadas.
+- [x] Ícones e botões possuem significado compreensível.
+- [x] Mensagens de erro são claras.
+- [x] Loading desabilita ações repetidas.
+
+#### Teclado e formulários
+
+- [x] Teclado não cobre o botão principal.
+- [x] Último campo permanece acessível.
+- [x] Rolagem com teclado aberto funciona.
+- [x] Layout volta ao normal ao fechar o teclado.
+- [x] Login, Cadastro, Recuperação, Adicionar e Editar foram validados.
+
+#### Cálculos e dados extremos
+
+- [x] Assinatura anual de R$ 120.000,00 resulta em R$ 10.000,00 mensais.
+- [x] Valores grandes são formatados corretamente.
+- [x] Total mensal permanece legível.
+- [x] Nomes extensos são tratados corretamente.
+
+#### Observação do teste
+
+- Ambiente: SubTrack Dev.
+- Plataforma: Android (aparelho físico).
+- Tipo de teste: layout responsivo, acessibilidade e dados extremos.
+- Resultado: aprovado.
+- Data: 05/08/2026.
+
 ## Android
 
 - [ ] Abrir o app no Expo Go em aparelho Android e confirmar a splash, a safe area e a orientação vertical.

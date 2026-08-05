@@ -48,6 +48,62 @@
 - Resultado: aprovado.
 - Data: 05/08/2026.
 
+### Teste de autenticação e assinaturas concluído
+
+#### Autenticação
+
+- [x] Login com senha incorreta mostra erro.
+- [x] Login com senha correta funciona.
+- [x] Sessão permanece após fechar e abrir o app.
+- [x] Logout funciona.
+- [x] Recuperação de senha abre o app.
+- [x] Redefinição de senha funciona.
+- [x] Senha antiga deixa de funcionar.
+- [x] Senha nova funciona.
+- [x] Sessão temporária de recuperação não libera a Home.
+
+#### CRUD de assinaturas
+
+- [x] Criação de assinatura.
+- [x] Exibição na Home.
+- [x] Exibição na tela Assinaturas.
+- [x] Edição atualiza nome e valor.
+- [x] Edição não cria duplicata.
+- [x] Exclusão exige confirmação.
+- [x] Exclusão remove da Home e da lista.
+- [x] Exclusão atualiza o total mensal.
+
+#### Validações
+
+- [x] Nomes duplicados são bloqueados.
+- [x] Duplicidade ignora maiúsculas e minúsculas.
+- [x] Duplicidade ignora espaços extras.
+- [x] Duplicidade ignora acentos.
+- [x] Mensagem exibida: “Você já possui uma assinatura com este nome.”
+
+#### Cálculos
+
+- [x] Assinatura mensal usa o valor integral.
+- [x] Assinatura anual é dividida por 12.
+- [x] Exemplo validado: R$ 1.200,00 anual = R$ 100,00 por mês.
+- [x] Total mensal atualiza após criar, editar e excluir.
+- [x] Próximas renovações funcionam para datas dentro de 30 dias.
+
+#### Pesquisa
+
+- [x] Pesquisa por nome funciona.
+- [x] Pesquisa ignora maiúsculas e minúsculas.
+- [x] Pesquisa ignora acentos.
+- [x] Limpeza da busca restaura a lista.
+
+#### Observação do teste
+
+- Ambiente: SubTrack Dev.
+- Plataforma: Android (aparelho físico).
+- Tipo de teste: autenticação e CRUD.
+- Resultado: aprovado.
+- Data: 05/08/2026.
+
 ## Android
 
 - [ ] Abrir o app no Expo Go em aparelho Android e confirmar a splash, a safe area e a orientação vertical.

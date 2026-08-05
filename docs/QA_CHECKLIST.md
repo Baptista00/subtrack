@@ -104,6 +104,44 @@
 - Resultado: aprovado.
 - Data: 05/08/2026.
 
+### Teste de conexão, erros e ações duplicadas concluído
+
+#### Conexão e estados de erro
+
+- [x] Aplicativo abre sem internet sem fechar.
+- [x] Tela de abertura encerra normalmente.
+- [x] Não ocorre loading infinito.
+- [x] Erro ao carregar assinaturas é tratado.
+- [x] Tentar novamente funciona após restabelecer a internet.
+- [x] Erro ao cadastrar assinatura sem internet é tratado.
+- [x] Formulário preserva os dados após falha.
+- [x] Nova tentativa funciona após restabelecer a conexão.
+- [x] Erro ao editar assinatura sem internet é tratado.
+- [x] Dados anteriores permanecem intactos após falha.
+- [x] Erro ao excluir assinatura sem internet é tratado.
+- [x] Assinatura não desaparece indevidamente.
+- [x] Loading encerra após erro.
+- [x] Mensagens não exibem detalhes técnicos indevidos.
+
+#### Proteção contra ações duplicadas
+
+- [x] Login não executa duas vezes.
+- [x] Cadastro de assinatura não cria duplicatas por toque duplo.
+- [x] Edição não executa duas vezes.
+- [x] Exclusão não executa duas vezes.
+- [x] Recuperação de senha não envia múltiplas solicitações.
+- [x] Botões ficam desabilitados durante processamento.
+- [x] Não ocorre navegação duplicada.
+- [x] Não ocorre loading infinito durante o processamento.
+
+#### Observação do teste
+
+- Ambiente: SubTrack Dev.
+- Plataforma: Android (aparelho físico).
+- Tipo de teste: conexão, erros e ações duplicadas.
+- Resultado: aprovado.
+- Data: 05/08/2026.
+
 ## Android
 
 - [ ] Abrir o app no Expo Go em aparelho Android e confirmar a splash, a safe area e a orientação vertical.

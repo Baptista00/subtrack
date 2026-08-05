@@ -17,10 +17,36 @@
 - [ ] Autenticação funciona.
 - [ ] Sessão persiste.
 - [ ] CRUD funciona.
-- [ ] Notificações locais funcionam.
+- [x] Notificações locais funcionam.
 - [ ] Link de recuperação abre o aplicativo.
 - [ ] Senha pode ser redefinida.
 - [ ] Login com a nova senha funciona.
+
+### Teste de notificações locais concluído
+
+- [x] Solicitação de permissão de notificações.
+- [x] Permissão concedida.
+- [x] Agendamento de notificação local.
+- [x] Recebimento da notificação com o app fechado.
+- [x] Canal Android funcionando.
+- [x] Título exibido corretamente.
+- [x] Mensagem exibida corretamente.
+- [x] Ausência de push remoto.
+- [x] Notificação de teste separada das notificações reais.
+- [x] Regra oficial preservada:
+  - [x] Lembrete um dia antes da renovação.
+  - [x] Lembrete às 09:00 no horário local.
+  - [x] Edição cancela e reagenda.
+  - [x] Exclusão cancela.
+  - [x] IDs reais continuam no AsyncStorage.
+
+#### Observação do teste
+
+- Ambiente: SubTrack Dev.
+- Plataforma: Android.
+- Tipo de teste: notificação local temporária em 1 minuto.
+- Resultado: aprovado.
+- Data: 05/08/2026.
 
 ## Android
 

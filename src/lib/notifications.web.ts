@@ -1,5 +1,12 @@
-import { removeNotificationId } from "./notifications.shared";
-import type { ReminderScheduleResult, SubscriptionReminderInput } from "./notifications.shared";
+import {
+  clearSavedNotificationIds,
+  removeNotificationId,
+} from "./notifications.shared";
+import type {
+  ReminderScheduleResult,
+  SubscriptionNotificationCleanupStatus,
+  SubscriptionReminderInput,
+} from "./notifications.shared";
 
 export {
   getNotificationId,
@@ -15,6 +22,10 @@ export async function ensureNotificationPermissionAsync(): Promise<boolean> {
 
 export async function cancelSubscriptionReminder(subscriptionId: string): Promise<void> {
   await removeNotificationId(subscriptionId);
+}
+
+export async function clearAllSubscriptionNotifications(): Promise<SubscriptionNotificationCleanupStatus> {
+  return (await clearSavedNotificationIds()) ? "cleared" : "partial";
 }
 
 export async function scheduleSubscriptionReminder(

@@ -4,6 +4,13 @@ const notificationIdsStorageKey = "@subtrack:notification-ids";
 
 type NotificationIds = Record<string, string>;
 
+export type SubscriptionNotificationCleanupStatus = "cleared" | "partial";
+
+export type StoredSubscriptionNotificationIds = {
+  notificationIds: string[];
+  isComplete: boolean;
+};
+
 export type SubscriptionReminderInput = {
   subscriptionId: string;
   name: string;
@@ -62,6 +69,39 @@ export async function removeNotificationId(subscriptionId: string): Promise<void
 
   delete notificationIds[subscriptionId];
   await AsyncStorage.setItem(notificationIdsStorageKey, JSON.stringify(notificationIds));
+}
+
+export async function getNotificationIdsForCleanup(): Promise<StoredSubscriptionNotificationIds> {
+  try {
+    const storedValue = await AsyncStorage.getItem(notificationIdsStorageKey);
+
+    if (!storedValue) {
+      return { notificationIds: [], isComplete: true };
+    }
+
+    const parsedValue: unknown = JSON.parse(storedValue);
+
+    if (!isNotificationIds(parsedValue)) {
+      return { notificationIds: [], isComplete: false };
+    }
+
+    return {
+      notificationIds: [...new Set(Object.values(parsedValue))],
+      isComplete: true,
+    };
+  } catch {
+    return { notificationIds: [], isComplete: false };
+  }
+}
+
+export async function clearSavedNotificationIds(): Promise<boolean> {
+  try {
+    await AsyncStorage.removeItem(notificationIdsStorageKey);
+
+    return true;
+  } catch {
+    return false;
+  }
 }
 
 async function getNotificationIds(): Promise<NotificationIds> {

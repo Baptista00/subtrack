@@ -156,6 +156,37 @@
 - Resultado: aprovado.
 - Data: 05/08/2026.
 
+### Teste de exclusão de conta concluído
+
+#### EXCLUSÃO DE CONTA
+
+- [x] Ação “Excluir minha conta” disponível no Perfil.
+- [x] Confirmação destrutiva exibida antes da exclusão.
+- [x] Toque duplo bloqueado durante o processamento.
+- [x] Edge Function `delete-account` chamada com usuário autenticado.
+- [x] Usuário obtido pelo JWT, sem `userId` vindo do cliente.
+- [x] Somente a própria conta pode ser excluída.
+- [x] Conta removida do Supabase Auth.
+- [x] Assinaturas removidas por ON DELETE CASCADE.
+- [x] Notificações locais vinculadas foram canceladas.
+- [x] Mapa de IDs no AsyncStorage foi limpo.
+- [x] Sessão local foi encerrada.
+- [x] AuthProvider foi limpo.
+- [x] Usuário foi redirecionado para o Login.
+- [x] Botão Voltar não retornou à Home.
+- [x] Login com a conta excluída não funcionou.
+- [x] Nenhuma chave administrativa foi exposta no aplicativo.
+- [x] Nenhuma informação sensível foi registrada em logs.
+
+#### Observação do teste
+
+- Ambiente: SubTrack Dev.
+- Plataforma: Android (aparelho físico).
+- Tipo de teste: exclusão segura de conta.
+- Conta utilizada: descartável.
+- Resultado: aprovado.
+- Data: 06/08/2026.
+
 ### Teste de conexão, erros e ações duplicadas concluído
 
 #### Conexão e estados de erro

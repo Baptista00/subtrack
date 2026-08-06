@@ -4,11 +4,17 @@ import * as Notifications from "expo-notifications";
 import { colors } from "../theme";
 import { formatCurrency } from "./subscriptions";
 import {
+  clearSavedNotificationIds,
+  getNotificationIdsForCleanup,
   getNotificationId,
   removeNotificationId,
   saveNotificationId,
 } from "./notifications.shared";
-import type { ReminderScheduleResult, SubscriptionReminderInput } from "./notifications.shared";
+import type {
+  ReminderScheduleResult,
+  SubscriptionNotificationCleanupStatus,
+  SubscriptionReminderInput,
+} from "./notifications.shared";
 
 const subscriptionRemindersChannelId = "subscription-reminders";
 
@@ -67,6 +73,23 @@ export async function cancelSubscriptionReminder(subscriptionId: string): Promis
   if (cancellationError !== null) {
     throw cancellationError;
   }
+}
+
+export async function clearAllSubscriptionNotifications(): Promise<SubscriptionNotificationCleanupStatus> {
+  const { isComplete: hasCompleteMap, notificationIds } = await getNotificationIdsForCleanup();
+  let hasClearedAllNotifications = hasCompleteMap;
+
+  for (const notificationId of notificationIds) {
+    try {
+      await Notifications.cancelScheduledNotificationAsync(notificationId);
+    } catch {
+      hasClearedAllNotifications = false;
+    }
+  }
+
+  const hasClearedMap = await clearSavedNotificationIds();
+
+  return hasClearedAllNotifications && hasClearedMap ? "cleared" : "partial";
 }
 
 export async function scheduleSubscriptionReminder(

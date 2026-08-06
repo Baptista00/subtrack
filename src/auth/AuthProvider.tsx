@@ -30,6 +30,7 @@ export type AuthContextValue = {
   clearPasswordRecovery: () => void;
   abandonPasswordRecovery: () => Promise<void>;
   signOut: () => Promise<void>;
+  clearLocalSession: () => Promise<void>;
 };
 
 export const AuthContext = createContext<AuthContextValue | undefined>(undefined);
@@ -96,6 +97,27 @@ export function AuthProvider({ children }: PropsWithChildren) {
 
     if (error) {
       throw error;
+    }
+  }, []);
+
+  const clearLocalSession = useCallback(async () => {
+    try {
+      await supabase.auth.signOut({ scope: "local" });
+    } catch {
+      // A conta pode já ter sido removida do Auth; o estado local ainda precisa ser limpo.
+    } finally {
+      hasValidatedRecoveryLinkRef.current = false;
+      passwordRecoveryRef.current = false;
+      setSession(null);
+      setUser(null);
+      setIsPasswordRecovery(false);
+      setPasswordRecoveryLinkState("idle");
+
+      try {
+        await AsyncStorage.removeItem(passwordRecoveryStorageKey);
+      } catch {
+        // A rota protegida continua bloqueada em memória se o armazenamento local falhar.
+      }
     }
   }, []);
 
@@ -247,11 +269,13 @@ export function AuthProvider({ children }: PropsWithChildren) {
       clearPasswordRecovery,
       abandonPasswordRecovery,
       signOut,
+      clearLocalSession,
     }),
     [
       abandonPasswordRecovery,
       beginPasswordRecovery,
       clearPasswordRecovery,
+      clearLocalSession,
       isLoading,
       isPasswordRecovery,
       isPasswordRecoveryLinkReady,

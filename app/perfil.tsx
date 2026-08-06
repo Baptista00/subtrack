@@ -1,5 +1,5 @@
 import { Feather } from "@expo/vector-icons";
-import { type ComponentProps, useState } from "react";
+import { type ComponentProps, useRef, useState } from "react";
 import {
   Alert,
   Platform,
@@ -13,6 +13,8 @@ import { router } from "expo-router";
 
 import { useAuth } from "../src/auth";
 import { AppText, BottomNav, Button, ScreenContainer } from "../src/components";
+import { deleteCurrentAccount } from "../src/lib/account";
+import { clearAllSubscriptionNotifications } from "../src/lib/notifications";
 import { button, colors, home, spacing, typography } from "../src/theme";
 
 type ProfileOptionRowProps = {
@@ -24,14 +26,17 @@ type ProfileOptionRowProps = {
 };
 
 export default function Perfil() {
-  const { signOut, user } = useAuth();
+  const { clearLocalSession, signOut, user } = useAuth();
   const [isSigningOut, setIsSigningOut] = useState(false);
   const [signOutError, setSignOutError] = useState<string | null>(null);
+  const [isDeletingAccount, setIsDeletingAccount] = useState(false);
+  const [deleteAccountError, setDeleteAccountError] = useState<string | null>(null);
+  const activeAccountOperation = useRef<"sign-out" | "delete-account" | null>(null);
   const userName = getUserName(user?.user_metadata.full_name);
   const userEmail = getUserEmail(user?.email);
 
   function handleSignOutPress() {
-    if (isSigningOut) {
+    if (activeAccountOperation.current) {
       return;
     }
 
@@ -66,10 +71,11 @@ export default function Perfil() {
   }
 
   async function handleSignOut() {
-    if (isSigningOut) {
+    if (activeAccountOperation.current) {
       return;
     }
 
+    activeAccountOperation.current = "sign-out";
     setIsSigningOut(true);
     setSignOutError(null);
 
@@ -78,7 +84,83 @@ export default function Perfil() {
     } catch {
       setSignOutError("Não foi possível sair da conta. Tente novamente.");
     } finally {
+      activeAccountOperation.current = null;
       setIsSigningOut(false);
+    }
+  }
+
+  function handleDeleteAccountPress() {
+    if (activeAccountOperation.current) {
+      return;
+    }
+
+    setDeleteAccountError(null);
+
+    if (Platform.OS === "web") {
+      const isConfirmed = globalThis.confirm(
+        "Excluir conta?\n\nSua conta, suas assinaturas e seus lembretes serão removidos permanentemente.",
+      );
+
+      if (isConfirmed) {
+        void handleDeleteAccount();
+      }
+
+      return;
+    }
+
+    Alert.alert(
+      "Excluir conta?",
+      "Sua conta, suas assinaturas e seus lembretes serão removidos permanentemente.",
+      [
+        { text: "Cancelar", style: "cancel" },
+        {
+          text: "Excluir permanentemente",
+          style: "destructive",
+          onPress: () => {
+            void handleDeleteAccount();
+          },
+        },
+      ],
+    );
+  }
+
+  async function handleDeleteAccount() {
+    if (activeAccountOperation.current) {
+      return;
+    }
+
+    activeAccountOperation.current = "delete-account";
+    setIsDeletingAccount(true);
+    setDeleteAccountError(null);
+    setSignOutError(null);
+
+    try {
+      const deleteResult = await deleteCurrentAccount();
+
+      if (deleteResult.status !== "success") {
+        setDeleteAccountError("Não foi possível excluir sua conta. Tente novamente.");
+        return;
+      }
+
+      let notificationCleanupStatus: "cleared" | "partial" = "partial";
+
+      try {
+        notificationCleanupStatus = await clearAllSubscriptionNotifications();
+      } catch {
+        notificationCleanupStatus = "partial";
+      }
+
+      try {
+        await clearLocalSession();
+      } catch {
+        // A exclusão remota já foi confirmada; a navegação não pode manter a sessão em memória.
+      }
+
+      router.replace("/login");
+      showAccountDeletionResult(notificationCleanupStatus === "partial");
+    } finally {
+      activeAccountOperation.current = null;
+      setIsDeletingAccount(false);
     }
   }
 
@@ -142,33 +224,62 @@ export default function Perfil() {
             </View>
           </View>
 
-          <View style={styles.signOutSection}>
-            {signOutError ? (
-              <AppText
-                accessibilityRole="alert"
-                variant="Small/Helper"
-                style={styles.errorText}
+          <View style={styles.accountActions}>
+            <View style={styles.signOutSection}>
+              {signOutError ? (
+                <AppText
+                  accessibilityRole="alert"
+                  variant="Small/Helper"
+                  style={styles.errorText}
+                >
+                  {signOutError}
+                </AppText>
+              ) : null}
+              <Button
+                disabled={isDeletingAccount}
+                icon={
+                  <Feather
+                    accessible={false}
+                    color={colors.error}
+                    name="log-out"
+                    size={button.danger.iconSize}
+                  />
+                }
+                loading={isSigningOut}
+                loadingText="Saindo..."
+                onPress={handleSignOutPress}
+                style={styles.signOutButton}
+                variant="danger"
               >
-                {signOutError}
+                Sair da conta
+              </Button>
+            </View>
+
+            <View style={styles.deleteAccountSection}>
+              <AppText variant="Small/Helper" style={styles.deleteAccountDescription}>
+                Essa ação excluirá permanentemente sua conta e todas as suas assinaturas. Não será
+                possível desfazer.
               </AppText>
-            ) : null}
-            <Button
-              icon={
-                <Feather
-                  accessible={false}
-                  color={colors.error}
-                  name="log-out"
-                  size={button.danger.iconSize}
-                />
-              }
-              loading={isSigningOut}
-              loadingText="Saindo..."
-              onPress={handleSignOutPress}
-              style={styles.signOutButton}
-              variant="danger"
-            >
-              Sair da conta
-            </Button>
+              {deleteAccountError ? (
+                <AppText
+                  accessibilityRole="alert"
+                  variant="Small/Helper"
+                  style={styles.errorText}
+                >
+                  {deleteAccountError}
+                </AppText>
+              ) : null}
+              <Button
+                disabled={isSigningOut}
+                loading={isDeletingAccount}
+                loadingText="Excluindo conta..."
+                onPress={handleDeleteAccountPress}
+                style={styles.signOutButton}
+                variant="danger"
+              >
+                Excluir minha conta
+              </Button>
+            </View>
           </View>
         </View>
       </ScrollView>
@@ -252,6 +363,22 @@ function showComingSoon() {
   }
 
   Alert.alert("Em breve", message);
+}
+
+function showAccountDeletionResult(hasPartialNotificationCleanup: boolean) {
+  const message = hasPartialNotificationCleanup
+    ? "Conta excluída com sucesso. Alguns lembretes locais não puderam ser removidos."
+    : "Conta excluída com sucesso.";
+
+  if (Platform.OS === "web") {
+    if (typeof globalThis.alert === "function") {
+      globalThis.alert(message);
+    }
+
+    return;
+  }
+
+  Alert.alert("Conta excluída", message);
 }
 
 function getUserName(fullName: unknown): string {
@@ -379,9 +506,22 @@ const styles = StyleSheet.create({
   optionValue: {
     color: colors.textSecondary,
   },
+  accountActions: {
+    gap: spacing[4],
+    paddingTop: spacing[1],
+  },
   signOutSection: {
     gap: spacing[2],
-    paddingTop: spacing[1],
+  },
+  deleteAccountSection: {
+    borderTopColor: colors.border,
+    borderTopWidth: 1,
+    gap: spacing[2],
+    paddingTop: spacing[4],
+  },
+  deleteAccountDescription: {
+    color: colors.textSecondary,
+    textAlign: "center",
   },
   errorText: {
     color: colors.error,

@@ -48,6 +48,34 @@
 - Resultado: aprovado.
 - Data: 05/08/2026.
 
+### Teste de deep links e recuperação de senha concluído
+
+- [x] SubTrack normal usa `subtrack://redefinir-senha`.
+- [x] SubTrack Dev usa `subtrack-dev://redefinir-senha`.
+- [x] Os dois aplicativos podem permanecer instalados simultaneamente.
+- [x] O link solicitado pelo SubTrack normal abre somente o SubTrack normal.
+- [x] O link solicitado pelo SubTrack Dev abre o SubTrack Dev.
+- [x] Ambos direcionam para a tela de criação de nova senha.
+- [x] O Android reconhece o scheme `subtrack-dev`.
+- [x] O teste direto via ADB abriu corretamente o SubTrack Dev.
+- [x] A recuperação com e-mail novo foi concluída com sucesso.
+- [x] O parser de recuperação continua compartilhado entre as variantes.
+- [x] Tokens e URLs sensíveis não foram registrados em logs.
+
+#### Ocorrência encontrada e resolução
+
+- Uma instalação antiga do SubTrack Dev ainda possuía os schemes `subtrack` e `exp+subtrack`.
+- Após a desinstalação e a instalação limpa do APK mais recente, o Android registrou `subtrack-dev` corretamente.
+- A reinstalação limpa resolveu o problema.
+
+#### Observação do teste
+
+- Ambiente: SubTrack e SubTrack Dev.
+- Plataforma: Android (aparelho físico).
+- Tipo de teste: deep links e recuperação de senha.
+- Resultado: aprovado.
+- Data: 06/08/2026.
+
 ### Teste de autenticação e assinaturas concluído
 
 #### Autenticação

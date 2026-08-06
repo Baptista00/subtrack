@@ -1,5 +1,4 @@
 import * as Linking from "expo-linking";
-import { Platform } from "react-native";
 
 import { supabase } from "./supabase";
 
@@ -12,15 +11,10 @@ export type PasswordRecoveryResult =
   | { status: "success" }
   | { status: "invalid" };
 
-const passwordRecoveryPath = "/redefinir-senha";
 const passwordRecoveryRouteName = "redefinir-senha";
 
 export function getPasswordRecoveryRedirectUrl(): string {
-  if (Platform.OS === "web") {
-    return Linking.createURL(passwordRecoveryPath);
-  }
-
-  return "subtrack://redefinir-senha";
+  return Linking.createURL(passwordRecoveryRouteName);
 }
 
 export function isPasswordRecoveryUrl(url: string): boolean {

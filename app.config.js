@@ -9,6 +9,7 @@ export default ({ config }) => ({
   ...(isDevelopment
     ? {
         name: "SubTrack Dev",
+        scheme: "subtrack-dev",
         android: {
           ...config.android,
           package: "com.baptista00.subtrack.dev",

@@ -1,3 +1,4 @@
+import Constants from "expo-constants";
 import * as Linking from "expo-linking";
 
 import { supabase } from "./supabase";
@@ -12,9 +13,30 @@ export type PasswordRecoveryResult =
   | { status: "invalid" };
 
 const passwordRecoveryRouteName = "redefinir-senha";
+const passwordRecoveryFallbackScheme = "subtrack";
 
 export function getPasswordRecoveryRedirectUrl(): string {
-  return Linking.createURL(passwordRecoveryRouteName);
+  return Linking.createURL(passwordRecoveryRouteName, {
+    scheme: getPasswordRecoveryScheme(),
+  });
+}
+
+function getPasswordRecoveryScheme(): string {
+  const configuredScheme = Constants.expoConfig?.scheme;
+
+  if (typeof configuredScheme === "string" && configuredScheme) {
+    return configuredScheme;
+  }
+
+  if (Array.isArray(configuredScheme)) {
+    const [firstScheme] = configuredScheme;
+
+    if (firstScheme) {
+      return firstScheme;
+    }
+  }
+
+  return passwordRecoveryFallbackScheme;
 }
 
 export function isPasswordRecoveryUrl(url: string): boolean {

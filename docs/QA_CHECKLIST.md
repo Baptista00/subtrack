@@ -48,6 +48,30 @@
 - Resultado: aprovado.
 - Data: 05/08/2026.
 
+### Teste do ciclo real de notificações concluído
+
+- [x] Cadastro de assinatura agenda um lembrete local.
+- [x] Lembrete é agendado para um dia antes da renovação.
+- [x] Horário do lembrete é 09:00 no horário local.
+- [x] Edição cancela o agendamento anterior.
+- [x] Edição cria um novo agendamento com a data atualizada.
+- [x] Permanece apenas um lembrete para a assinatura após edição.
+- [x] Exclusão cancela o lembrete vinculado.
+- [x] Nenhuma notificação vinculada permanece após exclusão.
+- [x] Painel temporário apenas consultou os agendamentos.
+- [x] Diagnóstico não criou, alterou ou cancelou notificações.
+- [x] IDs reais continuaram armazenados no AsyncStorage.
+- [x] Nenhuma notificação duplicada foi encontrada.
+- [x] Nenhum push remoto foi utilizado.
+
+#### Observação do teste
+
+- Ambiente: SubTrack Dev.
+- Plataforma: Android (aparelho físico).
+- Tipo de teste: ciclo real de notificações no cadastro, edição e exclusão.
+- Resultado: aprovado.
+- Data: 06/08/2026.
+
 ### Teste de deep links e recuperação de senha concluído
 
 - [x] SubTrack normal usa `subtrack://redefinir-senha`.

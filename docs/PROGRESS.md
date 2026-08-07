@@ -104,6 +104,10 @@
 - [x] `expo-notifications` configurado como config plugin mínimo para notificações locais.
 - [x] Nenhuma build foi executada nesta etapa.
 - [x] Nenhuma credencial foi criada nesta etapa.
+- [x] Telas locais de Política de Privacidade e Termos de Uso implementadas com conteúdo tipado e rascunhos explicitamente em revisão.
+- [x] Acesso aos documentos legais locais adicionado ao Perfil, Login e Cadastro.
+- [x] Versão do aplicativo exibida no Perfil a partir da configuração do Expo.
+- [x] Nenhuma URL pública ou externa foi adicionada aos documentos legais nesta etapa.
 
 ## Próxima etapa
 
@@ -128,6 +132,9 @@
 - PENDENTE: configurar SMTP próprio antes da produção; durante o desenvolvimento, o projeto usa o serviço padrão de e-mail do Supabase, sujeito a limitações de envio.
 - PENDENTE: validar o deep link de recuperação em development build ou build instalada; o custom scheme `subtrack` não tem teste final estável no Expo Go.
 - PENDENTE: executar o teste completo de recuperação de senha em development build instalada.
+- PENDENTE: obter revisão jurídica profissional antes de publicar os documentos legais.
+- PENDENTE: definir identificação jurídica e canal público de contato do SubTrack.
+- PENDENTE: definir domínio ou hospedagem e publicar URLs públicas para Política de Privacidade, Termos de Uso e exclusão de conta.
 
 ## Próximas etapas de dados
 

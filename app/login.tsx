@@ -3,7 +3,14 @@ import { Pressable, StyleSheet, View } from "react-native";
 import { router } from "expo-router";
 
 import { getAuthErrorMessage } from "../src/auth";
-import { AppText, Button, Input, PasswordInput, ScreenContainer } from "../src/components";
+import {
+  AppText,
+  Button,
+  Input,
+  LegalAgreementFooter,
+  PasswordInput,
+  ScreenContainer,
+} from "../src/components";
 import { supabase } from "../src/lib/supabase";
 import { colors, spacing } from "../src/theme";
 
@@ -127,6 +134,7 @@ export default function Login() {
           <Button disabled={isSubmitting} onPress={() => router.push("/cadastro")} variant="ghost">
             Criar conta
           </Button>
+          <LegalAgreementFooter />
         </View>
       </View>
     </ScreenContainer>

@@ -9,6 +9,7 @@
 - `/login`, `/cadastro` e `/esqueci-senha` estão disponíveis somente para usuários sem uma sessão autenticada normal.
 - `/redefinir-senha` é uma rota especial de recuperação e permanece registrada enquanto o deep link é processado.
 - `/redefinir-senha` não libera as rotas autenticadas até que a senha seja alterada e a sessão temporária seja encerrada.
+- `/politica-privacidade` e `/termos-de-uso` são rotas públicas locais, disponíveis com ou sem sessão. Elas não usam URLs externas e apresentam rascunhos técnicos internos em revisão, não documentos jurídicos definitivos.
 - Enquanto a sessão inicial é restaurada, o aplicativo mostra uma tela de carregamento antes de decidir a rota.
 
 
@@ -20,6 +21,7 @@
 - Exibe erros de validação e autenticação inline.
 - Oferece a ação visual para criar uma conta.
 - Oferece a ação visual “Esqueci minha senha?” abaixo do campo Senha e antes da ação Entrar.
+- No rodapé, informa que, ao continuar, a pessoa usuária concorda com os Termos de Uso e reconhece a Política de Privacidade; os dois textos abrem as rotas locais em revisão.
 
 ## Cadastro
 
@@ -28,6 +30,7 @@
 - Validações: nome obrigatório com mínimo de 2 caracteres após trim; e-mail obrigatório com formato simples; senha obrigatória com mínimo de 6 caracteres; confirmação igual à senha.
 - Exibe erros inline e a mensagem de confirmação de e-mail quando o Supabase não retornar sessão.
 - Oferece a ação visual para entrar em uma conta existente.
+- No rodapé, informa que, ao continuar, a pessoa usuária concorda com os Termos de Uso e reconhece a Política de Privacidade; os dois textos abrem as rotas locais em revisão.
 
 ## Esqueci minha senha
 
@@ -111,9 +114,16 @@
 - Nome e e-mail são obtidos diretamente do Supabase Auth, sem consulta a uma tabela `profiles`.
 - A seção “CONTA” possui as ações visuais Editar perfil e Notificações; ambas mostram “Em breve” e não abrem novas telas.
 - A seção “PREFERÊNCIAS” mostra a moeda fixa `BRL (R$)` e a ação visual Configurações, que também mostra “Em breve”.
+- A seção “INFORMAÇÕES” oferece Política de Privacidade e Termos de Uso, que abrem as rotas locais em revisão, e mostra a versão configurada pelo Expo sem ação de toque.
 - O logout funcional fica abaixo dos cards e exige confirmação explícita; durante o envio, o botão mostra loading e, em caso de falha, a mensagem é exibida inline.
 - A BottomNav mantém Perfil ativo e permite navegar para Início e Assinaturas.
-- Não há edição de perfil, alteração de senha ou exclusão de conta nesta etapa.
+- Não há edição de perfil ou alteração de senha nesta etapa. A exclusão de conta existente permanece separada das informações legais.
+
+## Política de Privacidade e Termos de Uso
+
+- As rotas locais `/politica-privacidade` e `/termos-de-uso` usam conteúdo tipado no aplicativo, sem WebView, HTML em runtime ou dependência de internet.
+- As duas telas têm botão voltar, Safe Area, rolagem completa, data de atualização 06/08/2026 e o aviso “Documento em revisão antes da publicação oficial do SubTrack.”.
+- URLs públicas, domínio ou hospedagem, canal público de contato e revisão jurídica continuam pendentes antes de qualquer publicação oficial.
 
 ## Splash e notificações locais
 

@@ -1,4 +1,5 @@
 import { Feather } from "@expo/vector-icons";
+import Constants from "expo-constants";
 import { type ComponentProps, useRef, useState } from "react";
 import {
   Alert,
@@ -23,7 +24,11 @@ type ProfileOptionRowProps = {
   value?: string;
   onPress?: () => void;
   showDivider?: boolean;
+  accessibilityHint?: string;
+  accessibilityRole?: "button" | "link";
 };
+
+const applicationVersion = Constants.expoConfig?.version ?? "—";
 
 export default function Perfil() {
   const { clearLocalSession, signOut, user } = useAuth();
@@ -187,6 +192,35 @@ export default function Perfil() {
 
         <View style={styles.content}>
           <View style={styles.section}>
+            <AppText accessibilityRole="header" variant="Label" style={styles.sectionTitle}>
+              INFORMAÇÕES
+            </AppText>
+            <View style={styles.optionsCard}>
+              <ProfileOptionRow
+                accessibilityHint="Abre a Política de Privacidade em revisão."
+                accessibilityRole="link"
+                icon="shield"
+                label="Política de Privacidade"
+                onPress={() => router.push("/politica-privacidade")}
+                showDivider
+              />
+              <ProfileOptionRow
+                accessibilityHint="Abre os Termos de Uso em revisão."
+                accessibilityRole="link"
+                icon="file-text"
+                label="Termos de Uso"
+                onPress={() => router.push("/termos-de-uso")}
+                showDivider
+              />
+              <ProfileOptionRow
+                icon="info"
+                label="Versão do aplicativo"
+                value={applicationVersion}
+              />
+            </View>
+          </View>
+
+          <View style={styles.section}>
             <AppText variant="Label" style={styles.sectionTitle}>
               CONTA
             </AppText>
@@ -295,6 +329,8 @@ export default function Perfil() {
 }
 
 function ProfileOptionRow({
+  accessibilityHint = "Esta funcionalidade será implementada em breve.",
+  accessibilityRole = "button",
   icon,
   label,
   onPress,
@@ -336,9 +372,9 @@ function ProfileOptionRow({
 
   return (
     <Pressable
-      accessibilityHint="Esta funcionalidade será implementada em breve."
+      accessibilityHint={accessibilityHint}
       accessibilityLabel={label}
-      accessibilityRole="button"
+      accessibilityRole={accessibilityRole}
       onPress={onPress}
       style={({ pressed }) => [
         styles.optionRow,

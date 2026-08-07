@@ -187,6 +187,45 @@
 - Resultado: aprovado.
 - Data: 06/08/2026.
 
+### Teste de documentos legais no aplicativo concluído
+
+#### DOCUMENTOS LEGAIS NO APLICATIVO
+
+- [x] Política de Privacidade abre pelo Perfil.
+- [x] Termos de Uso abrem pelo Perfil.
+- [x] Versão do aplicativo é exibida na seção Informações.
+- [x] Versão é obtida da configuração do Expo, sem valor fixado manualmente.
+- [x] Política de Privacidade e Termos de Uso abrem pelo Login.
+- [x] Política de Privacidade e Termos de Uso abrem pelo Cadastro.
+- [x] As rotas funcionam com usuário logado.
+- [x] As rotas funcionam com usuário deslogado.
+- [x] Os documentos não são bloqueados pelos guards de autenticação.
+- [x] Botão voltar retorna à tela anterior.
+- [x] Conteúdo permite rolagem completa.
+- [x] Fonte aumentada não impede o acesso ao conteúdo.
+- [x] Safe Area é respeitada.
+- [x] Nenhuma URL externa é necessária para abrir os documentos.
+- [x] Nenhum WebView, HTML bruto ou Markdown em runtime é utilizado.
+- [x] Os documentos exibem aviso de que estão em revisão.
+- [x] A data de atualização exibida é 06/08/2026.
+- [x] Recuperação de senha e autenticação permaneceram funcionando.
+
+#### Observação do teste
+
+- Ambiente: SubTrack Dev.
+- Plataforma: Android (aparelho físico).
+- Tipo de teste: documentos legais locais e informações do aplicativo.
+- Resultado: aprovado.
+- Data: 06/08/2026.
+
+#### Pendências antes da publicação oficial
+
+- [ ] Revisão jurídica profissional.
+- [ ] Contato público.
+- [ ] Domínio ou hospedagem.
+- [ ] URLs públicas da Política de Privacidade e da página de exclusão.
+- [ ] Configuração de SMTP profissional.
+
 ### Teste de conexão, erros e ações duplicadas concluído
 
 #### Conexão e estados de erro

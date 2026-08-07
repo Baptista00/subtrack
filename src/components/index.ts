@@ -42,5 +42,10 @@ export type { BottomNavProps, BottomNavTab } from "./BottomNav";
 export { BackButton } from "./BackButton";
 export type { BackButtonProps } from "./BackButton";
 
+export { LegalDocumentScreen } from "./LegalDocumentScreen";
+export type { LegalDocumentScreenProps } from "./LegalDocumentScreen";
+
+export { LegalAgreementFooter } from "./LegalAgreementFooter";
+
 export { SubscriptionForm } from "./SubscriptionForm";
 export type { SubscriptionFormProps } from "./SubscriptionForm";

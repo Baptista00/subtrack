@@ -100,6 +100,33 @@
 - Resultado: aprovado.
 - Data: 06/08/2026.
 
+### Teste de segurança de senha e recovery após hardening concluído
+
+#### SEGURANÇA DE SENHA / RECOVERY
+
+##### Configuração
+
+- [x] `Secure password change` habilitado no Supabase Auth.
+- [x] `Require current password when updating` habilitado no Supabase Auth.
+
+##### Teste
+
+- [x] Recovery solicitado.
+- [x] E-mail recebido.
+- [x] Deep link abriu o aplicativo.
+- [x] Redefinição de senha concluída.
+- [x] Senha antiga rejeitada.
+- [x] Senha nova aceita.
+- [x] Nenhuma regressão no fluxo de autenticação observada.
+
+#### Observação do teste
+
+- Ambiente: SubTrack Dev.
+- Plataforma: Android (aparelho físico).
+- Tipo de teste: recovery após hardening das configurações de senha do Supabase Auth.
+- Resultado: APROVADO.
+- Data: 08/08/2026.
+
 ### Teste de autenticação e assinaturas concluído
 
 #### Autenticação

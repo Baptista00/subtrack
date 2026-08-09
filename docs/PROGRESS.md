@@ -31,8 +31,8 @@
 - [x] BottomNav e estado vazio preservados na Home.
 - [x] Validação web disponível nesta etapa.
 - [x] Contrato inicial da tabela `subscriptions` documentado.
-- [x] Tabela `subscriptions` criada no Supabase, com RLS e políticas aplicadas.
-- [x] Auditoria de segurança do Supabase concluída sem alertas.
+- [x] Auditoria somente leitura do Supabase remoto concluída em 06/08/2026: `public.subscriptions`, FK para `auth.users(id)`, `ON DELETE CASCADE`, RLS, políticas para `authenticated`, normalização de nomes e índice de unicidade confirmados.
+- [x] Security Advisor remoto revisado: o único aviso relevante era a proteção contra senhas vazadas desabilitada; isso não caracterizava falha de RLS.
 - [x] Cliente Supabase configurado no aplicativo.
 - [x] Variáveis locais do Supabase configuradas e ignoradas pelo Git.
 - [x] Autenticação por e-mail e senha com Supabase Auth implementada.
@@ -40,7 +40,7 @@
 - [x] Telas de Login e Cadastro implementadas.
 - [x] Home protegida para usuários autenticados.
 - [x] Nome da Home obtido de `user_metadata.full_name`.
-- [x] Confirmação de e-mail desabilitada somente durante os testes.
+- [x] Supabase Auth remoto validado: Email Provider e novos cadastros habilitados, confirmação de e-mail habilitada, logins anônimos e linking manual desabilitados e Secure email change habilitado.
 - [x] Tela Adicionar assinatura implementada.
 - [x] Insert real de assinaturas no Supabase implementado.
 - [x] Rota de Adicionar assinatura protegida para usuários autenticados.
@@ -96,18 +96,24 @@
 - [x] Deep link de recuperação processado com suporte a callbacks por código e por tokens.
 - [x] Redefinição de senha com validações inline implementada.
 - [x] Sessão temporária de recuperação encerrada após a troca de senha.
+- [x] Hardening remoto de senha concluído: `Secure password change` e `Require current password when updating` habilitados.
+- [x] Recovery retestado após o hardening em Android físico no SubTrack Dev, com resultado aprovado em 08/08/2026.
 - [x] Projeto preparado para a primeira development build com EAS Build.
 - [x] `expo-dev-client` instalado para a development build.
 - [x] `eas.json` criado com perfis development, preview e production.
 - [x] Identificador Android definido como `com.baptista00.subtrack`.
 - [x] Identificador iOS reservado como `com.baptista00.subtrack`.
 - [x] `expo-notifications` configurado como config plugin mínimo para notificações locais.
-- [x] Nenhuma build foi executada nesta etapa.
-- [x] Nenhuma credencial foi criada nesta etapa.
+- [x] Perfil EAS Production configurado com `environment: production`.
+- [x] Variáveis `EXPO_PUBLIC_SUPABASE_URL` e `EXPO_PUBLIC_SUPABASE_PUBLISHABLE_KEY` confirmadas no ambiente EAS Production; `APP_VARIANT=development` não está presente.
+- [x] Configuração Production confirmada: nome `SubTrack`, scheme `subtrack`, pacote Android e bundle iOS `com.baptista00.subtrack` e versão `1.0.0`.
+- [x] Android Keystore gerenciada pelo EAS confirmada; há Build Credentials Default com upload keystore JKS e nenhuma keystore ou senha está no repositório.
+- [x] Build Preview existente verificada com versão `1.0.0` e `versionCode` 1; `cli.appVersionSource = remote` e `autoIncrement = true` deixam o próximo contador sob gestão remota do EAS.
 - [x] Telas locais de Política de Privacidade e Termos de Uso implementadas com conteúdo tipado e rascunhos explicitamente em revisão.
 - [x] Acesso aos documentos legais locais adicionado ao Perfil, Login e Cadastro.
 - [x] Versão do aplicativo exibida no Perfil a partir da configuração do Expo.
 - [x] Nenhuma URL pública ou externa foi adicionada aos documentos legais nesta etapa.
+- [x] Domínio `subtrackbr.com.br` registrado em 08/08/2026 por um ano.
 
 ## Próxima etapa
 
@@ -125,16 +131,18 @@
 - PENDENTE: definir os casos de renovação mensal para os dias 29, 30 e 31.
 - PENDENTE: implementar login social.
 - PENDENTE: implementar filtros avançados, ordenação manual e paginação na tela Assinaturas.
-- PENDENTE: implementar Editar perfil, Notificações, Configurações, alteração de senha e exclusão de conta.
+- PENDENTE: implementar Editar perfil, Notificações, Configurações e alteração de senha; a exclusão de conta já foi concluída.
 - PENDENTE: implementar renovação automática de assinaturas.
-- PENDENTE: executar o checklist manual pré-build em Android, iOS e web.
-- PENDENTE: criar as credenciais e gerar os builds Android e iOS necessários; a primeira development build Android ainda não foi executada.
-- PENDENTE: configurar SMTP próprio antes da produção; durante o desenvolvimento, o projeto usa o serviço padrão de e-mail do Supabase, sujeito a limitações de envio.
-- PENDENTE: validar o deep link de recuperação em development build ou build instalada; o custom scheme `subtrack` não tem teste final estável no Expo Go.
-- PENDENTE: executar o teste completo de recuperação de senha em development build instalada.
+- PENDENTE: executar QA final de release em Android, iOS e web.
+- PENDENTE: gerar o AAB Production; ainda não existe AAB de produção.
+- PENDENTE: conectar `subtrackbr.com.br` à hospedagem, configurar DNS e hospedar as páginas legais públicas.
+- PENDENTE: configurar o Resend após acesso/hospedagem do domínio, verificar o domínio, configurar SPF/DKIM, remetente oficial e templates finais.
+- PENDENTE: configurar SMTP próprio no Supabase e retestar confirmação de e-mail e recovery.
+- PENDENTE: alterar o Site URL do Supabase, atualmente `http://localhost:3000`, quando o site/domínio oficial estiver no ar.
 - PENDENTE: obter revisão jurídica profissional antes de publicar os documentos legais.
 - PENDENTE: definir identificação jurídica e canal público de contato do SubTrack.
-- PENDENTE: definir domínio ou hospedagem e publicar URLs públicas para Política de Privacidade, Termos de Uso e exclusão de conta.
+- PENDENTE: publicar URLs públicas para Política de Privacidade, página de exclusão de conta e, se decidido, Termos de Uso; retirar o aviso de documentos em revisão no aplicativo após a revisão aprovada.
+- PENDENTE: concluir a conta Google Play Developer e pagar a taxa de US$ 25 somente como etapa final, depois dos demais itens de publicação.
 
 ## Próximas etapas de dados
 

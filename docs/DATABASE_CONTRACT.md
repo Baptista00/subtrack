@@ -15,6 +15,7 @@
 - Autenticação: Supabase Auth.
 - Ambiente atual: projeto de desenvolvimento.
 - Região do projeto: São Paulo.
+- Auditoria somente leitura remota concluída em 06/08/2026: projeto SubTrack (`nmubendqtacvbdezbbbt`), região `sa-east-1`, status `ACTIVE_HEALTHY` e PostgreSQL 17.
 - O aplicativo acessa os dados pelo cliente oficial do Supabase.
 - Nenhuma chave secreta de servidor será usada no aplicativo mobile.
 - A chave pública publishable é lida de `EXPO_PUBLIC_SUPABASE_PUBLISHABLE_KEY`; a URL é lida de `EXPO_PUBLIC_SUPABASE_URL`.
@@ -64,29 +65,38 @@ Não criar os campos abaixo nem outros campos além dos aprovados:
 - Esse mapeamento local não é sincronizado pelo Supabase. Ao trocar de aparelho ou limpar os dados do aplicativo, o usuário precisa ativar os lembretes novamente.
 - Push remoto, tokens de dispositivo e serviços de envio em nuvem não fazem parte desta etapa.
 
-## Relacionamentos, integridade e índices planejados
+## Relacionamentos, integridade e índices
 
-- `subscriptions.user_id` referencia `auth.users(id)` com exclusão em cascata.
+### Confirmado remotamente em 06/08/2026
+
+- `public.subscriptions` existe com as colunas `id`, `user_id`, `name`, `price`, `category`, `service_color`, `next_renewal_date`, `billing_cycle`, `created_at` e `updated_at`.
+- `subscriptions.user_id` referencia `auth.users(id)`.
+- A chave estrangeira usa `ON DELETE CASCADE`.
+- A função `public.normalize_subscription_name(text)` existe.
+- O índice único `subscriptions_user_normalized_name_key` garante unicidade por `user_id` e nome normalizado. A normalização cobre diferenças de espaços, acentos e capitalização.
+
+### Índices previstos no contrato, sem confirmação remota registrada nesta auditoria
+
 - Índice por proprietário: `user_id`.
 - Índice composto para próximas renovações: `user_id, next_renewal_date`.
-- Há uma restrição única por `user_id` e nome normalizado. A normalização considera trim, espaços internos consecutivos, maiúsculas/minúsculas e acentos.
+
 - O cliente mantém uma validação preventiva de nomes duplicados para uma melhor experiência.
 - O banco protege definitivamente contra condições de corrida; a violação de unicidade PostgreSQL `23505` é traduzida no aplicativo para uma mensagem amigável.
 
-## Row Level Security
+## Row Level Security — confirmado remotamente em 06/08/2026
 
-RLS será habilitado em `subscriptions`. Não haverá política pública nem acesso anônimo aos dados.
+RLS está habilitado em `public.subscriptions`. As políticas confirmadas são destinadas à role `authenticated`; não há política pública de acesso aos dados.
 
-As políticas planejadas serão destinadas a usuários autenticados e usarão `auth.uid()` para comparar a propriedade da linha:
+As políticas usam `auth.uid()` para comparar a propriedade da linha:
 
-| Operação | Política planejada |
+| Operação | Política confirmada |
 | --- | --- |
 | `SELECT` | Consultar somente linhas em que `user_id` seja igual a `auth.uid()`. |
 | `INSERT` | Inserir somente linhas em que o `user_id` informado seja igual a `auth.uid()`, usando `WITH CHECK`. |
 | `UPDATE` | Atualizar somente linhas do próprio usuário com `USING`, e manter `user_id` igual a `auth.uid()` com `WITH CHECK`. |
 | `DELETE` | Excluir somente linhas em que `user_id` seja igual a `auth.uid()`. |
 
-Nenhuma política aceitará um `user_id` de outro usuário.
+Nenhuma política aceita um `user_id` de outro usuário.
 
 ## Contrato futuro do aplicativo
 
@@ -141,6 +151,5 @@ Não incluir campos formatados nessa interface de domínio.
 
 ## Pendências técnicas
 
-- Antes do CRUD final, definir a atualização automática de `updated_at`.
+- Definir a atualização automática de `updated_at` antes de qualquer automação que dependa desse campo.
 - Definir os casos de renovação mensal para os dias 29, 30 e 31 antes de implementar o avanço automático.
-- Criar a tabela, constraints, índices e políticas RLS somente na etapa de configuração do Supabase.

@@ -1,0 +1,265 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#1B4D3E" />
+    <meta
+      name="description"
+      content="Saiba como excluir sua conta do SubTrack e quais dados são removidos após a confirmação."
+    />
+    <meta property="og:locale" content="pt_BR" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="SubTrack" />
+    <meta property="og:title" content="Exclusão de conta — SubTrack" />
+    <meta
+      property="og:description"
+      content="Orientações para excluir sua conta diretamente no aplicativo SubTrack."
+    />
+    <meta
+      property="og:url"
+      content="https://subtrackbr.com.br/exclusao-de-conta.html"
+    />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="Exclusão de conta — SubTrack" />
+    <meta
+      name="twitter:description"
+      content="Orientações para excluir sua conta diretamente no aplicativo SubTrack."
+    />
+    <title>Exclusão de conta — SubTrack</title>
+    <link
+      rel="canonical"
+      href="https://subtrackbr.com.br/exclusao-de-conta.html"
+    />
+    <link rel="icon" href="assets/subtrack-app-icon-1024.png" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body class="legal-body">
+    <a class="skip-link" href="#conteudo">Ir para o conteúdo</a>
+
+    <header class="legal-header">
+      <div class="container legal-header-inner">
+        <a class="legal-wordmark" href="index.html" aria-label="SubTrack — página inicial">
+          <img
+            src="assets/subtrack-wordmark-green.png"
+            alt="SubTrack"
+            width="180"
+            height="45"
+          />
+        </a>
+
+        <nav class="legal-nav" aria-label="Navegação das páginas institucionais">
+          <a href="index.html">Início</a>
+          <a href="privacidade.html">Privacidade</a>
+          <a href="termos.html">Termos</a>
+          <a href="exclusao-de-conta.html" aria-current="page">Excluir conta</a>
+        </nav>
+      </div>
+    </header>
+
+    <main id="conteudo" class="legal-page" tabindex="-1">
+      <section class="legal-hero" aria-labelledby="titulo-pagina">
+        <div class="container">
+          <a class="back-link" href="index.html">Voltar para o site</a>
+          <p class="eyebrow">Conta e privacidade</p>
+          <h1 id="titulo-pagina">Exclusão de conta</h1>
+          <p class="legal-lead">
+            Veja como excluir sua conta diretamente no SubTrack e o que acontece
+            após a confirmação.
+          </p>
+          <p class="document-status" role="note">
+            Documento em revisão antes da publicação oficial do SubTrack.
+          </p>
+          <p class="document-date">
+            <strong>Última atualização:</strong>
+            <time datetime="2026-08-06">06/08/2026</time>
+          </p>
+        </div>
+      </section>
+
+      <div class="container legal-layout">
+        <aside class="legal-toc" aria-labelledby="sumario-titulo">
+          <p id="sumario-titulo" class="legal-toc-title">Nesta página</p>
+          <nav aria-label="Sumário da página de exclusão de conta">
+            <ol>
+              <li><a href="#como-excluir">Como excluir</a></li>
+              <li><a href="#o-que-e-removido">O que é removido</a></li>
+              <li><a href="#limpeza-local">Limpeza local</a></li>
+              <li><a href="#servicos-externos">Serviços externos</a></li>
+              <li><a href="#solicitacao-alternativa">Solicitação alternativa</a></li>
+              <li><a href="#revisao">Revisão antes da publicação</a></li>
+            </ol>
+          </nav>
+        </aside>
+
+        <article class="legal-document">
+          <section id="como-excluir" aria-labelledby="como-excluir-titulo">
+            <p class="section-kicker">Fluxo no aplicativo</p>
+            <h2 id="como-excluir-titulo">Como excluir sua conta</h2>
+            <p>
+              A exclusão é iniciada no próprio aplicativo, depois de entrar na
+              conta. Siga estes passos:
+            </p>
+
+            <ol class="deletion-steps">
+              <li>
+                <span class="step-number" aria-hidden="true">1</span>
+                <div>
+                  <strong>Abra o SubTrack</strong>
+                  <p>Entre na conta que deseja excluir.</p>
+                </div>
+              </li>
+              <li>
+                <span class="step-number" aria-hidden="true">2</span>
+                <div>
+                  <strong>Acesse Perfil</strong>
+                  <p>Use a navegação inferior do aplicativo.</p>
+                </div>
+              </li>
+              <li>
+                <span class="step-number" aria-hidden="true">3</span>
+                <div>
+                  <strong>Selecione Excluir minha conta</strong>
+                  <p>Leia com atenção o aviso apresentado.</p>
+                </div>
+              </li>
+              <li>
+                <span class="step-number" aria-hidden="true">4</span>
+                <div>
+                  <strong>Confirme em Excluir permanentemente</strong>
+                  <p>A ação não pode ser desfeita.</p>
+                </div>
+              </li>
+            </ol>
+          </section>
+
+          <section id="o-que-e-removido" aria-labelledby="remocao-titulo">
+            <p class="section-kicker">Depois da confirmação</p>
+            <h2 id="remocao-titulo">O que é removido</h2>
+            <p>
+              Depois que a exclusão remota é confirmada, o fluxo implementado
+              pelo SubTrack:
+            </p>
+            <ul class="legal-check-list">
+              <li>remove a conta do Supabase Auth;</li>
+              <li>
+                remove as assinaturas vinculadas à conta pela relação em cascata
+                configurada no banco de dados;
+              </li>
+              <li>encerra a sessão e limpa o estado local de autenticação;</li>
+              <li>
+                tenta cancelar os lembretes locais gerenciados pelo SubTrack e
+                remover o mapa local de identificadores de notificações.
+              </li>
+            </ul>
+            <div class="pending-note" role="note">
+              <strong>Sem restauração no ambiente principal</strong>
+              <p>
+                A conta e as assinaturas associadas não possuem lixeira ou opção
+                de restauração no SubTrack. Retenção em logs, backups operacionais
+                ou por obrigação legal não está documentada e será definida antes
+                da publicação oficial.
+              </p>
+            </div>
+          </section>
+
+          <section id="limpeza-local" aria-labelledby="limpeza-local-titulo">
+            <p class="section-kicker">Possível limitação no aparelho</p>
+            <h2 id="limpeza-local-titulo">A limpeza local pode ser parcial</h2>
+            <p>
+              O aplicativo confirma primeiro a exclusão da conta. Em uma falha
+              excepcional do sistema operacional ao cancelar algum lembrete
+              local, a conta continuará excluída e o SubTrack informará que essa
+              parte da limpeza foi parcial. A conta não é recriada.
+            </p>
+          </section>
+
+          <section id="servicos-externos" aria-labelledby="servicos-externos-titulo">
+            <p class="section-kicker">Importante</p>
+            <h2 id="servicos-externos-titulo">Assinaturas externas não são canceladas</h2>
+            <p>
+              Excluir a conta do SubTrack não cancela serviços, cobranças,
+              contratos ou pagamentos mantidos com terceiros. Para encerrar uma
+              assinatura externa, fale diretamente com o serviço responsável.
+            </p>
+          </section>
+
+          <section
+            id="solicitacao-alternativa"
+            aria-labelledby="solicitacao-alternativa-titulo"
+          >
+            <p class="section-kicker">Sem acesso ao aplicativo</p>
+            <h2 id="solicitacao-alternativa-titulo">Solicitação alternativa</h2>
+            <p>
+              O canal externo para quem não consegue acessar o aplicativo ainda
+              está sendo definido. Não existe, neste momento, e-mail público ou
+              formulário alternativo oficial para essa solicitação.
+            </p>
+            <div class="pending-note" role="note">
+              <strong>Canal oficial em definição</strong>
+              <p>
+                Contato público, informações mínimas do pedido, verificação de
+                identidade, prazo de resposta e comunicação da conclusão serão
+                definidos e informados aqui antes da publicação oficial.
+              </p>
+            </div>
+            <p>
+              Quando o canal estiver disponível, nunca envie senha, token de
+              sessão ou qualquer outro segredo no pedido.
+            </p>
+          </section>
+
+          <section id="revisao" aria-labelledby="revisao-titulo">
+            <p class="section-kicker">Próxima revisão</p>
+            <h2 id="revisao-titulo">Antes da publicação na Google Play</h2>
+            <p>
+              Esta página, o canal de contato e o procedimento alternativo serão
+              revisados novamente antes da publicação do SubTrack na Google Play.
+            </p>
+            <div class="pending-note" role="note">
+              <strong>Em preparação</strong>
+              <p>O SubTrack ainda não está disponível para download na Google Play.</p>
+            </div>
+          </section>
+
+          <a class="back-link back-link-bottom" href="index.html">Voltar para o site</a>
+        </article>
+      </div>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container footer-grid">
+        <div class="footer-brand">
+          <a class="legal-wordmark" href="index.html" aria-label="SubTrack — página inicial">
+            <img
+              src="assets/subtrack-wordmark-white.png"
+              alt="SubTrack"
+              width="180"
+              height="45"
+              loading="lazy"
+            />
+          </a>
+          <p>Controle, clareza e simplicidade para suas assinaturas recorrentes.</p>
+        </div>
+
+        <nav class="footer-nav" aria-label="Navegação institucional">
+          <p class="footer-title">Institucional</p>
+          <a href="privacidade.html">Política de Privacidade</a>
+          <a href="termos.html">Termos de Uso</a>
+          <a href="exclusao-de-conta.html" aria-current="page">Exclusão de Conta</a>
+        </nav>
+
+        <div class="footer-status">
+          <p class="footer-title">SubTrack</p>
+          <p>subtrackbr.com.br</p>
+          <span class="store-status">Em breve na Google Play</span>
+        </div>
+      </div>
+
+      <div class="container footer-bottom">
+        <p>&copy; 2026 SubTrack. Todos os direitos reservados.</p>
+        <a href="index.html">Voltar ao início</a>
+      </div>
+    </footer>
+  </body>
+</html>

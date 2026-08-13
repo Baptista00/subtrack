@@ -1,0 +1,394 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Política de Privacidade — SubTrack</title>
+    <meta
+      name="description"
+      content="Leia como o SubTrack trata dados de conta, assinaturas e lembretes locais. Documento em revisão antes da publicação oficial."
+    />
+    <meta name="theme-color" content="#1b4d3e" />
+    <link rel="canonical" href="https://subtrackbr.com.br/privacidade.html" />
+    <link rel="icon" type="image/png" href="assets/subtrack-app-icon-1024.png" />
+    <link rel="stylesheet" href="styles.css" />
+    <meta property="og:locale" content="pt_BR" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Política de Privacidade — SubTrack" />
+    <meta
+      property="og:description"
+      content="Como o SubTrack trata dados de conta, assinaturas e lembretes locais."
+    />
+    <meta property="og:url" content="https://subtrackbr.com.br/privacidade.html" />
+  </head>
+  <body class="legal-body">
+    <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
+
+    <header class="legal-header">
+      <div class="container legal-header__inner">
+        <a class="legal-wordmark" href="index.html" aria-label="SubTrack — página inicial">
+          <img
+            src="assets/subtrack-wordmark-green.png"
+            width="180"
+            height="45"
+            alt="SubTrack"
+          />
+        </a>
+        <nav class="legal-nav" aria-label="Navegação das páginas legais">
+          <a href="index.html">Início</a>
+          <a href="privacidade.html" aria-current="page">Privacidade</a>
+          <a href="termos.html">Termos</a>
+          <a href="exclusao-de-conta.html">Exclusão</a>
+        </nav>
+      </div>
+    </header>
+
+    <main id="conteudo" class="legal-page" tabindex="-1">
+      <section class="legal-hero" aria-labelledby="titulo-privacidade">
+        <div class="container">
+          <p class="eyebrow">Transparência e privacidade</p>
+          <h1 id="titulo-privacidade">Política de Privacidade</h1>
+          <p class="legal-lead">
+            Este documento descreve o comportamento identificado no código e na documentação técnica do
+            SubTrack em 06/08/2026. Ele ainda não é uma política pública definitiva.
+          </p>
+          <div class="legal-status" role="note" aria-label="Status do documento">
+            <strong>Documento em revisão antes da publicação oficial do SubTrack.</strong>
+            <span>Última atualização do rascunho: 06/08/2026.</span>
+          </div>
+        </div>
+      </section>
+
+      <div class="container legal-layout">
+        <aside class="legal-toc" aria-labelledby="sumario-privacidade">
+          <h2 id="sumario-privacidade">Nesta página</h2>
+          <nav aria-label="Sumário da Política de Privacidade">
+            <ol>
+              <li><a href="#quem-e-o-subtrack">Quem é o SubTrack</a></li>
+              <li><a href="#dados-tratados">Dados tratados</a></li>
+              <li><a href="#dados-nao-identificados">Dados não identificados</a></li>
+              <li><a href="#como-usamos">Como os dados são usados</a></li>
+              <li><a href="#supabase">Autenticação e armazenamento</a></li>
+              <li><a href="#dados-no-aparelho">Dados no aparelho</a></li>
+              <li><a href="#lembretes">Lembretes locais</a></li>
+              <li><a href="#seguranca">Segurança e transmissão</a></li>
+              <li><a href="#retencao">Retenção</a></li>
+              <li><a href="#exclusao">Exclusão de conta</a></li>
+              <li><a href="#direitos">Direitos do titular</a></li>
+              <li><a href="#criancas">Crianças e adolescentes</a></li>
+              <li><a href="#alteracoes">Alterações</a></li>
+              <li><a href="#contato">Contato</a></li>
+            </ol>
+          </nav>
+        </aside>
+
+        <article class="legal-document">
+          <section id="quem-e-o-subtrack">
+            <h2>1. Quem é o SubTrack e para que serve</h2>
+            <p>
+              O SubTrack é um aplicativo para organizar e acompanhar assinaturas recorrentes informadas
+              manualmente pela pessoa usuária. Ele permite criar uma conta, registrar assinaturas,
+              consultar valores e datas de renovação e, quando habilitado no aplicativo móvel, agendar
+              lembretes locais.
+            </p>
+            <div class="pending-note" role="note">
+              <strong>Identificação jurídica do responsável em definição.</strong>
+              <p>Canal oficial de contato para privacidade em definição.</p>
+            </div>
+          </section>
+
+          <section id="dados-tratados">
+            <h2>2. Dados tratados</h2>
+            <p>O SubTrack trata os dados abaixo para disponibilizar suas funcionalidades.</p>
+            <div class="legal-table-wrap" tabindex="0" aria-label="Tabela rolável de dados tratados">
+              <table>
+                <thead>
+                  <tr>
+                    <th scope="col">Categoria</th>
+                    <th scope="col">Dados</th>
+                    <th scope="col">Como são usados</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th scope="row">Conta</th>
+                    <td>Endereço de e-mail, nome informado, identificador de usuário e senha.</td>
+                    <td>
+                      Criar e autenticar a conta, exibir nome e e-mail no Perfil e viabilizar a
+                      recuperação de senha. A senha é enviada ao Supabase Auth e não é armazenada nem
+                      exibida pelo código do aplicativo.
+                    </td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Assinaturas</th>
+                    <td>
+                      Nome do serviço, preço, categoria, ciclo de cobrança, próxima data de renovação,
+                      cor do serviço, identificador e datas de criação e atualização.
+                    </td>
+                    <td>
+                      Registrar, listar, editar e excluir assinaturas, além de calcular informações
+                      exibidas pelo aplicativo.
+                    </td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Sessão e recuperação</th>
+                    <td>
+                      Sessão de autenticação, tokens de acesso e renovação tratados pelo Supabase e
+                      estado local de recuperação de senha.
+                    </td>
+                    <td>Manter e restaurar a sessão e concluir a recuperação de senha.</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Lembretes locais</th>
+                    <td>
+                      Identificadores locais de notificações e conteúdo do lembrete com nome, preço e
+                      identificador da assinatura.
+                    </td>
+                    <td>Agendar, atualizar e cancelar lembretes locais de renovação no aplicativo móvel.</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <p>
+              O inventário técnico interno detalha origem, armazenamento, retenção e exclusão desses
+              dados. As limitações ainda abertas estão descritas nas seções seguintes.
+            </p>
+          </section>
+
+          <section id="dados-nao-identificados">
+            <h2>3. Dados que não foram identificados no escopo atual</h2>
+            <p>
+              Na auditoria de código realizada para este rascunho, não foram identificados recursos do
+              SubTrack para coleta de localização, contatos, câmera, microfone, biometria, dados
+              bancários, dados de cartão, pagamentos, Open Finance, leitura de faturas, anúncios ou
+              analytics comportamental.
+            </p>
+            <p>
+              Também não foi identificado código de push remoto, token de push ou serviço em nuvem para
+              envio de lembretes. Os lembretes implementados são locais ao aparelho. Essa constatação é
+              limitada ao código e às configurações versionadas auditadas; SDKs, dependências e
+              configurações de produção ainda precisam de revisão antes de uma declaração pública
+              definitiva.
+            </p>
+          </section>
+
+          <section id="como-usamos">
+            <h2>4. Como os dados são usados</h2>
+            <p>Os dados são usados para:</p>
+            <ul>
+              <li>criar e manter a conta de acesso;</li>
+              <li>autenticar a pessoa usuária, recuperar senha e proteger rotas autenticadas;</li>
+              <li>associar cada assinatura à respectiva conta;</li>
+              <li>exibir, organizar, editar e excluir assinaturas;</li>
+              <li>calcular valores mensais e indicar renovações próximas;</li>
+              <li>agendar lembretes locais quando a pessoa usuária escolher ativá-los; e</li>
+              <li>atender à solicitação de exclusão de conta.</li>
+            </ul>
+            <p>
+              O código auditado não usa dados das assinaturas para publicidade direcionada, venda de
+              dados ou perfilamento de marketing.
+            </p>
+          </section>
+
+          <section id="supabase">
+            <h2>5. Autenticação e armazenamento no Supabase</h2>
+            <p>
+              O SubTrack usa o Supabase Auth para cadastro por e-mail e senha, login, recuperação de
+              senha e gerenciamento da conta. Os dados das assinaturas são armazenados na tabela
+              <code>public.subscriptions</code> de um projeto Supabase, associados ao identificador de
+              autenticação da pessoa usuária.
+            </p>
+            <p>
+              O aplicativo usa um cliente público do Supabase configurado por variáveis públicas do
+              aplicativo. Nenhuma chave administrativa é incluída no aplicativo. A chave administrativa
+              necessária para excluir uma conta existe somente no ambiente server-side da Edge Function
+              <code>delete-account</code>.
+            </p>
+            <p>
+              O Supabase atua como provedor de infraestrutura e operador técnico de autenticação, banco
+              de dados e Edge Function. Por isso, dados necessários para essas funções são enviados do
+              aparelho ao Supabase. Isso não significa venda de dados nem compartilhamento para anúncios;
+              a classificação jurídica e a resposta final sobre “compartilhamento” na Google Play
+              dependem da revisão do contrato, da configuração de produção e da definição aplicável da
+              plataforma.
+            </p>
+          </section>
+
+          <section id="dados-no-aparelho">
+            <h2>6. Sessão, recuperação e dados mantidos no aparelho</h2>
+            <p>
+              O cliente do Supabase está configurado para persistir a sessão no AsyncStorage do
+              aplicativo. O SubTrack também mantém um indicador local de recuperação de senha no
+              AsyncStorage. Tokens de sessão e dados temporários de recuperação são usados para
+              autenticação; os prazos exatos de expiração e rotação são definidos pelo serviço de
+              autenticação e não estão documentados neste repositório.
+            </p>
+            <div class="pending-note" role="note">
+              <strong>Proteção em repouso em avaliação.</strong>
+              <p>
+                O aplicativo não usa SecureStore no código auditado. A proteção em repouso aplicável à
+                sessão em cada plataforma precisa ser avaliada e registrada antes da publicação pública.
+              </p>
+            </div>
+          </section>
+
+          <section id="lembretes">
+            <h2>7. Lembretes locais</h2>
+            <p>
+              Quando a pessoa usuária ativa um lembrete ao salvar uma assinatura no aplicativo móvel, o
+              SubTrack solicita permissão de notificações ao sistema operacional e agenda um lembrete
+              local para o dia anterior à renovação, às 09:00 no horário local. O conteúdo programado
+              pode incluir nome e preço da assinatura.
+            </p>
+            <p>
+              Os identificadores das notificações gerenciadas pelo SubTrack são mantidos em um mapa no
+              AsyncStorage, associado ao identificador da assinatura. Esse mapa não é sincronizado com o
+              Supabase. Na web, o aplicativo não agenda lembretes locais.
+            </p>
+          </section>
+
+          <section id="seguranca">
+            <h2>8. Segurança e transmissão</h2>
+            <p>
+              O SubTrack separa o cliente público usado pelo aplicativo do cliente administrativo usado
+              somente na Edge Function de exclusão de conta. A função obtém a identidade exclusivamente
+              pelo JWT enviado no cabeçalho de autorização e exclui apenas o usuário resolvido por esse
+              token.
+            </p>
+            <p>Medidas técnicas reduzem riscos, mas nenhum sistema pode prometer segurança absoluta.</p>
+            <div class="pending-note" role="note">
+              <strong>Verificações técnicas pendentes.</strong>
+              <p>
+                Ainda precisam ser confirmadas e documentadas a evidência de HTTPS/TLS do endpoint
+                Supabase de produção, a configuração remota de autenticação, os controles de acesso
+                administrativos e as políticas de logs e backups do provedor.
+              </p>
+            </div>
+          </section>
+
+          <section id="retencao">
+            <h2>9. Retenção</h2>
+            <p>
+              Dados de conta e assinaturas permanecem no ambiente principal do SubTrack enquanto a conta
+              estiver ativa, salvo exclusão individual de uma assinatura. Identificadores de lembrete e
+              estado de sessão permanecem no aparelho enquanto sessão, lembretes e armazenamento local
+              existirem.
+            </p>
+            <p>
+              O código implementa exclusão de conta e limpeza local, mas não documenta prazos de retenção
+              de backups, logs de infraestrutura, registros de segurança ou exigências legais. Por isso,
+              nenhum prazo numérico adicional é afirmado.
+            </p>
+          </section>
+
+          <section id="exclusao">
+            <h2>10. Exclusão de conta</h2>
+            <p>
+              A pessoa usuária pode solicitar a exclusão dentro do aplicativo em
+              <strong>Perfil → Excluir minha conta</strong>. Após confirmação explícita:
+            </p>
+            <ol>
+              <li>o aplicativo chama a Edge Function autenticada <code>delete-account</code>;</li>
+              <li>a função valida o JWT e identifica o usuário por <code>auth.getUser()</code>;</li>
+              <li>a função exclui somente esse usuário do Supabase Auth;</li>
+              <li>
+                as assinaturas relacionadas são removidas pela relação
+                <code>subscriptions.user_id</code> com <code>ON DELETE CASCADE</code> documentada no
+                projeto; e
+              </li>
+              <li>
+                o aplicativo tenta cancelar os lembretes locais gerenciados pelo SubTrack, remove o mapa
+                de identificadores, limpa a sessão e retorna à tela de Login.
+              </li>
+            </ol>
+            <p>
+              A exclusão remota é confirmada antes da limpeza local. Se o cancelamento de algum lembrete
+              local falhar, a conta permanece excluída e o aplicativo informa a limitação de limpeza
+              local de forma segura.
+            </p>
+            <p>
+              Consulte também as <a href="exclusao-de-conta.html">instruções para exclusão de conta</a>.
+            </p>
+          </section>
+
+          <section id="direitos">
+            <h2>11. Direitos do titular</h2>
+            <p>
+              Dependendo da legislação aplicável, a pessoa titular pode ter direitos de confirmação,
+              acesso, correção, anonimização, bloqueio, eliminação, informação e revisão sobre seus dados.
+              O SubTrack disponibiliza a exclusão de conta dentro do aplicativo.
+            </p>
+            <div class="pending-note" role="note">
+              <strong>Procedimento de atendimento em definição.</strong>
+              <p>
+                Responsável, canal público, verificação de identidade e prazo de resposta para pedidos
+                não atendidos diretamente no aplicativo ainda serão definidos.
+              </p>
+            </div>
+          </section>
+
+          <section id="criancas">
+            <h2>12. Crianças e adolescentes</h2>
+            <p>
+              O projeto não documenta atualmente faixa etária de público, fluxo de consentimento
+              específico ou procedimento de atendimento para crianças e adolescentes.
+            </p>
+            <div class="pending-note" role="note">
+              <strong>Política de público em definição.</strong>
+              <p>
+                Base legal e procedimento para solicitações de responsáveis precisam ser definidos antes
+                da publicação pública.
+              </p>
+            </div>
+          </section>
+
+          <section id="alteracoes">
+            <h2>13. Alterações desta política</h2>
+            <p>
+              Mudanças relevantes neste documento deverão aparecer em uma versão atualizada da política
+              pública, com nova data de atualização e comunicação adequada no aplicativo ou no canal
+              público definido.
+            </p>
+          </section>
+
+          <section id="contato">
+            <h2>14. Contato</h2>
+            <div class="pending-note" role="note">
+              <strong>Canal oficial de contato em definição.</strong>
+              <p>O e-mail público para privacidade e direitos do titular será informado após definição.</p>
+            </div>
+          </section>
+
+          <p class="legal-back-link"><a href="index.html">Voltar para a página inicial</a></p>
+        </article>
+      </div>
+    </main>
+
+    <footer class="legal-footer">
+      <div class="container legal-footer__grid">
+        <div>
+          <a class="legal-wordmark" href="index.html" aria-label="SubTrack — página inicial">
+            <img
+              src="assets/subtrack-wordmark-white.png"
+              width="180"
+              height="45"
+              alt="SubTrack"
+              loading="lazy"
+            />
+          </a>
+          <p>Suas assinaturas sob controle.</p>
+          <p class="footer-status">Em breve na Google Play</p>
+        </div>
+        <nav aria-label="Links legais do rodapé">
+          <a href="privacidade.html" aria-current="page">Política de Privacidade</a>
+          <a href="termos.html">Termos de Uso</a>
+          <a href="exclusao-de-conta.html">Exclusão de Conta</a>
+        </nav>
+        <div class="legal-footer__meta">
+          <p>subtrackbr.com.br</p>
+          <p>© 2026 SubTrack.</p>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

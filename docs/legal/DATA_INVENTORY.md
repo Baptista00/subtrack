@@ -1,6 +1,6 @@
 # Inventário de dados — Auditoria técnica interna
 
-> **Escopo da auditoria:** código e documentação versionados do SubTrack, lidos em 06/08/2026, mais auditoria somente leitura do Supabase remoto concluída na mesma data. Este inventário não substitui revisão jurídica, contrato de tratamento de dados nem auditoria de SDKs. Retenção detalhada de logs, backups, acessos administrativos, SMTP e contratos de provedores externos continuam pendentes de confirmação.
+> **Escopo da auditoria:** código e documentação versionados do SubTrack, lidos em 06/08/2026, mais auditoria somente leitura do Supabase remoto concluída na mesma data e confirmações operacionais de produção registradas em 14/08/2026. Este inventário não substitui revisão jurídica, contrato de tratamento de dados nem auditoria de SDKs. Retenção detalhada de logs, backups, acessos administrativos e contratos de provedores externos continuam pendentes de confirmação.
 
 ## Leitura rápida
 
@@ -18,6 +18,15 @@
 - A função `public.normalize_subscription_name(text)` e o índice único `subscriptions_user_normalized_name_key` foram confirmados; a unicidade por `user_id` e nome normalizado cobre espaços, acentos e capitalização.
 - A Edge Function `delete-account` está `ACTIVE` e usa `verify_jwt: true`.
 - Não há bucket Storage, tabela publicada no Realtime, outra tabela pública além de `subscriptions` nem outra Edge Function além de `delete-account`.
+
+## Confirmações operacionais de produção — 14/08/2026
+
+- `https://subtrackbr.com.br` está hospedado na Hostinger, publicado e disponível por HTTPS.
+- `suporte@subtrackbr.com.br` é o canal oficial e foi testado com envio e recebimento.
+- O domínio de envio `auth.subtrackbr.com.br` está verificado no Resend, com DKIM, SPF e MX verificados.
+- O SMTP customizado do Supabase está configurado com Resend e usa `no-reply@auth.subtrackbr.com.br` como remetente técnico.
+- A Site URL do Supabase está configurada como `https://subtrackbr.com.br`.
+- Essas confirmações não definem retenção de logs ou backups nem substituem a revisão dos contratos e acessos administrativos dos provedores.
 
 ## Inventário detalhado
 
@@ -49,7 +58,7 @@
 
 A Edge Function `delete-account` aceita apenas `POST`, obtém o JWT do cabeçalho `Authorization`, resolve a pessoa autenticada com `auth.getUser()` e chama `auth.admin.deleteUser()` somente com o ID resolvido por esse JWT. Ela não aceita `userId`, e-mail ou identificador arbitrário no corpo da requisição.
 
-O contrato de banco e a auditoria remota de 06/08/2026 confirmam `subscriptions.user_id` como referência a `auth.users(id)` com `ON DELETE CASCADE`, além de RLS e das políticas de propriedade em `public.subscriptions`. A Edge Function `delete-account` foi confirmada remotamente e está ativa com verificação de JWT. O checklist de QA registra teste aprovado em 06/08/2026 no SubTrack Dev em aparelho Android físico, incluindo a remoção da conta, assinaturas, sessão e mapa de notificações. Backups, logs da plataforma, retenção detalhada, acesso administrativo, SMTP e contratos de provedores externos continuam pendentes de verificação independente.
+O contrato de banco e a auditoria remota de 06/08/2026 confirmam `subscriptions.user_id` como referência a `auth.users(id)` com `ON DELETE CASCADE`, além de RLS e das políticas de propriedade em `public.subscriptions`. A Edge Function `delete-account` foi confirmada remotamente e está ativa com verificação de JWT. O checklist de QA registra teste aprovado em 06/08/2026 no SubTrack Dev em aparelho Android físico, incluindo a remoção da conta, assinaturas, sessão e mapa de notificações. O SMTP customizado foi confirmado operacionalmente em 14/08/2026; backups, logs da plataforma, retenção detalhada, acesso administrativo e contratos de provedores externos continuam pendentes de verificação independente.
 
 ## Seção preliminar — Segurança dos dados da Google Play
 
@@ -78,4 +87,5 @@ O contrato de banco e a auditoria remota de 06/08/2026 confirmam `subscriptions.
 - [PENDENTE: confirmar política de backups, logs de acesso, retenção e exclusão operacional do Supabase.]
 - [PENDENTE: confirmar quem possui acesso administrativo ao projeto Supabase e controles aplicados.]
 - [PENDENTE: revisar a classificação “coletado” e “compartilhado” conforme as perguntas vigentes da Play Console.]
-- [PENDENTE: definir canal público, procedimento de direitos do titular e público de crianças/adolescentes.]
+- Canal público confirmado: suporte@subtrackbr.com.br.
+- [PENDENTE: definir procedimento de direitos do titular e política aplicável a crianças/adolescentes.]

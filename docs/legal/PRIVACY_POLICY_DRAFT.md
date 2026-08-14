@@ -10,7 +10,9 @@ O SubTrack é um aplicativo para organizar e acompanhar assinaturas recorrentes 
 
 Esta política descreve o comportamento identificado no código e na documentação técnica do projeto em 06/08/2026. Ela ainda não é uma política pública definitiva.
 
-**Controlador e canal de contato:** [PENDENTE: definir identificação jurídica do responsável pelo SubTrack e e-mail público de privacidade.]
+**Controlador:** [PENDENTE: definir identificação jurídica do responsável pelo SubTrack.]
+
+**Canal oficial de contato:** suporte@subtrackbr.com.br
 
 ## 2. Dados tratados
 
@@ -89,13 +91,13 @@ A pessoa usuária pode solicitar a exclusão dentro do aplicativo em **Perfil �
 
 O resultado da exclusão remota é confirmado antes da limpeza local. Se o cancelamento local de algum lembrete falhar, a conta permanece excluída e o aplicativo informa o resultado de forma segura.
 
-O conteúdo de uma futura página pública de exclusão está em [ACCOUNT_DELETION_PAGE_DRAFT.md](ACCOUNT_DELETION_PAGE_DRAFT.md).
+O conteúdo da página pública de exclusão está documentado em [ACCOUNT_DELETION_PAGE_DRAFT.md](ACCOUNT_DELETION_PAGE_DRAFT.md) e permanece em revisão.
 
 ## 11. Direitos do titular
 
 Dependendo da legislação aplicável, a pessoa titular pode ter direitos de confirmação, acesso, correção, anonimização, bloqueio, eliminação, informação e revisão sobre seus dados. O SubTrack disponibiliza a exclusão de conta no aplicativo.
 
-[PENDENTE: definir procedimento operacional, prazo de resposta, identificação do responsável e canal público para solicitações que não possam ser atendidas diretamente no aplicativo.]
+[PENDENTE: definir procedimento operacional, prazo de resposta e identificação do responsável para solicitações que não possam ser atendidas diretamente no aplicativo.]
 
 ## 12. Crianças e adolescentes
 
@@ -109,4 +111,4 @@ Mudanças relevantes neste documento deverão ser refletidas em versão atualiza
 
 ## 14. Contato
 
-[PENDENTE: definir e-mail público de contato para privacidade e direitos do titular.]
+Para assuntos de privacidade e direitos do titular: suporte@subtrackbr.com.br.

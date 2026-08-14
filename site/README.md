@@ -1,8 +1,8 @@
 # Site oficial do SubTrack
 
-Esta pasta contém a landing page estática e as páginas legais para futura publicação do
-SubTrack. Todo o site usa HTML, CSS e JavaScript puro, sem framework, backend ou
-acesso direto ao Supabase.
+Esta pasta contém a landing page estática e as páginas legais publicadas do SubTrack.
+Todo o site usa HTML, CSS e JavaScript puro, sem framework, backend ou acesso direto
+ao Supabase.
 
 ## Estrutura
 
@@ -29,15 +29,16 @@ python -m http.server 8000
 Depois, abra no navegador o endereço local informado pelo comando. Nenhuma
 instalação adicional é necessária para visualizar os arquivos.
 
-## Publicação futura na Hostinger
+## Publicação na Hostinger
 
-Envie **o conteúdo de `site/`** para a pasta `public_html` da hospedagem, mantendo
-a mesma estrutura de arquivos e a pasta `assets/`. O domínio preparado para o
-site é `subtrackbr.com.br`.
+O site está publicado em `https://subtrackbr.com.br` com HTTPS. Para futuras
+atualizações, envie **o conteúdo de `site/`** para a pasta `public_html` da Hostinger,
+mantendo a mesma estrutura de arquivos e a pasta `assets/`.
+
+O canal oficial de contato é `suporte@subtrackbr.com.br`.
 
 Antes da publicação oficial, atualizar:
 
-- canal oficial de contato;
 - revisão jurídica;
 - textos legais definitivos;
 - link público da Google Play;

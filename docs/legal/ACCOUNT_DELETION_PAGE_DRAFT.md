@@ -1,6 +1,6 @@
-# Excluir conta do SubTrack — Conteúdo para futura página pública
+# Excluir conta do SubTrack — Conteúdo da página pública
 
-> **Status:** rascunho técnico interno. Não é uma página publicada e não cria formulário funcional.
+> **Status:** conteúdo técnico da página pública, ainda sujeito a revisão jurídica. Não cria formulário funcional nem processo automatizado.
 >
 > **Última atualização do rascunho:** 06/08/2026.
 
@@ -32,12 +32,12 @@ O aplicativo confirma primeiro a exclusão remota. Se houver falha excepcional a
 
 ## Alternativa de solicitação
 
-Se não conseguir acessar o aplicativo, haverá um canal alternativo de solicitação de exclusão:
+Se não conseguir acessar o aplicativo, entre em contato pelo canal oficial:
 
-**[PENDENTE: definir e-mail público de contato e procedimento de verificação de identidade.]**
+**suporte@subtrackbr.com.br**
 
-Ao publicar a página, o procedimento alternativo deverá indicar quais informações mínimas serão solicitadas, como a identidade será verificada, o prazo de resposta e como a conclusão será comunicada. Não inclua senha, token de sessão ou outros segredos no pedido.
+O e-mail é um canal de contato e não representa um processo automatizado. [PENDENTE: definir quais informações mínimas serão solicitadas, como a identidade será verificada, o prazo de resposta e como a conclusão será comunicada.] Não inclua senha, token de sessão ou outros segredos no pedido.
 
 ## Contato
 
-**[PENDENTE: definir e-mail público de privacidade e exclusão de conta.]**
+**E-mail oficial:** suporte@subtrackbr.com.br

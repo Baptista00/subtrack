@@ -112,8 +112,13 @@
 - [x] Telas locais de Política de Privacidade e Termos de Uso implementadas com conteúdo tipado e rascunhos explicitamente em revisão.
 - [x] Acesso aos documentos legais locais adicionado ao Perfil, Login e Cadastro.
 - [x] Versão do aplicativo exibida no Perfil a partir da configuração do Expo.
-- [x] Nenhuma URL pública ou externa foi adicionada aos documentos legais nesta etapa.
+- [x] Landing, Política de Privacidade, Termos de Uso e página de exclusão publicados em `https://subtrackbr.com.br`, mantendo o aviso de documento em revisão.
 - [x] Domínio `subtrackbr.com.br` registrado em 08/08/2026 por um ano.
+- [x] Domínio hospedado na Hostinger, com site público e HTTPS ativo.
+- [x] Canal oficial `suporte@subtrackbr.com.br` configurado e testado com envio e recebimento.
+- [x] Domínio `auth.subtrackbr.com.br` verificado no Resend, com DKIM, SPF e MX verificados.
+- [x] SMTP customizado do Supabase configurado com Resend e remetente técnico `no-reply@auth.subtrackbr.com.br`.
+- [x] Site URL do Supabase alterada para `https://subtrackbr.com.br`.
 
 ## Próxima etapa
 
@@ -135,13 +140,10 @@
 - PENDENTE: implementar renovação automática de assinaturas.
 - PENDENTE: executar QA final de release em Android, iOS e web.
 - PENDENTE: gerar o AAB Production; ainda não existe AAB de produção.
-- PENDENTE: conectar `subtrackbr.com.br` à hospedagem, configurar DNS e hospedar as páginas legais públicas.
-- PENDENTE: configurar o Resend após acesso/hospedagem do domínio, verificar o domínio, configurar SPF/DKIM, remetente oficial e templates finais.
-- PENDENTE: configurar SMTP próprio no Supabase e retestar confirmação de e-mail e recovery.
-- PENDENTE: alterar o Site URL do Supabase, atualmente `http://localhost:3000`, quando o site/domínio oficial estiver no ar.
-- PENDENTE: obter revisão jurídica profissional antes de publicar os documentos legais.
-- PENDENTE: definir identificação jurídica e canal público de contato do SubTrack.
-- PENDENTE: publicar URLs públicas para Política de Privacidade, página de exclusão de conta e, se decidido, Termos de Uso; retirar o aviso de documentos em revisão no aplicativo após a revisão aprovada.
+- PENDENTE: obter revisão jurídica profissional antes de considerar os documentos legais definitivos.
+- PENDENTE: definir a identificação jurídica definitiva do responsável pelo SubTrack.
+- PENDENTE: concluir e aprovar os textos legais definitivos; retirar o aviso de documentos em revisão somente após a revisão jurídica aprovada.
+- PENDENTE: revisar e aprovar os textos finais dos e-mails de autenticação e recuperação.
 - PENDENTE: concluir a conta Google Play Developer e pagar a taxa de US$ 25 somente como etapa final, depois dos demais itens de publicação.
 
 ## Próximas etapas de dados

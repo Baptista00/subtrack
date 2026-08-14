@@ -52,7 +52,7 @@ A exclusão pode ser solicitada no aplicativo em **Perfil → Excluir minha cont
 
 A exclusão da conta no Supabase Auth remove as assinaturas relacionadas por `ON DELETE CASCADE` documentado no projeto. O aplicativo também tenta cancelar os lembretes locais sob sua gestão, remove o mapa local de identificadores e encerra a sessão.
 
-Para uma futura página pública de instruções, consulte [ACCOUNT_DELETION_PAGE_DRAFT.md](ACCOUNT_DELETION_PAGE_DRAFT.md). [PENDENTE: definir canal público alternativo para solicitação de exclusão.]
+Consulte o conteúdo da página pública em [ACCOUNT_DELETION_PAGE_DRAFT.md](ACCOUNT_DELETION_PAGE_DRAFT.md). Se não conseguir acessar o aplicativo, entre em contato pelo e-mail suporte@subtrackbr.com.br. [PENDENTE: definir o procedimento de verificação de identidade e atendimento da solicitação alternativa.]
 
 ## 8. Propriedade intelectual
 
@@ -74,4 +74,4 @@ O tratamento de dados é descrito no rascunho de [Política de Privacidade](PRIV
 
 Estes termos poderão ser atualizados quando houver mudanças relevantes no serviço ou na legislação aplicável. A versão pública deverá indicar sua data de atualização e forma de comunicação.
 
-**Contato:** [PENDENTE: definir e-mail público de contato para suporte e assuntos legais.]
+**Contato oficial para suporte e assuntos legais:** suporte@subtrackbr.com.br

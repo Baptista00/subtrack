@@ -19,7 +19,7 @@ export const privacyPolicySections = [
     paragraphs: [
       "O SubTrack é um aplicativo para organizar e acompanhar assinaturas recorrentes informadas manualmente pela pessoa usuária. Ele permite criar uma conta, registrar assinaturas, consultar valores e datas de renovação e, quando habilitado no aplicativo móvel, agendar lembretes locais.",
       "A identificação jurídica da pessoa responsável pelo SubTrack ainda está em definição antes da publicação oficial.",
-      "Canal oficial de contato em definição.",
+      "Canal oficial de contato: suporte@subtrackbr.com.br.",
     ],
   },
   {
@@ -98,7 +98,7 @@ export const privacyPolicySections = [
     title: "10. Exclusão de conta",
     paragraphs: [
       "A pessoa usuária pode solicitar a exclusão dentro do aplicativo em Perfil → Excluir minha conta. Após a confirmação explícita:",
-      "As instruções para uma futura página pública de exclusão ainda são um rascunho técnico interno.",
+      "As instruções da página pública de exclusão permanecem em revisão antes da publicação oficial do SubTrack.",
     ],
     items: [
       "O aplicativo chama a Edge Function autenticada delete-account.",
@@ -114,7 +114,7 @@ export const privacyPolicySections = [
     paragraphs: [
       "Dependendo da legislação aplicável, a pessoa titular pode ter direitos de confirmação, acesso, correção, anonimização, bloqueio, eliminação, informação e revisão sobre seus dados. O SubTrack disponibiliza a exclusão de conta no aplicativo.",
       "Antes da publicação pública, ainda é necessário definir o procedimento operacional, o prazo de resposta e a identificação da pessoa responsável pelas solicitações que não possam ser atendidas diretamente no aplicativo.",
-      "Canal oficial de contato em definição.",
+      "Canal oficial de contato: suporte@subtrackbr.com.br.",
     ],
   },
   {
@@ -132,7 +132,7 @@ export const privacyPolicySections = [
   },
   {
     title: "14. Contato",
-    paragraphs: ["Canal oficial de contato em definição."],
+    paragraphs: ["Canal oficial de contato: suporte@subtrackbr.com.br."],
   },
 ] satisfies LegalSection[];
 
@@ -194,8 +194,8 @@ export const termsOfUseSections = [
     paragraphs: [
       "A exclusão pode ser solicitada no aplicativo em Perfil → Excluir minha conta. A ação exige confirmação explícita e é permanente para a conta e as assinaturas associadas no ambiente principal do aplicativo.",
       "A exclusão da conta no Supabase Auth remove as assinaturas relacionadas por ON DELETE CASCADE documentado no projeto. O aplicativo também tenta cancelar os lembretes locais sob sua gestão, remove o mapa local de identificadores e encerra a sessão.",
-      "As instruções para uma futura página pública de exclusão ainda são um rascunho técnico interno.",
-      "Canal oficial de contato em definição.",
+      "As instruções da página pública de exclusão permanecem em revisão antes da publicação oficial do SubTrack.",
+      "Canal oficial de contato: suporte@subtrackbr.com.br.",
     ],
   },
   {
@@ -222,7 +222,7 @@ export const termsOfUseSections = [
     title: "11. Alterações e contato",
     paragraphs: [
       "Estes termos poderão ser atualizados quando houver mudanças relevantes no serviço ou na legislação aplicável. A versão pública deverá indicar sua data de atualização e forma de comunicação.",
-      "Canal oficial de contato em definição.",
+      "Canal oficial de contato: suporte@subtrackbr.com.br.",
     ],
   },
 ] satisfies LegalSection[];

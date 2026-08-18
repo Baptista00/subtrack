@@ -21,6 +21,10 @@ type CadastroFieldErrors = {
   confirmPassword?: string;
 };
 
+// Este destino é exclusivo da confirmação de cadastro; recovery usa auth-recovery.ts.
+const SIGNUP_CONFIRMATION_REDIRECT_URL =
+  "https://subtrackbr.com.br/conta-verificada.html";
+
 function validateCadastro(
   name: string,
   email: string,
@@ -89,6 +93,7 @@ export default function Cadastro() {
         email: email.trim(),
         password,
         options: {
+          emailRedirectTo: SIGNUP_CONFIRMATION_REDIRECT_URL,
           data: {
             full_name: name.trim(),
           },

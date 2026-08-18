@@ -2,7 +2,7 @@ import "../src/lib/notifications";
 
 import { useEffect, useState } from "react";
 import { StyleSheet, View } from "react-native";
-import { Stack } from "expo-router";
+import { Stack, usePathname, useRouter } from "expo-router";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 
 import { AuthProvider, useAuth } from "../src/auth";
@@ -20,6 +20,8 @@ export default function RootLayout() {
 
 function RootNavigator() {
   const { isLoading, isPasswordRecovery, isPasswordRecoveryLinkReady, session } = useAuth();
+  const pathname = usePathname();
+  const router = useRouter();
   const [hasMinimumLaunchTimeElapsed, setHasMinimumLaunchTimeElapsed] = useState(false);
   const hasSession = session !== null;
   const canAccessPrivateRoutes = hasSession && !isPasswordRecovery;
@@ -35,6 +37,12 @@ function RootNavigator() {
       clearTimeout(timer);
     };
   }, []);
+
+  useEffect(() => {
+    if (isPasswordRecovery && pathname !== "/redefinir-senha") {
+      router.replace("/redefinir-senha");
+    }
+  }, [isPasswordRecovery, pathname, router]);
 
   return (
     <View style={styles.root}>

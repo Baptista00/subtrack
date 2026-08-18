@@ -46,7 +46,13 @@ body {
   overflow-x: clip;
   background: var(--background);
   color: var(--text);
-  font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-family:
+    Inter,
+    ui-sans-serif,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
   font-size: 16px;
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
@@ -150,9 +156,49 @@ a {
   border-radius: var(--radius-sm);
 }
 
-.brand-link img {
+.brand-lockup {
+  display: inline-flex;
+  width: 150px;
+  height: 38px;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  color: var(--primary);
+  line-height: 1;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.brand-link.brand-lockup {
   width: 154px;
-  height: auto;
+  height: 39px;
+}
+
+.brand-lockup.brand-lockup-light {
+  color: var(--surface);
+}
+
+.brand-mark {
+  display: block;
+  width: 20px;
+  height: 27px;
+  flex: 0 0 20px;
+  object-fit: contain;
+}
+
+.brand-name {
+  color: inherit;
+  font-family: inherit;
+  font-size: 23px;
+  font-weight: 800;
+  letter-spacing: -0.045em;
+  line-height: 1;
+}
+
+.brand-link .brand-mark {
+  width: 21px;
+  height: 28px;
+  flex-basis: 21px;
 }
 
 .main-nav {
@@ -451,7 +497,11 @@ a {
   width: 460px;
   height: 460px;
   border-radius: 50%;
-  background: linear-gradient(145deg, rgba(27, 77, 62, 0.12), rgba(34, 197, 94, 0.04));
+  background: linear-gradient(
+    145deg,
+    rgba(27, 77, 62, 0.12),
+    rgba(34, 197, 94, 0.04)
+  );
   content: "";
 }
 
@@ -1095,7 +1145,11 @@ a {
 .feature-card-large {
   grid-column: span 2;
   background:
-    radial-gradient(circle at 82% 34%, rgba(34, 197, 94, 0.11), transparent 25%),
+    radial-gradient(
+      circle at 82% 34%,
+      rgba(34, 197, 94, 0.11),
+      transparent 25%
+    ),
     var(--background);
 }
 
@@ -1399,17 +1453,29 @@ a {
   width: 470px;
   height: 470px;
   border-radius: 44% 56% 60% 40% / 52% 41% 59% 48%;
-  background: linear-gradient(145deg, rgba(27, 77, 62, 0.13), rgba(34, 197, 94, 0.05));
+  background: linear-gradient(
+    145deg,
+    rgba(27, 77, 62, 0.13),
+    rgba(34, 197, 94, 0.05)
+  );
   transform: rotate(-8deg);
 }
 
 .demo-backdrop-purple {
-  background: linear-gradient(145deg, rgba(139, 92, 246, 0.12), rgba(27, 77, 62, 0.05));
+  background: linear-gradient(
+    145deg,
+    rgba(139, 92, 246, 0.12),
+    rgba(27, 77, 62, 0.05)
+  );
   transform: rotate(7deg);
 }
 
 .demo-backdrop-orange {
-  background: linear-gradient(145deg, rgba(245, 158, 11, 0.13), rgba(27, 77, 62, 0.05));
+  background: linear-gradient(
+    145deg,
+    rgba(245, 158, 11, 0.13),
+    rgba(27, 77, 62, 0.05)
+  );
   transform: rotate(-5deg);
 }
 
@@ -1916,7 +1982,11 @@ a {
   position: relative;
   overflow: hidden;
   padding: 130px 0;
-  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+  background: linear-gradient(
+    135deg,
+    var(--primary) 0%,
+    var(--primary-dark) 100%
+  );
   color: var(--surface);
 }
 
@@ -1963,10 +2033,21 @@ a {
   flex-direction: column;
 }
 
-.final-cta-content > img {
+.final-cta-brand {
   width: 172px;
-  height: auto;
+  height: 43px;
   margin-bottom: 34px;
+  gap: 8px;
+}
+
+.final-cta-brand .brand-mark {
+  width: 23px;
+  height: 31px;
+  flex-basis: 23px;
+}
+
+.final-cta-brand .brand-name {
+  font-size: 26px;
 }
 
 .final-cta h2 {
@@ -2017,9 +2098,19 @@ a {
   gap: 54px;
 }
 
-.footer-brand img {
+.footer-brand > .brand-lockup:not(.legal-wordmark) {
   width: 160px;
-  height: auto;
+  height: 40px;
+}
+
+.footer-brand > .brand-lockup:not(.legal-wordmark) .brand-mark {
+  width: 22px;
+  height: 30px;
+  flex-basis: 22px;
+}
+
+.footer-brand > .brand-lockup:not(.legal-wordmark) .brand-name {
+  font-size: 24px;
 }
 
 .footer-brand > p {
@@ -2119,11 +2210,6 @@ a {
   gap: 28px;
 }
 
-.legal-header img {
-  width: 150px;
-  height: auto;
-}
-
 .legal-wordmark,
 .brand.wordmark {
   display: inline-flex;
@@ -2139,9 +2225,10 @@ a {
   text-decoration: none;
 }
 
-.legal-wordmark img {
+.legal-wordmark.brand-lockup {
   width: 150px;
-  height: auto;
+  height: 38px;
+  gap: 7px;
 }
 
 .brand.wordmark .brand-logo {
@@ -2544,7 +2631,10 @@ main.legal-page {
 
 .legal-footer__grid {
   display: grid;
-  grid-template-columns: minmax(250px, 1.25fr) minmax(190px, 0.8fr) minmax(170px, 0.6fr);
+  grid-template-columns: minmax(250px, 1.25fr) minmax(190px, 0.8fr) minmax(
+      170px,
+      0.6fr
+    );
   align-items: start;
   gap: 44px;
 }
@@ -2946,8 +3036,20 @@ main.legal-page {
     background: rgba(248, 250, 249, 0.94);
   }
 
-  .brand-link img {
+  .brand-link.brand-lockup {
     width: 137px;
+    height: 34px;
+    gap: 6px;
+  }
+
+  .brand-link .brand-mark {
+    width: 18px;
+    height: 25px;
+    flex-basis: 18px;
+  }
+
+  .brand-link .brand-name {
+    font-size: 21px;
   }
 
   .hero {
@@ -3209,8 +3311,20 @@ main.legal-page {
     grid-column: 1;
   }
 
-  .legal-header img {
+  .legal-header .legal-wordmark.brand-lockup {
     width: 136px;
+    height: 34px;
+    gap: 6px;
+  }
+
+  .legal-header .brand-mark {
+    width: 18px;
+    height: 25px;
+    flex-basis: 18px;
+  }
+
+  .legal-header .brand-name {
+    font-size: 21px;
   }
 
   .legal-nav {
